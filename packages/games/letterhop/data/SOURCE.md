@@ -1,0 +1,15 @@
+# Letterhop word data
+
+| File            | What                                                                                                | Source                                                                                                                                                                  | Licence                                                                                                                                    |
+| --------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `source.txt`    | Every 4-letter `a`–`z` word (3,903): the words the game accepts                                     | ENABLE word list, file `enable1.txt`, taken from the github.com/dolph/dictionary mirror                                                                                 | Public domain. The ENABLE README says the list is "formally released into the Public Domain" (reproduced in the SCOWL package, `r/enable`) |
+| `common.txt`    | The familiar subset used for starts, goals and revealed paths (1,750; all appear in `source.txt`)   | 12dicts 6.0.2 by Alan Beale, list `American/6of12.txt` (words found in at least 6 of 12 dictionaries), unannotated lowercase entries only; from wordlist.aspell.net     | Public domain: "I explicitly release them to the public domain, but request acknowledgment of their use." (12dicts ReadMe)                 |
+| `blocklist.txt` | Words removed from both lists                                                                       | Written for Letterhop. It is a first pass and should be read by a person before the game is promoted widely                                                             | Project licence                                                                                                                            |
+| `report.json`   | Generator report (counts, par and ways histograms)                                                  | `tools/gen-word-ladder.ts`                                                                                                                                              | Generated                                                                                                                                  |
+
+Acknowledgment: the 12dicts lists were compiled by Alan Beale. Both lists are also credited in the repository's
+[ASSETS.md](../../../../ASSETS.md) and on the site's Licenses page.
+
+Proper nouns and abbreviations are excluded because both inputs are filtered to lowercase `a`–`z` words.
+Regenerate the game data with `node tools/gen-word-ladder.ts` (deterministic for `--seed letterhop-v1`);
+`--check` verifies that the generated files are up to date.

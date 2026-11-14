@@ -1,0 +1,31 @@
+{
+  "name": "@pocketcade/game-sunset-sprint",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "description": "Sunset Sprint: race Miso the red panda along a winding coast road at sunset, weave through traffic and beat the clock to every checkpoint (Pocketcade arcade racer).",
+  "exports": {
+    ".": "./src/index.ts",
+    "./meta": "./src/meta.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@pocketcade/sdk": "workspace:*",
+    "@pocketcade/toolkit": "workspace:*",
+    "phaser": "catalog:"
+  },
+  "devDependencies": {
+    "@pocketcade/config": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
+    "eslint": "catalog:",
+    "playwright": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

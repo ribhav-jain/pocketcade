@@ -1,0 +1,31 @@
+{
+  "name": "@pocketcade/game-sourdough",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "description": "Sourdough Solitaire: cosy gold-rush patience at a lantern-lit camp, Klondike rules with Draw 1 and Draw 3 (Pocketcade card game).",
+  "exports": {
+    ".": "./src/index.ts",
+    "./meta": "./src/meta.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@pocketcade/sdk": "workspace:*",
+    "@pocketcade/toolkit": "workspace:*",
+    "phaser": "catalog:"
+  },
+  "devDependencies": {
+    "@pocketcade/config": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
+    "eslint": "catalog:",
+    "playwright": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

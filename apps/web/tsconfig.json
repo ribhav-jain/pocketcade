@@ -1,0 +1,19 @@
+{
+  "extends": "@pocketcade/config/tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "types": ["node"],
+    "plugins": [{ "name": "next" }]
+  },
+  "include": [
+    "next-env.d.ts",
+    "next.config.ts",
+    "src",
+    "scripts",
+    "test",
+    "e2e",
+    "playwright.config.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": ["node_modules", "out"]
+}

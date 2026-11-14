@@ -1,0 +1,19 @@
+{
+  "totalWins": 3,
+  "d1": {
+    "played": 5,
+    "won": 3,
+    "bestMs": 312480,
+    "bestMoves": 118,
+    "streak": 1,
+    "bestStreak": 2
+  },
+  "d3": {
+    "played": 2,
+    "won": 0,
+    "bestMs": null,
+    "bestMoves": null,
+    "streak": 0,
+    "bestStreak": 0
+  }
+}

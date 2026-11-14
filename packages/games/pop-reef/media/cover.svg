@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3B3278"/>
+      <stop offset=".35" stop-color="#25327A"/>
+      <stop offset=".7" stop-color="#1A2560"/>
+      <stop offset="1" stop-color="#141640"/>
+    </linearGradient>
+    <radialGradient id="dusk" cx=".5" cy="0" r=".7">
+      <stop offset="0" stop-color="#FF9F6B" stop-opacity=".32"/>
+      <stop offset="1" stop-color="#FF9F6B" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lagoon" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#2DD4BF" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#2DD4BF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ray" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE9C7" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#FFE9C7" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="body" cx=".33" cy=".28" r=".8">
+      <stop offset="0" stop-color="#FFE69A"/>
+      <stop offset=".55" stop-color="#FFC24D"/>
+      <stop offset="1" stop-color="#E8952C"/>
+    </radialGradient>
+    <radialGradient id="g0" cx=".32" cy=".28" r=".78"><stop offset="0" stop-color="#FFA4A7"/><stop offset=".55" stop-color="#FF5A5F"/><stop offset="1" stop-color="#A63B3E"/></radialGradient>
+    <radialGradient id="g1" cx=".32" cy=".28" r=".78"><stop offset="0" stop-color="#FFEE9D"/><stop offset=".55" stop-color="#FFE14D"/><stop offset="1" stop-color="#A69232"/></radialGradient>
+    <radialGradient id="g2" cx=".32" cy=".28" r=".78"><stop offset="0" stop-color="#8AE7B7"/><stop offset=".55" stop-color="#2BD47D"/><stop offset="1" stop-color="#1C8A51"/></radialGradient>
+    <radialGradient id="g3" cx=".32" cy=".28" r=".78"><stop offset="0" stop-color="#91E8FF"/><stop offset=".55" stop-color="#38D6FF"/><stop offset="1" stop-color="#248BA6"/></radialGradient>
+    <radialGradient id="g4" cx=".32" cy=".28" r=".78"><stop offset="0" stop-color="#E0B7FF"/><stop offset=".55" stop-color="#C77DFF"/><stop offset="1" stop-color="#8151A6"/></radialGradient>
+    <radialGradient id="g5" cx=".32" cy=".28" r=".78"><stop offset="0" stop-color="#FFCA82"/><stop offset=".55" stop-color="#FF9F1C"/><stop offset="1" stop-color="#A66712"/></radialGradient>
+    <g id="shine">
+      <ellipse cx="-11" cy="-12.5" rx="5.4" ry="2.9" transform="rotate(-40 -11 -12.5)" fill="#fff" fill-opacity=".85"/>
+      <path d="M20.3 6.6A21 21 0 0 1 8.6 19.2" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="2.4" stroke-linecap="round"/>
+    </g>
+    <g id="k0">
+      <circle r="25" fill="url(#g0)" stroke="#732B2B" stroke-width="2.2"/>
+      <path d="M-3.1-10.4H3.1V-3.1H10.4V3.1H3.1V10.4H-3.1V3.1H-10.4V-3.1H-3.1Z" fill="#6B2628" stroke="#fff" stroke-opacity=".4" stroke-width="1.4"/>
+      <use href="#shine"/>
+    </g>
+    <g id="k1">
+      <circle r="25" fill="url(#g1)" stroke="#73651F" stroke-width="2.2"/>
+      <path d="M0-10.4L8.1 0 0 10.4-8.1 0Z" fill="#6B5F20" stroke="#fff" stroke-opacity=".4" stroke-width="1.4"/>
+      <use href="#shine"/>
+    </g>
+    <g id="k2">
+      <circle r="25" fill="url(#g2)" stroke="#135F38" stroke-width="2.2"/>
+      <path d="M0-9.9L9.9 7.3H-9.9Z" fill="#125935" stroke="#fff" stroke-opacity=".4" stroke-width="1.4"/>
+      <use href="#shine"/>
+    </g>
+    <g id="k3">
+      <circle r="25" fill="url(#g3)" stroke="#196073" stroke-width="2.2"/>
+      <rect x="-7.5" y="-7.5" width="15" height="15" rx="2.3" fill="#185A6B" stroke="#fff" stroke-opacity=".4" stroke-width="1.4"/>
+      <use href="#shine"/>
+    </g>
+    <g id="k4">
+      <circle r="25" fill="url(#g4)" stroke="#5A3873" stroke-width="2.2"/>
+      <path d="M8.3 4.8L0 9.6-8.3 4.8V-4.8L0-9.6 8.3-4.8Z" fill="#54356B" stroke="#fff" stroke-opacity=".4" stroke-width="1.4"/>
+      <use href="#shine"/>
+    </g>
+    <g id="k5">
+      <circle r="25" fill="url(#g5)" stroke="#73470D" stroke-width="2.2"/>
+      <circle r="8.1" fill="#6B430C" stroke="#fff" stroke-opacity=".4" stroke-width="1.4"/>
+      <use href="#shine"/>
+    </g>
+    <path id="leaf" d="M0 0C-9-7-11-22-4-34 7-26 9-10 0 0Z"/>
+  </defs>
+
+  <rect width="600" height="600" fill="url(#sea)"/>
+  <rect width="600" height="420" fill="url(#dusk)"/>
+  <!-- evening light rays -->
+  <path d="M70 0h46l150 600H156Z" fill="url(#ray)"/>
+  <path d="M250 0h34l140 600h-96Z" fill="url(#ray)" opacity=".8"/>
+  <path d="M410 0h40l130 600h-110Z" fill="url(#ray)" opacity=".7"/>
+  <!-- the reef: far, middle, near -->
+  <path d="M0 400l30-8 30 6 30-10 30 4 30-8 30 6 30-4 30 8 30-10 30 6 30-6 30 4 30-8 30 6 30-4 30 8 30-6 30 4 30-6 30 2V600H0Z" fill="#25366F"/>
+  <g stroke="#25366F" stroke-width="8" stroke-linecap="round" fill="none">
+    <path d="M90 402V360M90 372l-14-18M90 366l12-22M76 354l-6-12M102 344l2-12"/>
+    <path d="M470 400V350M470 368l-16-16M470 360l14-20M454 352l-4-12M484 340l4-12"/>
+  </g>
+  <path d="M0 470l40-10 40 6 40-8 40 4 40-6 40 8 40-4 40 6 40-8 40 4 40-6 40 8 40-4 40 6 40-8V600H0Z" fill="#1B275C"/>
+  <path d="M120 470a56 56 0 0 0-112 0Z" fill="#2A3A7A" opacity=".7"/>
+  <g stroke="#2A3A7A" stroke-width="2"><path d="M64 470l-50-14M64 470l-42-34M64 470l-24-48M64 470V416M64 470l24-48M64 470l42-34M64 470l50-14"/></g>
+  <path d="M590 470a48 48 0 0 0-96 0Z" fill="#2A3A7A" opacity=".7"/>
+  <g stroke="#2A3A7A" stroke-width="2"><path d="M542 470l-44-12M542 470l-36-30M542 470l-20-42M542 470V422M542 470l20-42M542 470l36-30M542 470l44-12"/></g>
+  <path d="M0 540l50-8 50 6 50-6 50 4 50-8 50 6 50-4 50 8 50-6 50 4 50-8 50 6V600H0Z" fill="#141C49"/>
+  <path d="M60 548a40 40 0 0 1 80 0Z" fill="#1A2354"/>
+  <path d="M470 550a46 46 0 0 1 92 0Z" fill="#1A2354"/>
+  <g fill="none" stroke="#25306A" stroke-width="2"><path d="M76 546a24 24 0 0 1 48 0M90 546a10 10 0 0 1 20 0M488 548a28 28 0 0 1 56 0M502 548a14 14 0 0 1 28 0"/></g>
+  <path d="M0 580q75-12 150 0t150 0 150 0 150 0V600H0Z" fill="#2B2A62"/>
+  <!-- seaweed -->
+  <g fill="#2BD47D" opacity=".85">
+    <use href="#leaf" transform="translate(30 600)"/>
+    <use href="#leaf" transform="translate(34 572) scale(-1 1)"/>
+    <use href="#leaf" transform="translate(30 544)"/>
+    <use href="#leaf" transform="translate(36 516) scale(-1 1)"/>
+    <use href="#leaf" transform="translate(32 488)"/>
+    <use href="#leaf" transform="translate(568 600) scale(-1 1)"/>
+    <use href="#leaf" transform="translate(564 572)"/>
+    <use href="#leaf" transform="translate(570 544) scale(-1 1)"/>
+    <use href="#leaf" transform="translate(564 516)"/>
+  </g>
+  <g fill="#1FA39A" opacity=".85">
+    <use href="#leaf" transform="translate(70 600) scale(-1 1)"/>
+    <use href="#leaf" transform="translate(66 572)"/>
+    <use href="#leaf" transform="translate(72 544) scale(-1 1)"/>
+    <use href="#leaf" transform="translate(530 600)"/>
+    <use href="#leaf" transform="translate(534 572) scale(-1 1)"/>
+  </g>
+  <!-- drifting specks -->
+  <g fill="#BFF6FF" opacity=".5">
+    <circle cx="120" cy="300" r="2.2"/><circle cx="208" cy="372" r="1.6"/><circle cx="420" cy="320" r="2"/>
+    <circle cx="500" cy="270" r="1.4"/><circle cx="350" cy="350" r="1.8"/><circle cx="560" cy="380" r="2.2"/>
+  </g>
+
+  <!-- the bubble ceiling -->
+  <rect width="600" height="10" fill="#0B0F2C"/>
+  <g>
+    <use href="#k3" x="40" y="34"/><use href="#k3" x="92" y="34"/><use href="#k1" x="144" y="34"/><use href="#k1" x="196" y="34"/>
+    <use href="#k1" x="248" y="34"/><use href="#k4" x="300" y="34"/><use href="#k4" x="352" y="34"/><use href="#k2" x="404" y="34"/>
+    <use href="#k2" x="456" y="34"/><use href="#k0" x="508" y="34"/><use href="#k0" x="560" y="34"/>
+    <use href="#k3" x="66" y="79"/><use href="#k5" x="118" y="79"/><use href="#k5" x="170" y="79"/><use href="#k1" x="222" y="79"/>
+    <use href="#k4" x="274" y="79"/><use href="#k4" x="326" y="79"/><use href="#k2" x="378" y="79"/><use href="#k0" x="430" y="79"/>
+    <use href="#k0" x="482" y="79"/><use href="#k5" x="534" y="79"/>
+    <use href="#k5" x="40" y="124"/><use href="#k5" x="92" y="124"/><use href="#k5" x="144" y="124"/><use href="#k2" x="248" y="124"/>
+    <use href="#k1" x="300" y="124"/><use href="#k1" x="352" y="124"/><use href="#k2" x="404" y="124"/><use href="#k3" x="508" y="124"/>
+    <use href="#k5" x="560" y="124"/>
+    <use href="#k4" x="66" y="169"/><use href="#k2" x="118" y="169"/><use href="#k1" x="326" y="169"/><use href="#k3" x="378" y="169"/>
+    <use href="#k3" x="534" y="169"/>
+    <use href="#k2" x="92" y="214"/><use href="#k2" x="144" y="214"/><use href="#k3" x="404" y="214"/>
+  </g>
+  <!-- a pop: three bubbles bursting into droplets, two more tumbling down -->
+  <g fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3">
+    <circle cx="456" cy="124" r="30"/><circle cx="482" cy="169" r="28" stroke-opacity=".4"/>
+  </g>
+  <g fill="#C8F1FF">
+    <circle cx="436" cy="98" r="4.5"/><circle cx="486" cy="102" r="3.5"/><circle cx="430" cy="150" r="3"/>
+    <circle cx="512" cy="152" r="4"/><circle cx="474" cy="206" r="3.5"/><circle cx="508" cy="196" r="2.6"/>
+    <circle cx="452" cy="182" r="2.8"/><circle cx="420" cy="122" r="2.4"/>
+  </g>
+  <g fill="#38D6FF"><circle cx="498" cy="122" r="3"/><circle cx="446" cy="160" r="2.6"/></g>
+  <g opacity=".85">
+    <use href="#k1" x="300" y="262"/>
+    <use href="#k4" x="352" y="292"/>
+  </g>
+  <g stroke="#fff" stroke-opacity=".3" stroke-width="3" stroke-linecap="round">
+    <path d="M300 222v-14M352 252v-14M338 250v-10"/>
+  </g>
+
+  <!-- the aim guide, with one wall bounce -->
+  <g fill="#B6EFFF">
+    <circle cx="276" cy="412" r="4" opacity=".95"/><circle cx="258" cy="400" r="4" opacity=".92"/>
+    <circle cx="240" cy="387" r="4" opacity=".88"/><circle cx="222" cy="375" r="4" opacity=".85"/>
+    <circle cx="204" cy="362" r="4" opacity=".8"/><circle cx="186" cy="350" r="4" opacity=".76"/>
+    <circle cx="168" cy="337" r="4" opacity=".72"/><circle cx="150" cy="325" r="4" opacity=".68"/>
+    <circle cx="132" cy="312" r="4" opacity=".64"/><circle cx="114" cy="300" r="4" opacity=".6"/>
+    <circle cx="96" cy="287" r="4" opacity=".56"/><circle cx="78" cy="275" r="4" opacity=".52"/>
+    <circle cx="60" cy="262" r="4" opacity=".48"/><circle cx="48" cy="244" r="3.6" opacity=".44"/>
+    <circle cx="66" cy="232" r="3.6" opacity=".4"/>
+  </g>
+  <!-- the lagoon glow, Puff and the bubble he's about to puff -->
+  <circle cx="300" cy="500" r="150" fill="url(#lagoon)"/>
+  <use href="#k3" x="300" y="440"/>
+  <g stroke="#2B1638" stroke-width="4" stroke-linejoin="round">
+    <path d="M246 520q-36-22-40 6t42 22Z" fill="#FF8F6B"/>
+    <path d="M354 520q36-22 40 6t-42 22Z" fill="#FF8F6B"/>
+    <path d="M282 478q8-28 24-22 16 6 12 26Z" fill="#FF8F6B"/>
+    <circle cx="300" cy="530" r="60" fill="url(#body)"/>
+  </g>
+  <ellipse cx="300" cy="568" rx="47" ry="26" fill="#FFF6D6" fill-opacity=".8"/>
+  <g fill="#C46C1E" fill-opacity=".45">
+    <ellipse cx="267" cy="494" rx="6.5" ry="5"/><ellipse cx="291" cy="483" rx="5" ry="4"/>
+    <ellipse cx="318" cy="489" rx="6" ry="4.6"/><ellipse cx="339" cy="506" rx="4.6" ry="3.6"/>
+  </g>
+  <circle cx="300" cy="530" r="58" fill="none" stroke="#2B1638" stroke-width="4.5"/>
+  <ellipse cx="274" cy="498" rx="12" ry="6.5" transform="rotate(-35 274 498)" fill="#fff" fill-opacity=".55"/>
+  <g fill="#FF6E8C" fill-opacity=".38">
+    <ellipse cx="261" cy="540" rx="10" ry="6.5"/><ellipse cx="339" cy="540" rx="10" ry="6.5"/>
+  </g>
+  <g stroke="#2B1638" stroke-width="3.6">
+    <ellipse cx="278" cy="526" rx="15.5" ry="17.5" fill="#fff"/>
+    <ellipse cx="322" cy="526" rx="15.5" ry="17.5" fill="#fff"/>
+  </g>
+  <g fill="#2B1638"><circle cx="276" cy="518" r="7.5"/><circle cx="320" cy="518" r="7.5"/></g>
+  <g fill="#fff"><circle cx="273" cy="515" r="2.6"/><circle cx="317" cy="515" r="2.6"/></g>
+  <ellipse cx="300" cy="560" rx="8" ry="8.5" fill="#7A2340" stroke="#2B1638" stroke-width="3.6"/>
+</svg>

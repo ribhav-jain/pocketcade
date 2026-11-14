@@ -1,0 +1,80 @@
+:root {
+  color-scheme: dark;
+  --bg: #12141c;
+  --surface: #1c1f2b;
+  --line: #3a4057;
+  --text: #f4f1e8;
+  --muted: #a7aec4;
+  --orange: #e69f00;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font:
+    14px/1.4 system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}
+#app {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  align-items: flex-start;
+}
+#stage {
+  position: relative;
+  flex: none;
+}
+#frame {
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+#panel {
+  flex: 1;
+  min-width: 280px;
+  display: grid;
+  gap: 8px;
+}
+#panel h1 {
+  margin: 0;
+  font-size: 16px;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+button,
+select {
+  min-height: 32px;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+.badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+}
+.crash {
+  margin: 0;
+  color: var(--orange);
+}
+@media (max-width: 900px) {
+  #app {
+    flex-direction: column;
+  }
+}

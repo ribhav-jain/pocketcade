@@ -1,0 +1,9 @@
+{
+  "best": 64,
+  "bestHits": 31,
+  "runs": 12,
+  "hits": 214,
+  "perfects": 71,
+  "longestChain": 7,
+  "lastRun": { "score": 40, "hits": 22, "perfects": 8, "meanOffsetMs": 14, "end": "late" }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "@pocketcade/playground",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "description": "Pocketcade playground: a Vite app that mounts any game package on the real host, plus the leak test.",
+  "scripts": {
+    "dev": "vite --port 5173",
+    "build": "vite build",
+    "preview": "node ../../tools/serve-static.ts --dir dist --config vercel.json --port 4174",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "e2e": "playwright test"
+  },
+  "dependencies": {
+    "@fontsource-variable/fredoka": "catalog:",
+    "@fontsource-variable/nunito": "catalog:",
+    "@pocketcade/game-bao-bolt": "workspace:*",
+    "@pocketcade/game-comet-crush": "workspace:*",
+    "@pocketcade/game-firefly-flip": "workspace:*",
+    "@pocketcade/game-glowworm": "workspace:*",
+    "@pocketcade/game-letterhop": "workspace:*",
+    "@pocketcade/game-molehills": "workspace:*",
+    "@pocketcade/game-on-the-dot": "workspace:*",
+    "@pocketcade/game-pebble-post": "workspace:*",
+    "@pocketcade/game-pentafall": "workspace:*",
+    "@pocketcade/game-pop-reef": "workspace:*",
+    "@pocketcade/game-rowdy": "workspace:*",
+    "@pocketcade/game-sourdough": "workspace:*",
+    "@pocketcade/game-sumslide": "workspace:*",
+    "@pocketcade/game-sunset-sprint": "workspace:*",
+    "@pocketcade/host": "workspace:*",
+    "@pocketcade/sdk": "workspace:*",
+    "@pocketcade/toolkit": "workspace:*"
+  },
+  "devDependencies": {
+    "@playwright/test": "catalog:",
+    "@pocketcade/config": "workspace:*",
+    "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}

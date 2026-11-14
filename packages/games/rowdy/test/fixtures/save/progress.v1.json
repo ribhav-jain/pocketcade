@@ -1,0 +1,12 @@
+{
+  "level": "medium",
+  "streak": 2,
+  "streakDraws": 1,
+  "records": {
+    "easy": { "wins": 5, "losses": 1, "draws": 0, "bestStreak": 4 },
+    "medium": { "wins": 3, "losses": 2, "draws": 1, "bestStreak": 2 },
+    "hard": { "wins": 0, "losses": 1, "draws": 0, "bestStreak": 0 }
+  },
+  "nextStarter": "bot",
+  "lastRoundId": 13
+}

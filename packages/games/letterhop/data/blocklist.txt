@@ -1,0 +1,42 @@
+# Letterhop blocklist (G-LAD-402, OQ-LAD-002). FIRST PASS by the code author: it MUST be reviewed by a person
+# before any data release. One lowercase word per line; lines starting with # are comments. Words here are removed
+# from both the dictionary and the common list; a player who types one gets "Not in Letterhop's word list."
+# Scope: profanity, slurs, sexual terms and violent sexual terms, for an all-ages audience (D18).
+anal
+anus
+arse
+cock
+coon
+crap
+cunt
+dago
+damn
+dick
+dyke
+fags
+fart
+fuck
+gook
+hebe
+homo
+jism
+kike
+muff
+nazi
+piss
+poof
+poon
+porn
+rape
+shag
+shit
+slag
+slut
+smut
+spic
+spik
+tits
+turd
+twat
+wogs
+yids

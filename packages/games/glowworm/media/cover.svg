@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <linearGradient id="cave" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0D0826"/>
+      <stop offset=".5" stop-color="#170F3C"/>
+      <stop offset="1" stop-color="#0A0620"/>
+    </linearGradient>
+    <radialGradient id="floor" cx=".5" cy=".55" r=".55">
+      <stop offset="0" stop-color="#7B5CFF" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#7B5CFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="light" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#E9FFB0" stop-opacity=".55"/>
+      <stop offset=".35" stop-color="#8CF7C4" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#6CF5C2" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="pinkGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#FF4FA3" stop-opacity=".7"/>
+      <stop offset="1" stop-color="#FF4FA3" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="goldGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#FFE14D" stop-opacity=".75"/>
+      <stop offset="1" stop-color="#FFC83D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="shine" cx=".34" cy=".3" r=".75">
+      <stop offset="0" stop-color="#fff" stop-opacity=".85"/>
+      <stop offset=".4" stop-color="#fff" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".22"/>
+    </radialGradient>
+    <radialGradient id="head" cx=".36" cy=".32" r=".75">
+      <stop offset="0" stop-color="#FFFFE0"/>
+      <stop offset=".5" stop-color="#E4FF74"/>
+      <stop offset="1" stop-color="#A9D63E"/>
+    </radialGradient>
+    <radialGradient id="berry" cx=".35" cy=".3" r=".75">
+      <stop offset="0" stop-color="#FFB8DA"/>
+      <stop offset=".5" stop-color="#FF4FA3"/>
+      <stop offset="1" stop-color="#C42A78"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE14D"/>
+      <stop offset="1" stop-color="#FF9F1C"/>
+    </linearGradient>
+    <radialGradient id="speck" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#C8FFE6"/>
+      <stop offset="1" stop-color="#6CF5C2" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <g id="prism">
+      <path d="M-9 0V-30L0-44 9-30V0Z" fill="#9C84FF"/>
+      <path d="M0 0V-44L9-30V0Z" fill="#5A3FD0"/>
+      <path d="M-9 0V-30L0-44 9-30V0Z" fill="none" stroke="#25156A" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M-4.5-4V-28" stroke="#fff" stroke-opacity=".75" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <g id="prismP">
+      <path d="M-7 0V-20L0-31 7-20V0Z" fill="#E0B4FF"/>
+      <path d="M0 0V-31L7-20V0Z" fill="#9A55D6"/>
+      <path d="M-7 0V-20L0-31 7-20V0Z" fill="none" stroke="#3E1A66" stroke-width="2.2" stroke-linejoin="round"/>
+    </g>
+    <g id="prismS">
+      <path d="M-7 0V-22L0-33 7-22V0Z" fill="#9BEBFF"/>
+      <path d="M0 0V-33L7-22V0Z" fill="#1FA2D0"/>
+      <path d="M-7 0V-22L0-33 7-22V0Z" fill="none" stroke="#123E66" stroke-width="2.2" stroke-linejoin="round"/>
+    </g>
+  </defs>
+
+  <!-- the cave -->
+  <rect width="600" height="600" fill="url(#cave)"/>
+  <rect width="600" height="600" fill="url(#floor)"/>
+  <path d="M0 0H600V58C560 70 540 52 500 66S440 54 400 70 330 50 290 68 220 52 180 66 110 50 70 66 20 54 0 64Z" fill="#0A0620"/>
+  <path d="M60 64l8 16 7-16M150 66l6 13 6-13M262 66l7 18 7-18M352 68l6 12 6-12M452 64l8 15 7-15M548 62l6 14 6-14" fill="#0A0620"/>
+  <path d="M0 600V520C40 500 70 530 110 514S180 540 220 528 300 548 340 534 420 550 470 536 560 552 600 530V600Z" fill="#0A0620"/>
+  <g fill="#1E1650">
+    <ellipse cx="20" cy="250" rx="38" ry="60"/>
+    <ellipse cx="584" cy="380" rx="40" ry="70"/>
+    <ellipse cx="560" cy="210" rx="30" ry="40"/>
+  </g>
+
+  <!-- distant glow specks -->
+  <g fill="url(#speck)">
+    <circle cx="70" cy="118" r="6"/><circle cx="168" cy="210" r="4"/><circle cx="528" cy="96" r="5"/>
+    <circle cx="560" cy="300" r="4"/><circle cx="96" cy="350" r="5"/><circle cx="330" cy="140" r="4"/>
+    <circle cx="420" cy="450" r="5"/><circle cx="250" cy="520" r="4"/><circle cx="40" cy="430" r="4"/>
+    <circle cx="500" cy="250" r="3"/><circle cx="210" cy="110" r="3"/><circle cx="360" cy="560" r="4"/>
+  </g>
+
+  <!-- crystals -->
+  <g transform="translate(470 520)">
+    <use href="#prismP" transform="translate(-22 4) rotate(-18)"/>
+    <use href="#prismS" transform="translate(26 6) rotate(16)"/>
+    <use href="#prism" transform="scale(1.3)"/>
+  </g>
+  <g transform="translate(560 470) scale(.8)">
+    <use href="#prismP" transform="translate(-14 2) rotate(-14)"/>
+    <use href="#prism"/>
+  </g>
+  <g transform="translate(92 172)">
+    <use href="#prismS" transform="translate(-20 4) rotate(-20)"/>
+    <use href="#prismP" transform="translate(20 4) rotate(18)"/>
+    <use href="#prism" transform="scale(1.15)"/>
+  </g>
+  <g transform="translate(40 560) scale(.9)">
+    <use href="#prism" transform="rotate(-10)"/>
+    <use href="#prismS" transform="translate(22 4) rotate(14)"/>
+  </g>
+
+  <!-- Wick's light -->
+  <circle cx="380" cy="300" r="250" fill="url(#light)"/>
+
+  <!-- the golden star berry with its timer ring -->
+  <circle cx="462" cy="160" r="64" fill="url(#goldGlow)"/>
+  <circle cx="462" cy="160" r="40" fill="none" stroke="#120C2C" stroke-opacity=".55" stroke-width="9"/>
+  <path d="M462 120A40 40 0 1 1 427.4 180" fill="none" stroke="#FFC83D" stroke-width="6" stroke-linecap="round"/>
+  <path d="M462 133l7.6 15.4 17 2.5-12.3 12 2.9 16.9L462 171.8l-15.2 8 2.9-16.9-12.3-12 17-2.5Z" fill="url(#gold)" stroke="#8A4B00" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M462 147l3.6 7.3 8 1.2-5.8 5.6 1.4 8L462 165.3l-7.2 3.8 1.4-8-5.8-5.6 8-1.2Z" fill="#fff" fill-opacity=".4"/>
+  <g fill="#FFF6B8">
+    <path d="M506 128q0 9 9 9-9 0-9 9 0-9-9-9 9 0 9-9Z"/>
+    <path d="M424 126q0 6 6 6-6 0-6 6 0-6-6-6 6 0 6-6Z"/>
+    <path d="M498 196q0 6 6 6-6 0-6 6 0-6-6-6 6 0 6-6Z"/>
+  </g>
+
+  <!-- the glowberry -->
+  <circle cx="490" cy="318" r="54" fill="url(#pinkGlow)"/>
+  <ellipse cx="500" cy="286" rx="12" ry="6" transform="rotate(-28 500 286)" fill="#B8F34A" stroke="#3E7A2A" stroke-width="2.5"/>
+  <path d="M490 294l3-10" stroke="#3E7A2A" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="490" cy="320" r="24" fill="url(#berry)" stroke="#73123F" stroke-width="3"/>
+  <ellipse cx="481" cy="309" rx="7" ry="4.5" transform="rotate(-35 481 309)" fill="#fff" fill-opacity=".8"/>
+  <g fill="#FFE1F0"><circle cx="497" cy="326" r="2"/><circle cx="484" cy="333" r="2"/><circle cx="500" cy="314" r="2"/><circle cx="476" cy="322" r="2"/></g>
+
+  <!-- Wick's body glow -->
+  <path d="M96 480C150 450 210 440 232 384S262 286 336 278 400 290 408 296" fill="none" stroke="#6CF5C2" stroke-opacity=".45" stroke-width="64" stroke-linecap="round" filter="url(#soft)"/>
+
+  <!-- Wick's body, tail first, dimmer toward the tail -->
+  <g stroke-width="3">
+    <circle cx="96" cy="480" r="14" fill="#2C8F8C" stroke="#123E44"/>
+    <circle cx="96" cy="480" r="14" fill="url(#shine)" stroke="none"/>
+    <circle cx="126" cy="463" r="15" fill="#349D93" stroke="#14474A"/>
+    <circle cx="126" cy="463" r="15" fill="url(#shine)" stroke="none"/>
+    <circle cx="157" cy="449" r="16" fill="#3FB09E" stroke="#16504F"/>
+    <circle cx="157" cy="449" r="16" fill="url(#shine)" stroke="none"/>
+    <circle cx="188" cy="434" r="17" fill="#4CC3AA" stroke="#185A55"/>
+    <circle cx="188" cy="434" r="17" fill="url(#shine)" stroke="none"/>
+    <circle cx="214" cy="412" r="17.5" fill="#5BD6B6" stroke="#1B6459"/>
+    <circle cx="214" cy="412" r="17.5" fill="url(#shine)" stroke="none"/>
+    <circle cx="232" cy="384" r="18" fill="#62E2BA" stroke="#1D6C5C"/>
+    <circle cx="232" cy="384" r="18" fill="url(#shine)" stroke="none"/>
+    <circle cx="242" cy="352" r="18.5" fill="#70EBB6" stroke="#20735C"/>
+    <circle cx="242" cy="352" r="18.5" fill="url(#shine)" stroke="none"/>
+    <circle cx="254" cy="321" r="19" fill="#80F1AE" stroke="#247A58"/>
+    <circle cx="254" cy="321" r="19" fill="url(#shine)" stroke="none"/>
+    <circle cx="276" cy="297" r="19.5" fill="#94F5A6" stroke="#297F52"/>
+    <circle cx="276" cy="297" r="19.5" fill="url(#shine)" stroke="none"/>
+    <circle cx="305" cy="283" r="20" fill="#AEF89D" stroke="#2F844C"/>
+    <circle cx="305" cy="283" r="20" fill="url(#shine)" stroke="none"/>
+    <circle cx="337" cy="279" r="20.5" fill="#C8FC94" stroke="#378A46"/>
+    <circle cx="337" cy="279" r="20.5" fill="url(#shine)" stroke="none"/>
+    <circle cx="368" cy="285" r="21" fill="#DEFE8D" stroke="#3E8E40"/>
+    <circle cx="368" cy="285" r="21" fill="url(#shine)" stroke="none"/>
+  </g>
+
+  <!-- Wick's head: antennae, glowing ball, face (mouth open: a berry ahead) -->
+  <g stroke="#3F7A34" stroke-width="4.5" stroke-linecap="round" fill="none">
+    <path d="M396 270Q392 246 380 234"/>
+    <path d="M420 270Q428 246 444 236"/>
+  </g>
+  <circle cx="380" cy="234" r="14" fill="#FFF8B0" fill-opacity=".45"/>
+  <circle cx="444" cy="236" r="14" fill="#FFF8B0" fill-opacity=".45"/>
+  <circle cx="380" cy="234" r="7" fill="#FFF59A" stroke="#8A7A20" stroke-width="2.5"/>
+  <circle cx="444" cy="236" r="7" fill="#FFF59A" stroke="#8A7A20" stroke-width="2.5"/>
+  <circle cx="410" cy="298" r="36" fill="#E9FF7A" fill-opacity=".35" filter="url(#soft)"/>
+  <circle cx="410" cy="298" r="34" fill="url(#head)" stroke="#3F6E2A" stroke-width="3.5"/>
+  <ellipse cx="396" cy="282" rx="9" ry="5.5" transform="rotate(-35 396 282)" fill="#fff" fill-opacity=".8"/>
+  <g transform="translate(418 296)">
+    <ellipse cx="-24" cy="10" rx="6.5" ry="4" fill="#FF4FA3" fill-opacity=".45"/>
+    <ellipse cx="22" cy="10" rx="6.5" ry="4" fill="#FF4FA3" fill-opacity=".45"/>
+    <ellipse cx="-13" cy="-4" rx="8.5" ry="10" fill="#fff" stroke="#120C2C" stroke-width="2.2"/>
+    <ellipse cx="13" cy="-4" rx="8.5" ry="10" fill="#fff" stroke="#120C2C" stroke-width="2.2"/>
+    <circle cx="-10" cy="-3" r="5.6" fill="#120C2C"/>
+    <circle cx="16" cy="-3" r="5.6" fill="#120C2C"/>
+    <circle cx="-12" cy="-6" r="2.2" fill="#fff"/>
+    <circle cx="14" cy="-6" r="2.2" fill="#fff"/>
+    <ellipse cx="1" cy="15" rx="6" ry="6.5" fill="#5A1236" stroke="#120C2C" stroke-width="2.4"/>
+    <ellipse cx="1" cy="18" rx="3.6" ry="2.6" fill="#FF7FB8"/>
+  </g>
+</svg>

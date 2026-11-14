@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#070622"/>
+      <stop offset=".55" stop-color="#16134A"/>
+      <stop offset="1" stop-color="#3A2E86"/>
+    </linearGradient>
+    <linearGradient id="aurA" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#6CF5C2" stop-opacity=".6"/>
+      <stop offset=".45" stop-color="#6CF5C2" stop-opacity=".25"/>
+      <stop offset="1" stop-color="#6CF5C2" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="aurB" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#C77DFF" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#C77DFF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="ice" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2C3F86"/>
+      <stop offset=".35" stop-color="#3F5FA2"/>
+      <stop offset="1" stop-color="#5C82C8"/>
+    </linearGradient>
+    <linearGradient id="bank" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1D2559"/>
+      <stop offset="1" stop-color="#2C3A78"/>
+    </linearGradient>
+    <radialGradient id="moonGlow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#E8F0FF" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#E8F0FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="back" cx=".38" cy=".3" r=".8">
+      <stop offset="0" stop-color="#4A55A8"/>
+      <stop offset=".55" stop-color="#232A5C"/>
+      <stop offset="1" stop-color="#141838"/>
+    </radialGradient>
+    <linearGradient id="hat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FF7A8A"/>
+      <stop offset="1" stop-color="#D93A50"/>
+    </linearGradient>
+    <linearGradient id="beak" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFC069"/>
+      <stop offset="1" stop-color="#FF9A1F"/>
+    </linearGradient>
+    <linearGradient id="bag" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#D98E50"/>
+      <stop offset="1" stop-color="#A9622D"/>
+    </linearGradient>
+    <radialGradient id="spray" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#CFE0FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx=".5" cy=".5" r=".72">
+      <stop offset=".6" stop-color="#070622" stop-opacity="0"/>
+      <stop offset="1" stop-color="#070622" stop-opacity=".55"/>
+    </radialGradient>
+    <g id="letter">
+      <rect x="-32" y="-22" width="64" height="44" rx="6" fill="#FFF6EA"/>
+      <rect x="-28.5" y="-18.5" width="57" height="37" rx="4" fill="none" stroke="#3E6DE0" stroke-width="7"/>
+      <rect x="-28.5" y="-18.5" width="57" height="37" rx="4" fill="none" stroke="#F2475E" stroke-width="7" stroke-dasharray="7 7"/>
+      <rect x="-32" y="-22" width="64" height="44" rx="6" fill="none" stroke="#1B1440" stroke-width="3"/>
+      <path d="M-24-14 0 4 24-14" fill="none" stroke="#B7A6C9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cy="4" r="7" fill="#F2475E" stroke="#8E1F33" stroke-width="1.5"/>
+    </g>
+    <g id="pine">
+      <rect x="-6" y="-22" width="12" height="22" fill="#3A2A3E"/>
+      <path d="M-40-20 0-80 40-20Z" fill="#1F4A6E" stroke="#0F2440" stroke-width="2"/>
+      <path d="M-32-52 0-110 32-52Z" fill="#245679" stroke="#0F2440" stroke-width="2"/>
+      <path d="M-22-86 0-136 22-86Z" fill="#2A6286" stroke="#0F2440" stroke-width="2"/>
+      <path d="M-20-56 0-80 20-56Q0-64-20-56ZM-15-88 0-110 15-88Q0-96-15-88ZM-10-116 0-136 10-116Q0-122-10-116Z" fill="#C9D8FF"/>
+    </g>
+    <path id="spark" d="M0-12 3-3 12 0 3 3 0 12-3 3-12 0-3-3Z"/>
+  </defs>
+
+  <!-- sky, stars, moon and aurora -->
+  <rect width="600" height="600" fill="url(#sky)"/>
+  <g fill="#fff">
+    <circle cx="40" cy="40" r="1.6"/><circle cx="96" cy="88" r="1.2"/><circle cx="150" cy="30" r="1.8"/>
+    <circle cx="210" cy="70" r="1.1"/><circle cx="262" cy="22" r="1.5"/><circle cx="330" cy="56" r="1.2"/>
+    <circle cx="380" cy="18" r="1.7"/><circle cx="560" cy="40" r="1.4"/><circle cx="584" cy="120" r="1.1"/>
+    <circle cx="30" cy="150" r="1.2"/><circle cx="120" cy="160" r="1.5"/><circle cx="352" cy="128" r="1.1"/>
+    <circle cx="420" cy="170" r="1.3"/><circle cx="540" cy="200" r="1.2"/><circle cx="250" cy="150" r="1"/>
+  </g>
+  <circle cx="470" cy="84" r="80" fill="url(#moonGlow)"/>
+  <circle cx="470" cy="84" r="27" fill="#F4F7FF"/>
+  <circle cx="461" cy="77" r="6" fill="#B9C3E8" opacity=".6"/><circle cx="478" cy="93" r="4.5" fill="#B9C3E8" opacity=".6"/>
+  <path d="M0 210C90 170 170 230 280 186S460 140 600 196V70C500 40 430 110 300 84S110 50 0 110Z" fill="url(#aurA)"/>
+  <path d="M0 250C120 220 210 262 330 226S510 200 600 236V150C500 130 420 170 320 150S120 140 0 170Z" fill="url(#aurB)"/>
+
+  <!-- far peaks -->
+  <path d="M0 300V250L50 222 92 246 140 206 196 240 240 214 286 252 330 220 382 248 430 208 480 238 530 214 600 244V300Z" fill="#1C2462"/>
+  <path d="M50 222 66 232 58 236 40 230ZM140 206 158 220 146 222 126 216ZM240 214 256 226 244 228 226 222ZM330 220 346 232 334 234 316 228ZM430 208 448 222 436 224 416 218ZM530 214 546 226 534 228 516 222Z" fill="#7C8FD6"/>
+
+  <!-- the canyon floor, banks and ice track -->
+  <path d="M0 300H600V600H0Z" fill="url(#bank)"/>
+  <path d="M0 330 270 300H330L600 330V600H0Z" fill="#27336B" opacity=".6"/>
+  <path d="M286 300H314L560 600H40Z" fill="#DCE7FF"/>
+  <path d="M289 300H311L532 600H68Z" fill="url(#ice)"/>
+  <path d="M296 300 220 600M304 300 380 600" stroke="#8FF0D0" stroke-width="7" stroke-dasharray="26 22" opacity=".85"/>
+  <path d="M300 300 300 600" stroke="#fff" stroke-width="40" opacity=".05"/>
+
+  <!-- pines and lanterns on the banks -->
+  <use href="#pine" transform="translate(56 420) scale(1.05)"/>
+  <use href="#pine" transform="translate(150 360) scale(.62)"/>
+  <use href="#pine" transform="translate(212 328) scale(.36)"/>
+  <use href="#pine" transform="translate(548 430) scale(1.1)"/>
+  <use href="#pine" transform="translate(452 358) scale(.6)"/>
+  <use href="#pine" transform="translate(392 326) scale(.36)"/>
+  <g fill="#FFC83D"><circle cx="40" cy="352" r="3"/><circle cx="74" cy="380" r="3"/><circle cx="534" cy="356" r="3"/><circle cx="566" cy="392" r="3"/><circle cx="148" cy="318" r="2.4"/><circle cx="454" cy="320" r="2.4"/></g>
+
+  <!-- Pebble, belly-sliding toward us -->
+  <ellipse cx="300" cy="560" rx="170" ry="26" fill="#0B1030" opacity=".45"/>
+  <ellipse cx="140" cy="540" rx="70" ry="30" fill="url(#spray)"/>
+  <ellipse cx="460" cy="540" rx="70" ry="30" fill="url(#spray)"/>
+  <circle cx="102" cy="512" r="12" fill="#fff" opacity=".8"/><circle cx="498" cy="508" r="10" fill="#fff" opacity=".8"/>
+  <circle cx="122" cy="488" r="7" fill="#fff" opacity=".7"/><circle cx="480" cy="486" r="7" fill="#fff" opacity=".7"/>
+  <!-- flippers spread wide -->
+  <path d="M206 452Q150 470 92 530Q150 528 214 494Z" fill="#232A5C" stroke="#1B1440" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M394 452Q450 470 508 530Q450 528 386 494Z" fill="#232A5C" stroke="#1B1440" stroke-width="5" stroke-linejoin="round"/>
+  <!-- body and chest -->
+  <ellipse cx="300" cy="470" rx="120" ry="96" fill="url(#back)" stroke="#1B1440" stroke-width="5"/>
+  <ellipse cx="300" cy="490" rx="88" ry="74" fill="#F4F1FF"/>
+  <ellipse cx="300" cy="530" rx="70" ry="30" fill="#D9D6F2" opacity=".6"/>
+  <!-- satchel strap and bag -->
+  <path d="M218 420Q300 470 372 548" fill="none" stroke="#1B1440" stroke-width="20" stroke-linecap="round"/>
+  <path d="M218 420Q300 470 372 548" fill="none" stroke="#8A4B2A" stroke-width="12" stroke-linecap="round"/>
+  <rect x="352" y="478" width="86" height="70" rx="14" fill="url(#bag)" stroke="#1B1440" stroke-width="4.5"/>
+  <path d="M352 492Q352 478 366 478H424Q438 478 438 492V512H352Z" fill="#B06A33" stroke="#1B1440" stroke-width="4"/>
+  <rect x="380" y="514" width="30" height="21" rx="3" fill="#FFE9A8" stroke="#1B1440" stroke-width="2.5"/>
+  <path d="M382 516 395 526 408 516" fill="none" stroke="#1B1440" stroke-width="2"/>
+  <circle cx="395" cy="512" r="4" fill="#FFC83D" stroke="#1B1440" stroke-width="1.5"/>
+  <!-- head, face, beak -->
+  <circle cx="300" cy="338" r="80" fill="url(#back)" stroke="#1B1440" stroke-width="5"/>
+  <path d="M300 376C282 346 238 352 236 322C234 296 266 290 284 308Q300 322 316 308C334 290 366 296 364 322C362 352 318 346 300 376Z" fill="#F7F4FF"/>
+  <ellipse cx="270" cy="332" rx="15" ry="17" fill="#1B1440"/>
+  <ellipse cx="330" cy="332" rx="15" ry="17" fill="#1B1440"/>
+  <circle cx="275" cy="325" r="6" fill="#fff"/><circle cx="335" cy="325" r="6" fill="#fff"/>
+  <circle cx="266" cy="340" r="2.5" fill="#fff"/><circle cx="326" cy="340" r="2.5" fill="#fff"/>
+  <ellipse cx="246" cy="356" rx="12" ry="7" fill="#FF4FA3" opacity=".45"/>
+  <ellipse cx="354" cy="356" rx="12" ry="7" fill="#FF4FA3" opacity=".45"/>
+  <path d="M280 352Q300 342 320 352Q312 372 300 378Q288 372 280 352Z" fill="url(#beak)" stroke="#7A3D10" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M286 360Q300 366 314 360" fill="none" stroke="#7A3D10" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- the beanie -->
+  <g transform="rotate(-9 300 290)">
+    <path d="M216 300C214 206 386 206 384 300Z" fill="url(#hat)" stroke="#1B1440" stroke-width="5"/>
+    <path d="M250 296Q252 252 282 226M300 296V222M350 296Q348 252 318 226" fill="none" stroke="#9E2338" stroke-width="3" opacity=".55"/>
+    <rect x="208" y="284" width="184" height="38" rx="16" fill="#D93A50" stroke="#1B1440" stroke-width="5"/>
+    <path d="M226 290V316M244 290V316M262 290V316M280 290V316M298 290V316M316 290V316M334 290V316M352 290V316M370 290V316" stroke="#8E1F33" stroke-width="3" opacity=".7"/>
+    <rect x="216" y="276" width="168" height="7" rx="3" fill="#fff" opacity=".85"/>
+    <g fill="#fff" stroke="#B8B2D8" stroke-width="2">
+      <circle cx="300" cy="200" r="27"/>
+    </g>
+    <g fill="#fff">
+      <circle cx="282" cy="196" r="12"/><circle cx="318" cy="194" r="12"/><circle cx="300" cy="180" r="12"/>
+      <circle cx="292" cy="214" r="11"/><circle cx="310" cy="214" r="11"/>
+    </g>
+  </g>
+
+  <!-- letters fluttering round her -->
+  <use href="#letter" transform="translate(110 206) rotate(-18) scale(.95)"/>
+  <use href="#letter" transform="translate(500 236) rotate(16) scale(.9)"/>
+  <use href="#letter" transform="translate(196 118) rotate(10) scale(.66)"/>
+  <use href="#letter" transform="translate(392 150) rotate(-8) scale(.6)"/>
+  <use href="#letter" transform="translate(64 306) rotate(-6) scale(.7)"/>
+  <use href="#letter" transform="translate(540 330) rotate(22) scale(.72)"/>
+  <g fill="#FFE14D">
+    <use href="#spark" transform="translate(150 168) scale(.8)"/>
+    <use href="#spark" transform="translate(456 196) scale(.9)"/>
+    <use href="#spark" transform="translate(250 96) scale(.6)"/>
+    <use href="#spark" transform="translate(560 280) scale(.6)"/>
+    <use href="#spark" transform="translate(40 262) scale(.6)"/>
+  </g>
+  <rect width="600" height="600" fill="url(#vignette)"/>
+</svg>

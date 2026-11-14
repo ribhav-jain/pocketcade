@@ -1,0 +1,10 @@
+{
+  "tier": "medium",
+  "orders": {
+    "short": { "seed": "0123456789abcdef", "next": 0, "cycle": 0 },
+    "medium": { "seed": "fedcba9876543210", "next": 3, "cycle": 0 },
+    "long": { "seed": "00000000ffffffff", "next": 0, "cycle": 1 }
+  },
+  "current": { "short": null, "medium": null, "long": null },
+  "totals": { "solved": 2, "onPar": 1, "revealed": 0 }
+}

@@ -1,0 +1,23 @@
+{
+  "size": "garden",
+  "cols": 8,
+  "rows": 10,
+  "moles": "ABgJAkDABQCCAA",
+  "dug": "AAAAPDw8eHx8fA",
+  "flowers": "AAAAAAAAAAAAAA",
+  "start": 44,
+  "origin": {
+    "src": "gen",
+    "seed": "gen/11"
+  },
+  "gen": 1,
+  "elapsedMs": 41250,
+  "hints": 1,
+  "cursor": 44,
+  "view": {
+    "zoom": "fit",
+    "cx": 4,
+    "cy": 5
+  },
+  "startedAt": "2026-11-10T09:00:00.000Z"
+}

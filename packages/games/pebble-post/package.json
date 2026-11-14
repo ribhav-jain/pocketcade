@@ -1,0 +1,31 @@
+{
+  "name": "@pocketcade/game-pebble-post",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "description": "Pebble Post: belly-slide Pebble the penguin courier down a winding ice canyon, switch lanes, hop and tuck past drifts, icicle arches and mail sleds, and collect every letter (Pocketcade lane runner).",
+  "exports": {
+    ".": "./src/index.ts",
+    "./meta": "./src/meta.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@pocketcade/sdk": "workspace:*",
+    "@pocketcade/toolkit": "workspace:*",
+    "phaser": "catalog:"
+  },
+  "devDependencies": {
+    "@pocketcade/config": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
+    "eslint": "catalog:",
+    "playwright": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

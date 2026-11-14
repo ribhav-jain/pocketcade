@@ -1,0 +1,54 @@
+{
+  "name": "@pocketcade/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "description": "Pocketcade portal: Next.js App Router static export.",
+  "scripts": {
+    "catalog": "node ../../tools/gen-registry.ts",
+    "dev": "NEXT_TELEMETRY_DISABLED=1 next dev --port 3000",
+    "build": "NEXT_TELEMETRY_DISABLED=1 next build && node ../../tools/postbuild.ts",
+    "lint": "eslint .",
+    "og": "node scripts/gen-og.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "e2e": "playwright test"
+  },
+  "dependencies": {
+    "@fontsource-variable/fredoka": "catalog:",
+    "@fontsource-variable/nunito": "catalog:",
+    "@pocketcade/game-bao-bolt": "workspace:*",
+    "@pocketcade/game-comet-crush": "workspace:*",
+    "@pocketcade/game-firefly-flip": "workspace:*",
+    "@pocketcade/game-glowworm": "workspace:*",
+    "@pocketcade/game-letterhop": "workspace:*",
+    "@pocketcade/game-molehills": "workspace:*",
+    "@pocketcade/game-on-the-dot": "workspace:*",
+    "@pocketcade/game-pebble-post": "workspace:*",
+    "@pocketcade/game-pentafall": "workspace:*",
+    "@pocketcade/game-pop-reef": "workspace:*",
+    "@pocketcade/game-rowdy": "workspace:*",
+    "@pocketcade/game-snugfit": "workspace:*",
+    "@pocketcade/game-sourdough": "workspace:*",
+    "@pocketcade/game-sumslide": "workspace:*",
+    "@pocketcade/game-sunset-sprint": "workspace:*",
+    "@pocketcade/host": "workspace:*",
+    "@pocketcade/sdk": "workspace:*",
+    "next": "16.4.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@pocketcade/config": "workspace:*",
+    "@playwright/test": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "eslint": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

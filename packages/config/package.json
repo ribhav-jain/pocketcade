@@ -1,0 +1,18 @@
+{
+  "name": "@pocketcade/config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "description": "Shared tsconfig base, ESLint flat config and Prettier config for Pocketcade packages.",
+  "exports": {
+    "./tsconfig.base.json": "./tsconfig.base.json",
+    "./eslint": "./eslint.js",
+    "./prettier": "./prettier.json"
+  },
+  "dependencies": {
+    "eslint": "catalog:",
+    "typescript": "npm:typescript@6.0.3",
+    "typescript-eslint": "8.72.1"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "extends": "@pocketcade/config/tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node", "vite/client"]
+  },
+  "include": ["src", "e2e", "fixtures", "scripts", "vite.config.ts", "playwright.config.ts"],
+  "exclude": ["node_modules", "dist"]
+}

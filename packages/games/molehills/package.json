@@ -1,0 +1,31 @@
+{
+  "name": "@pocketcade/game-molehills",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "description": "Molehills: use the number clues to uncover every safe patch without waking a sleeping mole (Pocketcade no-guess deduction puzzle).",
+  "exports": {
+    ".": "./src/index.ts",
+    "./meta": "./src/meta.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@pocketcade/sdk": "workspace:*",
+    "@pocketcade/toolkit": "workspace:*",
+    "phaser": "catalog:"
+  },
+  "devDependencies": {
+    "@pocketcade/config": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
+    "eslint": "catalog:",
+    "playwright": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

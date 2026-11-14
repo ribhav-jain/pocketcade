@@ -1,0 +1,37 @@
+{
+  "name": "@pocketcade/toolkit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "description": "Shared game toolkit: core (input, sfx, rng, save, tokens, loop), the Phaser adapter and the DOM adapter.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./phaser": "./src/phaser/index.ts",
+    "./dom": "./src/dom/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@pocketcade/sdk": "workspace:*"
+  },
+  "peerDependencies": {
+    "phaser": "4.2.1"
+  },
+  "peerDependenciesMeta": {
+    "phaser": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@pocketcade/config": "workspace:*",
+    "eslint": "catalog:",
+    "happy-dom": "21.0.4",
+    "phaser": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

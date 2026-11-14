@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#36AEFF"/><stop offset="1" stop-color="#C8F2FF"/></linearGradient>
+    <radialGradient id="sun"><stop offset="0" stop-color="#FFFBD8"/><stop offset=".6" stop-color="#FFE14D"/><stop offset="1" stop-color="#FFC83D"/></radialGradient>
+    <radialGradient id="glow"><stop offset="0" stop-color="#FFF3A0" stop-opacity=".95"/><stop offset="1" stop-color="#FFF3A0" stop-opacity="0"/></radialGradient>
+    <linearGradient id="grass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7BD653"/><stop offset="1" stop-color="#3DA534"/></linearGradient>
+    <linearGradient id="blade" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#48B93C"/><stop offset="1" stop-color="#D6FA70"/></linearGradient>
+    <linearGradient id="soil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6E3D20"/><stop offset=".3" stop-color="#9A6038"/><stop offset="1" stop-color="#B27645"/></linearGradient>
+    <linearGradient id="mound" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C58A55"/><stop offset="1" stop-color="#7A4526"/></linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E0A866"/><stop offset="1" stop-color="#94582B"/></linearGradient>
+    <linearGradient id="cap" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7AA4FF"/><stop offset="1" stop-color="#3F6FE8"/></linearGradient>
+    <radialGradient id="fur" cx=".38" cy=".3" r=".8"><stop offset="0" stop-color="#AD9BC2"/><stop offset="1" stop-color="#5A4670"/></radialGradient>
+    <radialGradient id="pom" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FFF6B0"/><stop offset="1" stop-color="#FFC83D"/></radialGradient>
+    <radialGradient id="nose" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FFB0CB"/><stop offset="1" stop-color="#F0457F"/></radialGradient>
+    <radialGradient id="ctr" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FFF0A0"/><stop offset="1" stop-color="#F5A623"/></radialGradient>
+    <radialGradient id="vig" cx=".5" cy=".5" r=".72"><stop offset=".62" stop-color="#0A2814" stop-opacity="0"/><stop offset="1" stop-color="#0A2814" stop-opacity=".42"/></radialGradient>
+    <clipPath id="hole"><path d="M0 0H600V440H414A114 24 0 0 1 186 440H0Z"/></clipPath>
+    <clipPath id="capc"><path d="M196 324C190 220 330 168 404 222Q452 262 456 336Q424 284 400 304Z"/></clipPath>
+    <g id="tuft">
+      <rect x="2" y="8" width="92" height="88" rx="22" fill="#2A7F2C"/>
+      <rect x="2" y="2" width="92" height="86" rx="22" fill="url(#grass)" stroke="#1E5E22" stroke-width="3"/>
+      <rect x="10" y="7" width="76" height="30" rx="15" fill="#FFF" opacity=".22"/>
+      <g fill="url(#blade)" stroke="#1E5E22" stroke-width="2.5" stroke-linejoin="round">
+        <path d="M22 72Q12 46 14 30Q30 48 36 72"/>
+        <path d="M62 72Q72 44 84 32Q80 52 76 72"/>
+        <path d="M30 72Q26 38 34 18Q44 42 46 72"/>
+        <path d="M52 72Q56 36 66 18Q70 44 64 72"/>
+        <path d="M40 72Q42 32 50 12Q58 40 56 72"/>
+      </g>
+      <ellipse cx="48" cy="74" rx="32" ry="9" fill="#46B339"/>
+    </g>
+    <g id="dirt">
+      <rect x="2" y="2" width="92" height="92" rx="20" fill="url(#soil)" stroke="#4A2614" stroke-width="3"/>
+      <g fill="#46200C" opacity=".45"><circle cx="16" cy="78" r="4"/><circle cx="80" cy="20" r="3"/><circle cx="82" cy="80" r="3.5"/></g>
+      <g fill="#ECBE8C" opacity=".6"><circle cx="20" cy="22" r="3"/><circle cx="74" cy="86" r="2.5"/></g>
+    </g>
+    <ellipse id="pet" cx="0" cy="-17" rx="7" ry="14" fill="#FFF" stroke="#5D4E86" stroke-width="2"/>
+    <g id="daisy">
+      <use href="#pet"/><use href="#pet" transform="rotate(36)"/><use href="#pet" transform="rotate(72)"/><use href="#pet" transform="rotate(108)"/><use href="#pet" transform="rotate(144)"/>
+      <use href="#pet" transform="rotate(180)"/><use href="#pet" transform="rotate(216)"/><use href="#pet" transform="rotate(252)"/><use href="#pet" transform="rotate(288)"/><use href="#pet" transform="rotate(324)"/>
+      <circle r="11" fill="url(#ctr)" stroke="#9A5A00" stroke-width="2"/>
+    </g>
+    <g id="flower">
+      <path d="M48 86Q44 66 48 46" fill="none" stroke="#2A1630" stroke-width="9" stroke-linecap="round"/>
+      <path d="M48 86Q44 66 48 46" fill="none" stroke="#3DB04A" stroke-width="5" stroke-linecap="round"/>
+      <path d="M47 74Q36 62 24 68Q34 80 47 74Z" fill="#4CC456" stroke="#1E5E22" stroke-width="2.5"/>
+      <use href="#daisy" transform="translate(48 38)"/>
+    </g>
+    <path id="sparkle" d="M0-14Q2-2 14 0Q2 2 0 14Q-2 2-14 0Q-2-2 0-14Z" fill="#FFF"/>
+    <path id="d1" d="M102 372L114 364V410"/>
+    <path id="d2" d="M512 374Q526 358 540 372Q546 384 528 396L512 410H544"/>
+    <path id="d3" d="M-8 476L4 468V514"/>
+    <path id="d4" d="M96 478Q110 462 124 476Q130 488 112 500L96 514H128"/>
+    <path id="d5" d="M512 578Q526 566 538 576Q544 588 528 592Q546 596 540 610"/>
+  </defs>
+
+  <rect width="600" height="600" fill="url(#sky)"/>
+  <circle cx="500" cy="92" r="150" fill="url(#glow)"/>
+  <circle cx="500" cy="92" r="50" fill="url(#sun)"/>
+  <g fill="#FFF">
+    <circle cx="70" cy="96" r="24"/><circle cx="102" cy="80" r="32"/><circle cx="140" cy="88" r="26"/><circle cx="120" cy="104" r="22"/>
+    <circle cx="300" cy="54" r="18"/><circle cx="326" cy="44" r="24"/><circle cx="354" cy="56" r="18"/>
+  </g>
+  <path d="M0 250Q80 206 170 230T340 222T520 214T600 230V320H0Z" fill="#9DDF78"/>
+  <g fill="#2F9E46">
+    <circle cx="10" cy="292" r="46"/><circle cx="84" cy="282" r="50"/><circle cx="160" cy="296" r="44"/><circle cx="232" cy="284" r="48"/>
+    <circle cx="370" cy="286" r="48"/><circle cx="446" cy="296" r="44"/><circle cx="516" cy="282" r="50"/><circle cx="592" cy="292" r="46"/>
+  </g>
+  <g fill="#4FC25A" opacity=".7">
+    <circle cx="70" cy="262" r="18"/><circle cx="220" cy="262" r="16"/><circle cx="500" cy="260" r="18"/><circle cx="380" cy="266" r="14"/>
+  </g>
+
+  <rect x="-10" y="324" width="620" height="290" fill="#3B2012"/>
+  <rect x="-10" y="314" width="620" height="18" fill="url(#wood)" stroke="#5A3014" stroke-width="3"/>
+  <use href="#tuft" x="-40" y="338"/><use href="#dirt" x="64" y="338"/><use href="#tuft" x="168" y="338"/>
+  <use href="#dirt" x="376" y="338"/><use href="#dirt" x="480" y="338"/><use href="#tuft" x="584" y="338"/>
+  <use href="#dirt" x="-40" y="442"/><use href="#dirt" x="64" y="442"/><use href="#tuft" x="480" y="442"/><use href="#dirt" x="584" y="442"/>
+  <use href="#tuft" x="-40" y="546"/><use href="#tuft" x="64" y="546"/><use href="#dirt" x="480" y="546"/><use href="#tuft" x="584" y="546"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#d1" stroke="#2A1630" stroke-width="17"/><use href="#d1" stroke="#38D6FF" stroke-width="8"/>
+    <use href="#d2" stroke="#2A1630" stroke-width="17"/><use href="#d2" stroke="#B8F34A" stroke-width="8"/>
+    <use href="#d3" stroke="#2A1630" stroke-width="17"/><use href="#d3" stroke="#38D6FF" stroke-width="8"/>
+    <use href="#d4" stroke="#2A1630" stroke-width="17"/><use href="#d4" stroke="#B8F34A" stroke-width="8"/>
+    <use href="#d5" stroke="#2A1630" stroke-width="17"/><use href="#d5" stroke="#FFE14D" stroke-width="8"/>
+  </g>
+  <use href="#flower" x="480" y="430"/>
+  <use href="#flower" x="64" y="530"/>
+
+  <path d="M118 612C126 482 206 424 300 424C394 424 474 482 482 612Z" fill="url(#mound)" stroke="#4A2614" stroke-width="5"/>
+  <ellipse cx="300" cy="440" rx="114" ry="24" fill="#3A1C0C"/>
+  <g clip-path="url(#hole)">
+    <ellipse cx="300" cy="372" rx="102" ry="108" fill="url(#fur)" stroke="#2A1630" stroke-width="6"/>
+    <ellipse cx="232" cy="404" rx="20" ry="12" fill="#FF6F9F" opacity=".45"/>
+    <ellipse cx="368" cy="404" rx="20" ry="12" fill="#FF6F9F" opacity=".45"/>
+    <ellipse cx="300" cy="414" rx="48" ry="33" fill="#F4CDBD"/>
+    <g stroke="#2A1630" stroke-width="3" stroke-linecap="round" fill="none"><path d="M254 410L222 404M254 420L224 424M346 410L378 404M346 420L376 424"/></g>
+    <path d="M280 424Q300 442 320 424" fill="none" stroke="#2A1630" stroke-width="5" stroke-linecap="round"/>
+    <path d="M292 431h16v10a4 4 0 0 1-4 4h-8a4 4 0 0 1-4-4z" fill="#FFF" stroke="#2A1630" stroke-width="3"/>
+  </g>
+  <ellipse cx="300" cy="396" rx="23" ry="17" fill="url(#nose)" stroke="#2A1630" stroke-width="5"/>
+  <ellipse cx="292" cy="389" rx="8" ry="5" fill="#FFF" opacity=".8"/>
+  <g stroke="#2A1630" stroke-width="5">
+    <ellipse cx="262" cy="350" rx="18" ry="21" fill="#FFF"/>
+    <ellipse cx="338" cy="350" rx="18" ry="21" fill="#FFF"/>
+  </g>
+  <circle cx="259" cy="349" r="11" fill="#2A1630"/><circle cx="335" cy="349" r="11" fill="#2A1630"/>
+  <circle cx="255" cy="344" r="4" fill="#FFF"/><circle cx="331" cy="344" r="4" fill="#FFF"/>
+  <path d="M244 318Q258 308 274 314M326 314Q342 308 356 318" fill="none" stroke="#2A1630" stroke-width="5" stroke-linecap="round"/>
+  <path d="M196 324C190 220 330 168 404 222Q452 262 456 336Q424 284 400 304Z" fill="url(#cap)"/>
+  <g clip-path="url(#capc)" stroke="#FFF" stroke-width="18" opacity=".85">
+    <path d="M200 360L280 160M262 360L342 160M324 360L404 160M386 360L466 160"/>
+  </g>
+  <path d="M196 324C190 220 330 168 404 222Q452 262 456 336Q424 284 400 304Z" fill="none" stroke="#2A1630" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M192 326Q300 288 404 306" fill="none" stroke="#2A1630" stroke-width="30" stroke-linecap="round"/>
+  <path d="M192 326Q300 288 404 306" fill="none" stroke="#FFF6EA" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="458" cy="344" r="22" fill="url(#pom)" stroke="#2A1630" stroke-width="5"/>
+  <g fill="#FFB3C8" stroke="#2A1630" stroke-width="5">
+    <ellipse cx="226" cy="452" rx="32" ry="21"/>
+    <ellipse cx="374" cy="452" rx="32" ry="21"/>
+  </g>
+  <path d="M214 440v10M226 438v12M238 440v10M362 440v10M374 438v12M386 440v10" stroke="#2A1630" stroke-width="3.5" stroke-linecap="round"/>
+  <g fill="#6E3D20">
+    <circle cx="166" cy="400" r="9"/><circle cx="146" cy="372" r="6"/><circle cx="182" cy="356" r="4"/>
+    <circle cx="436" cy="394" r="9"/><circle cx="460" cy="404" r="5"/><circle cx="426" cy="364" r="5"/>
+  </g>
+  <g fill="#ECBE8C" opacity=".7"><ellipse cx="200" cy="500" rx="8" ry="5"/><ellipse cx="400" cy="520" rx="9" ry="5"/><ellipse cx="300" cy="560" rx="10" ry="6"/><ellipse cx="250" cy="580" rx="7" ry="4"/></g>
+  <g fill="#46200C" opacity=".5"><ellipse cx="340" cy="490" rx="7" ry="4"/><ellipse cx="180" cy="560" rx="8" ry="5"/><ellipse cx="420" cy="580" rx="8" ry="5"/></g>
+  <use href="#daisy" transform="translate(150 470) scale(1.25)"/>
+  <use href="#sparkle" x="130" y="300"/><use href="#sparkle" transform="translate(470 420) scale(.7)"/><use href="#sparkle" transform="translate(196 230) scale(.6)"/>
+  <rect width="600" height="600" fill="url(#vig)"/>
+</svg>

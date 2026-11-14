@@ -1,0 +1,31 @@
+{
+  "name": "@pocketcade/game-pop-reef",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "description": "Pop Reef: help Puff the pufferfish puff bubbles up a coral reef, match three or more to pop them and keep the bubble ceiling from sinking to the reef (Pocketcade bubble shooter).",
+  "exports": {
+    ".": "./src/index.ts",
+    "./meta": "./src/meta.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@pocketcade/sdk": "workspace:*",
+    "@pocketcade/toolkit": "workspace:*",
+    "phaser": "catalog:"
+  },
+  "devDependencies": {
+    "@pocketcade/config": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
+    "eslint": "catalog:",
+    "playwright": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

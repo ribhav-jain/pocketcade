@@ -1,0 +1,27 @@
+{
+  "name": "@pocketcade/host",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "description": "Mounts a game into a page: GameRunner and the host services (storage, scores, audio, fullscreen, errors).",
+  "exports": {
+    ".": "./src/index.ts",
+    "./testing": "./src/testing/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@pocketcade/sdk": "workspace:*"
+  },
+  "devDependencies": {
+    "@pocketcade/config": "workspace:*",
+    "eslint": "catalog:",
+    "happy-dom": "21.0.4",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
