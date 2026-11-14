@@ -1,0 +1,6 @@
+# Prettier also skips everything in .gitignore.
+docs/
+pnpm-lock.yaml
+.claude/
+*.gen.ts
+packages/games/letterhop/data/

@@ -1,0 +1,78 @@
+{
+  "$schema": "./node_modules/turbo/schema.json",
+  "globalPassThroughEnv": ["CI"],
+  "tasks": {
+    "transit": {
+      "dependsOn": ["^transit"]
+    },
+    "lint": {
+      "dependsOn": ["transit"]
+    },
+    "typecheck": {
+      "dependsOn": ["transit"]
+    },
+    "test": {
+      "dependsOn": ["transit"]
+    },
+    "build": {
+      "dependsOn": ["^build", "transit"],
+      "outputs": ["dist/**"]
+    },
+    "e2e": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "//#lint": {
+      "cache": false
+    },
+    "//#typecheck": {},
+    "//#test": {},
+    "@pocketcade/web#catalog": {
+      "dependsOn": ["transit"],
+      "inputs": [
+        "package.json",
+        "$TURBO_ROOT$/tools/gen-registry.ts",
+        "$TURBO_ROOT$/packages/games/*/package.json",
+        "$TURBO_ROOT$/packages/games/*/game.md",
+        "$TURBO_ROOT$/packages/games/*/media/cover.svg"
+      ],
+      "outputs": ["src/games/*.generated.ts", "public/covers/**"]
+    },
+    "@pocketcade/web#lint": {
+      "dependsOn": ["transit", "catalog"]
+    },
+    "@pocketcade/web#typecheck": {
+      "dependsOn": ["transit", "catalog"]
+    },
+    "@pocketcade/web#test": {
+      "dependsOn": ["transit", "catalog"]
+    },
+    "@pocketcade/web#dev": {
+      "dependsOn": ["catalog"],
+      "cache": false,
+      "persistent": true
+    },
+    "@pocketcade/web#build": {
+      "dependsOn": ["^build", "transit", "catalog", "typecheck"],
+      "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/tools/postbuild.ts", "$TURBO_ROOT$/ASSETS.md"],
+      "env": [
+        "NEXT_PUBLIC_*",
+        "VERCEL_ENV",
+        "VERCEL_URL",
+        "VERCEL_PROJECT_PRODUCTION_URL",
+        "VERCEL_GIT_COMMIT_SHA",
+        "VERCEL_GIT_PULL_REQUEST_ID",
+        "VERCEL_GIT_REPO_OWNER",
+        "VERCEL_GIT_REPO_SLUG",
+        "GITHUB_SHA",
+        "GITHUB_SERVER_URL",
+        "GITHUB_REPOSITORY"
+      ],
+      "outputs": ["out/**", ".next/**", "!.next/cache/**"]
+    }
+  }
+}

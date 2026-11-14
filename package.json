@@ -1,0 +1,40 @@
+{
+  "name": "pocketcade",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.18.0",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.18.0",
+      "onFail": "download"
+    }
+  },
+  "engines": {
+    "node": "26.x"
+  },
+  "scripts": {
+    "dev": "turbo run dev --filter=@pocketcade/web",
+    "build": "turbo run build",
+    "lint": "prettier --check . && node tools/gen-registry.ts --check && node tools/gen-word-ladder.ts --check",
+    "typecheck": "tsc --noEmit -p tools",
+    "test": "vitest run --dir tools",
+    "verify": "turbo run lint typecheck test build",
+    "e2e": "turbo run e2e",
+    "check": "turbo run lint typecheck test build e2e",
+    "budgets": "node tools/check-budgets.ts",
+    "serve:static": "node tools/serve-static.ts --dir apps/web/out --config apps/web/vercel.json --port 4173",
+    "og": "pnpm --filter @pocketcade/web og",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@pocketcade/config": "workspace:*",
+    "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "turbo": "2.11.10",
+    "typescript": "catalog:",
+    "vitest": "catalog:",
+    "yaml": "2.9.1"
+  }
+}
