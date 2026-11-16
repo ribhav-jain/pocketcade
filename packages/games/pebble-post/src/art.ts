@@ -316,7 +316,7 @@ export function drawCeiling(ctx: Ctx, w: number, h: number): void {
     ['#0C0724', h * 0.2, h * 0.62],
   ] as const) {
     ctx.fillStyle = fill;
-    for (let x = -20; x < w + 20; ) {
+    for (let x = -20; x < w + 20;) {
       const ww = 30 + rnd() * 56;
       poly(ctx, [
         [x, 0],

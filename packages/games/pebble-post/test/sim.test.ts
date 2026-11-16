@@ -317,7 +317,11 @@ describe('bonuses', () => {
 
   it('an obstacle the scarf shattered scores nothing', () => {
     const r = run(
-      fixed([makeRow(14, [EMPTY, LOW, EMPTY])], [], [{ z: 5, lane: 1, kind: 'scarf', taken: false }]),
+      fixed(
+        [makeRow(14, [EMPTY, LOW, EMPTY])],
+        [],
+        [{ z: 5, lane: 1, kind: 'scarf', taken: false }],
+      ),
     );
     const es = go(r, 2);
     expect(types(es)).toContain('scarf-save');

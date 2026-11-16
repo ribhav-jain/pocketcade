@@ -89,7 +89,9 @@ describe('fits', () => {
   });
 
   it('fitsAnywhere finds the last hole', () => {
-    const tight = boardOf(Array.from({ length: SIZE }, (_, r) => (r === 4 ? '111.1111' : '1111111.')));
+    const tight = boardOf(
+      Array.from({ length: SIZE }, (_, r) => (r === 4 ? '111.1111' : '1111111.')),
+    );
     expect(fitsAnywhere(tight, SHAPES[DOT]!)).toBe(true);
     expect(fitsAnywhere(tight, SHAPES[BAR2]!)).toBe(false);
   });
@@ -254,7 +256,10 @@ describe('greedy demo policy', () => {
   });
 
   it('returns null when nothing fits', () => {
-    const { state } = stateOf(Array.from({ length: SIZE }, () => '1.1.1.1.'), [piece(BAR2), null, null]);
+    const { state } = stateOf(
+      Array.from({ length: SIZE }, () => '1.1.1.1.'),
+      [piece(BAR2), null, null],
+    );
     expect(bestMove(state)).toBeNull();
   });
 

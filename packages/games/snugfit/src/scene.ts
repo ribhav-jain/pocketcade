@@ -830,7 +830,8 @@ export const createScenes: SceneFactory = (_P, kit) => {
       const piece = this.state.hand[this.sel];
       const { gx, gy, cell } = this.f;
       const grid = cell * SIZE;
-      const onQuilt = x > gx - cell && x < gx + grid + cell && y > gy - cell && y < gy + grid + cell;
+      const onQuilt =
+        x > gx - cell && x < gx + grid + cell && y > gy - cell && y < gy + grid + cell;
       if (!piece || !onQuilt) {
         this.hideGhost();
         this.select(-1);
@@ -939,7 +940,9 @@ export const createScenes: SceneFactory = (_P, kit) => {
       if (!box || this.tk.motion.reduced) return;
       const c = this.slotCentre(slot);
       this.tweens.killTweensOf(box);
-      box.setPosition(c.x, c.y).setScale(this.restScale(slot, SHAPES[this.state.hand[slot]!.shape]!));
+      box
+        .setPosition(c.x, c.y)
+        .setScale(this.restScale(slot, SHAPES[this.state.hand[slot]!.shape]!));
       kit.fps.burst(300);
       this.tweens.add({
         targets: box,
@@ -992,10 +995,7 @@ export const createScenes: SceneFactory = (_P, kit) => {
         if (i !== slot && box.depth === 50) continue;
         const c = this.slotCentre(i);
         this.tweens.killTweensOf(box);
-        box
-          .setPosition(c.x, c.y)
-          .setScale(this.restScale(i, SHAPES[piece.shape]!))
-          .setDepth(50);
+        box.setPosition(c.x, c.y).setScale(this.restScale(i, SHAPES[piece.shape]!)).setDepth(50);
       }
       this.showCursorGhost();
     }
@@ -1069,7 +1069,12 @@ export const createScenes: SceneFactory = (_P, kit) => {
       const midX = gx + cell * (SIZE / 2);
       const midY = gy + cell * (SIZE / 2);
       if (out.clean)
-        popText(this, midX, midY, strings.popClean, { color: '#7CF2C0', px: 54, rise: 60, ms: 1300 });
+        popText(this, midX, midY, strings.popClean, {
+          color: '#7CF2C0',
+          px: 54,
+          rise: 60,
+          ms: 1300,
+        });
       else if (lines >= 2)
         popText(this, midX, midY, call, { color: '#FF8FC7', px: 48, rise: 56, ms: 1100 });
       if (out.gain.multiplier >= 2)

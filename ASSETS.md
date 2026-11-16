@@ -9,12 +9,12 @@ Licenses page is generated from the table below.
 
 ## Assets
 
-| ID              | Title                                  | Author                      | License                                  | URL                                               | Files                                                                     |
-| --------------- | -------------------------------------- | --------------------------- | ---------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------- |
-| `font-fredoka`  | Fredoka (variable font)                | The Fredoka Project Authors | SIL Open Font License 1.1                | https://github.com/hafontia/Fredoka-One           | npm `@fontsource-variable/fredoka`, loaded by the portal and the games    |
-| `font-nunito`   | Nunito (variable font)                 | The Nunito Project Authors  | SIL Open Font License 1.1                | https://github.com/googlefonts/nunito             | npm `@fontsource-variable/nunito`, loaded by the portal and the games     |
-| `words-enable`  | ENABLE word list (`enable1.txt`)       | M. Cooper and contributors  | Public domain                            | https://sources.debian.org/src/scowl/             | `packages/games/letterhop/data/source.txt`, generated `src/data/*.gen.ts` |
-| `words-12dicts` | 12dicts word lists, list `6of12`       | Alan Beale                  | Public domain (acknowledgment requested) | http://wordlist.aspell.net/12dicts/               | `packages/games/letterhop/data/common.txt`, generated `src/data/*.gen.ts` |
+| ID              | Title                            | Author                      | License                                  | URL                                     | Files                                                                     |
+| --------------- | -------------------------------- | --------------------------- | ---------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------- |
+| `font-fredoka`  | Fredoka (variable font)          | The Fredoka Project Authors | SIL Open Font License 1.1                | https://github.com/hafontia/Fredoka-One | npm `@fontsource-variable/fredoka`, loaded by the portal and the games    |
+| `font-nunito`   | Nunito (variable font)           | The Nunito Project Authors  | SIL Open Font License 1.1                | https://github.com/googlefonts/nunito   | npm `@fontsource-variable/nunito`, loaded by the portal and the games     |
+| `words-enable`  | ENABLE word list (`enable1.txt`) | M. Cooper and contributors  | Public domain                            | https://sources.debian.org/src/scowl/   | `packages/games/letterhop/data/source.txt`, generated `src/data/*.gen.ts` |
+| `words-12dicts` | 12dicts word lists, list `6of12` | Alan Beale                  | Public domain (acknowledgment requested) | http://wordlist.aspell.net/12dicts/     | `packages/games/letterhop/data/common.txt`, generated `src/data/*.gen.ts` |
 
 Notes:
 
@@ -29,11 +29,11 @@ Notes:
 
 ## Libraries shipped in the built site
 
-| Library                                       | License |
-| --------------------------------------------- | ------- |
-| [Phaser](https://github.com/phaserjs/phaser)  | MIT     |
-| [Next.js](https://github.com/vercel/next.js)  | MIT     |
-| [React](https://github.com/facebook/react)    | MIT     |
+| Library                                      | License |
+| -------------------------------------------- | ------- |
+| [Phaser](https://github.com/phaserjs/phaser) | MIT     |
+| [Next.js](https://github.com/vercel/next.js) | MIT     |
+| [React](https://github.com/facebook/react)   | MIT     |
 
 Build and test tooling (TypeScript, Vite, Vitest, Playwright, ESLint, Prettier, Turborepo and their dependencies) is
 used during development only and is not part of the site. `pnpm licenses list` prints the licence of every installed

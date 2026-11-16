@@ -20,9 +20,11 @@ controls:
     touch: Tap "Play again"
 faq:
   - q: Can I turn a patch?
-    a: No. Every patch goes on the way it is dealt, so part of the puzzle is keeping room for the awkward ones.
+    a: No. Every patch goes on the way it is dealt, so part of the puzzle is keeping room for the awkward ones. Each fabric has its own pattern as well as its own colour.
   - q: How is the score worked out?
     a: One point for every square you place and 10 for a stitched line. Two lines at once are worth 30, three 60, four 100. Stitching on patches in a row multiplies the line points, up to 8 times, and emptying the whole quilt adds 300.
+  - q: When does the game end?
+    a: When none of the patches waiting in the tray fits anywhere on the quilt. You get three patches at a time, and the next three are dealt when you use the last one. Each new hand always has at least one patch that fits.
   - q: Is my game saved?
     a: Yes, on this device, after every patch. You can leave and pick the same quilt up later. Clearing site data removes it.
 coverAlt: A round orange cat dozes beside a bright patchwork quilt as a pink gingham patch is lowered into the last gap of a row.

@@ -2,7 +2,16 @@
 // it picks the next move: the first step of the shortest path (BFS) to a berry, if that leaves Wick more free
 // cells than its length; otherwise the move with the most room. When Wick dies the toolkit restarts the run.
 import type { AttractScript } from '@pocketcade/toolkit';
-import { CELLS, DIRS, floodCount, opposite, stepCell, type Cave, type Dir, type Run } from './sim.ts';
+import {
+  CELLS,
+  DIRS,
+  floodCount,
+  opposite,
+  stepCell,
+  type Cave,
+  type Dir,
+  type Run,
+} from './sim.ts';
 
 /** What the autopilot reads (the live run). */
 export type AutopilotView = Pick<

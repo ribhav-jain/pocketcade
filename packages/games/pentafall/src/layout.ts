@@ -109,9 +109,7 @@ function wide(v: View, pause: number): Frame {
   const [colMin, colMax, gap, edge, pillH, buttonH] = [124, 200, RAIL + 6, 10, 58, 96];
   const cell = Math.max(
     8,
-    Math.floor(
-      Math.min((v.height - 28) / VIS_ROWS, (v.width - 2 * (colMin + gap + edge)) / COLS),
-    ),
+    Math.floor(Math.min((v.height - 28) / VIS_ROWS, (v.width - 2 * (colMin + gap + edge)) / COLS)),
   );
   const well = {
     x: Math.round(v.x + (v.width - COLS * cell) / 2),

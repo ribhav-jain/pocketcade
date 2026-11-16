@@ -777,7 +777,9 @@ export const createScenes: SceneFactory = (_P, kit) => {
       if (!q) return;
       const { cell } = this.f;
       for (const [x, y] of q.cells)
-        this.board[(y - HIDDEN_ROWS) * COLS + x]!.setScale(this.unit).setY(this.cellY(y) + cell / 2);
+        this.board[(y - HIDDEN_ROWS) * COLS + x]!.setScale(this.unit).setY(
+          this.cellY(y) + cell / 2,
+        );
     }
 
     /** Per-frame motion that is not a tween: the falling piece easing into its cell and the landing squash. */
@@ -866,12 +868,18 @@ export const createScenes: SceneFactory = (_P, kit) => {
     /** Level up: the level pops in the well, the rim pulses, and every third level the look changes. */
     private levelFx(level: number): void {
       const { well, pills } = this.f;
-      popText(this, well.x + well.w / 2, well.y + well.h * 0.28, strings.t('levelUp', { n: level }), {
-        px: Math.min(60, well.w / 6.5),
-        color: colors.text,
-        rise: 50,
-        ms: 1100,
-      });
+      popText(
+        this,
+        well.x + well.w / 2,
+        well.y + well.h * 0.28,
+        strings.t('levelUp', { n: level }),
+        {
+          px: Math.min(60, well.w / 6.5),
+          color: colors.text,
+          rise: 50,
+          ms: 1100,
+        },
+      );
       burst(this, pills[1].x + pills[1].w / 2, pills[1].y + pills[1].h / 2, {
         count: 14,
         shape: 'star',
@@ -995,7 +1003,10 @@ export const createScenes: SceneFactory = (_P, kit) => {
           img
             .setTexture(petrified ? stone : art.cellKey(pieceAt(c), true, cell))
             .setY(cy)
-            .setScale(this.unit * (1 + flat * (clearing ? 0.12 : 0)), this.unit * (clearing ? 1 - flat * 0.75 : 1));
+            .setScale(
+              this.unit * (1 + flat * (clearing ? 0.12 : 0)),
+              this.unit * (clearing ? 1 - flat * 0.75 : 1),
+            );
         }
       }
       if (cl && !flashing && !collapsing) this.clearing = null;
@@ -1074,9 +1085,11 @@ export const createScenes: SceneFactory = (_P, kit) => {
         const [px, py] = [this.cellX(x), this.cellY(y)];
         g.fillStyle(color, 0.16).fillRect(px, py, cell, cell);
         if (!landed.has(`${x},${y - 1}`)) g.lineBetween(px, py + 1.5, px + cell, py + 1.5);
-        if (!landed.has(`${x},${y + 1}`)) g.lineBetween(px, py + cell - 1.5, px + cell, py + cell - 1.5);
+        if (!landed.has(`${x},${y + 1}`))
+          g.lineBetween(px, py + cell - 1.5, px + cell, py + cell - 1.5);
         if (!landed.has(`${x - 1},${y}`)) g.lineBetween(px + 1.5, py, px + 1.5, py + cell);
-        if (!landed.has(`${x + 1},${y}`)) g.lineBetween(px + cell - 1.5, py, px + cell - 1.5, py + cell);
+        if (!landed.has(`${x + 1},${y}`))
+          g.lineBetween(px + cell - 1.5, py, px + cell - 1.5, py + cell);
       }
       const key = art.cellKey(p.id, false, cell);
       cells.forEach(([, y], i) => this.active[i]!.setTexture(key).setVisible(y >= HIDDEN_ROWS));

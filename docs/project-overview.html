@@ -1,0 +1,981 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Pocketcade project overview</title>
+<meta name="description" content="A guided tour of Pocketcade, an open-source portal of original browser games: how it is built, how a game runs, and how to add one.">
+<style>
+:root {
+  --bg: #120C2C;
+  --bg-deep: #0B0720;
+  --surface: #1D1546;
+  --raised: #2A1F60;
+  --line: #4A3D93;
+  --text: #FFF9F2;
+  --muted: #C2B9EA;
+  --pink: #FF4FA3;
+  --orange: #FF9F1C;
+  --gold: #FFC83D;
+  --sky: #38D6FF;
+  --violet: #7B5CFF;
+  --lime: #B8F34A;
+  --ink: #120C2C;
+  --code-bg: #0B0720;
+  --link: #38D6FF;
+  /* diagram colours */
+  --d-box: #1D1546;
+  --d-box-2: #2A1F60;
+  --d-stroke: #4A3D93;
+  --d-text: #FFF9F2;
+  --d-muted: #C2B9EA;
+  --d-arrow: #C2B9EA;
+  --d-design: rgba(255, 79, 163, 0.22);
+  --d-bleed: rgba(56, 214, 255, 0.14);
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --measure: 46rem;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 1.5rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 17px/1.65 var(--font);
+  -webkit-text-size-adjust: 100%;
+}
+
+a { color: var(--link); text-underline-offset: 3px; }
+a:hover { color: var(--gold); }
+a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 4px; }
+
+code, kbd {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--code-bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.05em 0.35em;
+  overflow-wrap: anywhere;
+}
+pre {
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  background: var(--code-bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+}
+pre code { background: none; border: 0; padding: 0; font-size: inherit; }
+
+.skip { position: absolute; left: -999px; top: 0; }
+.skip:focus { left: 1rem; top: 1rem; z-index: 10; background: var(--gold); color: var(--ink); padding: 0.5rem 1rem; border-radius: 8px; }
+
+/* Layout: table of contents beside the article on wide screens, above it on narrow ones. */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 1rem 4rem;
+  gap: 0 2.5rem;
+}
+@media (min-width: 64rem) {
+  .layout { grid-template-columns: 15rem minmax(0, 1fr); padding: 0 2rem 5rem; }
+}
+
+.toc {
+  margin: 1.5rem 0 0;
+  padding: 1rem 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  font-size: 0.95rem;
+}
+.toc h2 { margin: 0 0 0.5rem; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.toc ol { margin: 0; padding-left: 1.4rem; }
+.toc-intro { margin: 0 0 0.3rem; }
+.toc li { margin: 0.2rem 0; }
+.toc a { color: var(--text); text-decoration: none; }
+.toc a:hover { color: var(--gold); text-decoration: underline; }
+@media (min-width: 64rem) {
+  .toc {
+    position: sticky;
+    top: 1.5rem;
+    align-self: start;
+    max-height: calc(100vh - 3rem);
+    overflow-y: auto;
+    margin-top: 2.5rem;
+  }
+}
+
+main { min-width: 0; }
+.prose { max-width: var(--measure); }
+
+header.hero {
+  padding: 2.5rem 0 1rem;
+  max-width: var(--measure);
+}
+.brand { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 1.2rem; }
+.brand svg { width: 3.4rem; height: 3.4rem; flex: none; }
+.brand span { font-size: 1.05rem; font-weight: 700; letter-spacing: 0.02em; color: var(--muted); }
+h1 {
+  margin: 0 0 0.6rem;
+  font-size: clamp(2.1rem, 6vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+h1 .grad {
+  background: linear-gradient(90deg, var(--pink), var(--orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.lede { font-size: 1.2rem; color: var(--muted); margin: 0 0 1.4rem; }
+.pills { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; margin: 0; list-style: none; }
+.pills li {
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+section { padding-top: 2.2rem; }
+h2 {
+  margin: 0 0 0.8rem;
+  font-size: 1.65rem;
+  line-height: 1.25;
+  padding-bottom: 0.45rem;
+  border-bottom: 3px solid var(--raised);
+}
+h2 .num { color: var(--pink); margin-right: 0.45rem; font-variant-numeric: tabular-nums; }
+h3 { margin: 1.6rem 0 0.4rem; font-size: 1.15rem; color: var(--gold); }
+p { margin: 0 0 1rem; }
+ul, ol { padding-left: 1.4rem; }
+li { margin: 0.25rem 0; }
+strong { color: #FFFFFF; }
+
+.callout {
+  max-width: var(--measure);
+  margin: 1.2rem 0;
+  padding: 0.9rem 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--sky);
+  border-radius: 12px;
+}
+.callout p:last-child { margin-bottom: 0; }
+
+/* Tables scroll sideways on small screens instead of squashing. */
+.table-wrap { overflow-x: auto; margin: 1rem 0 1.4rem; border: 1px solid var(--line); border-radius: 12px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+th, td { text-align: left; vertical-align: top; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--line); }
+th { background: var(--raised); color: var(--text); font-weight: 700; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td:first-child { font-weight: 600; }
+tbody tr:nth-child(even) td { background: rgba(255, 255, 255, 0.025); }
+
+/* Diagrams: fixed-size drawings that scroll sideways on a phone so the labels stay readable. */
+figure.diagram {
+  margin: 1.2rem 0 1.6rem;
+  padding: 1rem;
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+figure.diagram .scroll { overflow-x: auto; }
+figure.diagram svg { display: block; width: 100%; min-width: 600px; height: auto; font-family: var(--font); }
+figure.diagram figcaption { margin-top: 0.7rem; color: var(--muted); font-size: 0.92rem; max-width: var(--measure); }
+.d-box { fill: var(--d-box); stroke: var(--d-stroke); stroke-width: 2; }
+.d-box2 { fill: var(--d-box-2); stroke: var(--d-stroke); stroke-width: 2; }
+.d-pink { stroke: var(--pink); }
+.d-orange { stroke: var(--orange); }
+.d-sky { stroke: var(--sky); }
+.d-violet { stroke: var(--violet); }
+.d-gold { stroke: var(--gold); }
+.d-lime { stroke: var(--lime); }
+.d-title { fill: var(--d-text); font-size: 17px; font-weight: 700; }
+.d-text { fill: var(--d-text); font-size: 14px; }
+.d-small { fill: var(--d-muted); font-size: 13px; }
+.d-label { fill: var(--d-muted); font-size: 13px; font-weight: 600; }
+.d-line { stroke: var(--d-arrow); stroke-width: 2; fill: none; }
+.d-dash { stroke: var(--d-arrow); stroke-width: 2; fill: none; stroke-dasharray: 6 5; }
+.d-life { stroke: var(--d-stroke); stroke-width: 2; stroke-dasharray: 4 6; }
+.d-head { fill: var(--d-arrow); }
+.d-design { fill: var(--d-design); stroke: var(--pink); stroke-width: 2.5; }
+.d-bleed { fill: var(--d-bleed); }
+.d-frame { fill: none; stroke: var(--d-text); stroke-width: 2.5; }
+.d-view { fill: none; stroke: var(--sky); stroke-width: 2; stroke-dasharray: 7 5; }
+
+/* Game cards */
+.games {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13.5rem), 1fr));
+  gap: 1rem;
+  padding: 0;
+  margin: 1.2rem 0;
+  list-style: none;
+}
+.game {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--accent, var(--pink));
+  border-radius: 16px;
+  overflow: hidden;
+}
+.game img { display: block; width: 100%; height: auto; aspect-ratio: 1; background: var(--bg-deep); }
+.game .body { padding: 0.75rem 0.9rem 0.95rem; }
+.game h3 { margin: 0 0 0.25rem; font-size: 1.05rem; color: var(--text); }
+.game .meta { margin: 0 0 0.4rem; font-size: 0.82rem; color: var(--muted); font-weight: 600; }
+.game p { margin: 0; font-size: 0.92rem; line-height: 1.5; }
+
+.steps { counter-reset: step; list-style: none; padding: 0; max-width: var(--measure); }
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 0.2rem 0 0.8rem 2.8rem;
+  margin: 0;
+}
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--pink), var(--orange));
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.cols { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); margin: 1rem 0; }
+.card {
+  padding: 1rem 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.card h3 { margin-top: 0; }
+.card p:last-child, .card ul:last-child { margin-bottom: 0; }
+.card ul { padding-left: 1.1rem; font-size: 0.95rem; }
+
+footer.page-end { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.92rem; max-width: var(--measure); }
+
+/* Print: light page, no table of contents, no backgrounds, diagrams redrawn in ink. */
+@media print {
+  :root {
+    --bg: #FFFFFF;
+    --bg-deep: #FFFFFF;
+    --surface: #FFFFFF;
+    --raised: #F1EEF9;
+    --line: #B9B2D6;
+    --text: #120C2C;
+    --muted: #3E3566;
+    --code-bg: #F6F4FB;
+    --link: #3A2A9A;
+    --d-box: #FFFFFF;
+    --d-box-2: #F1EEF9;
+    --d-stroke: #6B5FB0;
+    --d-text: #120C2C;
+    --d-muted: #3E3566;
+    --d-arrow: #3E3566;
+    --d-design: rgba(255, 79, 163, 0.18);
+    --d-bleed: rgba(56, 160, 220, 0.18);
+  }
+  body { font-size: 11pt; line-height: 1.5; }
+  .toc, .skip { display: none; }
+  .layout { display: block; padding: 0; max-width: none; }
+  strong { color: inherit; }
+  h1 .grad { color: #C2186B; background: none; }
+  h2 { break-after: avoid; }
+  figure.diagram, .game, .card, .table-wrap, .callout { break-inside: avoid; }
+  figure.diagram svg { min-width: 0; }
+  .table-wrap { overflow: visible; }
+  a { color: inherit; }
+  .games { grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="layout">
+
+<nav class="toc" aria-labelledby="toc-title">
+  <h2 id="toc-title">Contents</h2>
+  <p class="toc-intro"><a href="#what">What Pocketcade is</a></p>
+  <ol>
+    <li><a href="#idea">The idea in one picture</a></li>
+    <li><a href="#tools">What it is built with</a></li>
+    <li><a href="#tour">Repository tour</a></li>
+    <li><a href="#play">When someone presses Play</a></li>
+    <li><a href="#contract">The contract in brief</a></li>
+    <li><a href="#frames">Flexible frames</a></li>
+    <li><a href="#data">Where data is saved</a></li>
+    <li><a href="#games">The 15 games</a></li>
+    <li><a href="#add">Adding a game</a></li>
+    <li><a href="#quality">Quality checks</a></li>
+    <li><a href="#privacy">Privacy and security</a></li>
+    <li><a href="#licence">Licensing</a></li>
+  </ol>
+</nav>
+
+<main id="main">
+
+<header class="hero" id="what">
+  <div class="brand">
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+      <defs>
+        <linearGradient id="logo-g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#FF4FA3"/>
+          <stop offset="1" stop-color="#FF9F1C"/>
+        </linearGradient>
+      </defs>
+      <path d="M8 10h48v22c0 14-10.7 24-24 24S8 46 8 32z" fill="url(#logo-g)"/>
+      <path d="M13 16h38" stroke="#FFF9F2" stroke-width="2.5" stroke-dasharray="4 4" stroke-linecap="round" opacity="0.7"/>
+      <path d="M32 21l4.2 8.6 9.4 1.4-6.8 6.6 1.6 9.4-8.4-4.4-8.4 4.4 1.6-9.4-6.8-6.6 9.4-1.4z" fill="#FFC83D" stroke="#120C2C" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+    <span>Project overview</span>
+  </div>
+  <h1><span class="grad">Pocketcade</span>: a whole arcade in your pocket</h1>
+  <p class="lede">An open-source website of fifteen original browser games. They start in a second on a phone or a
+  desktop, with no downloads, no sign-ups, no ads and no tracking.</p>
+  <ul class="pills" aria-label="Key facts">
+    <li>15 games</li>
+    <li>Static site, no server code</li>
+    <li>Saves stay on the device</li>
+    <li>Original art, synthesized sound</li>
+    <li>MIT and CC BY 4.0</li>
+  </ul>
+</header>
+
+<div class="prose">
+<p>This page is a guided tour for someone new to the project. It explains what the pieces are, how a game gets onto
+the screen, and how to add one. The detailed references live next to this file: <a href="architecture.md">architecture.md</a>
+for how the platform is built, <a href="making-games.md">making-games.md</a> for writing a game,
+<a href="design-system.md">design-system.md</a> for the look, and <a href="games.md">games.md</a> for each game's rules.</p>
+
+<p>Pocketcade is a <strong>portal</strong> (the website people browse) plus a <strong>library of games</strong>, each in
+its own package. The portal never needs to know how a particular game works inside. Every game follows the same
+small agreement, the <strong>contract</strong>, so the portal can start, pause, resume, mute, make fullscreen and stop
+any of them in exactly the same way.</p>
+</div>
+
+<section id="idea" aria-labelledby="idea-h">
+<h2 id="idea-h"><span class="num">1</span>The idea in one picture</h2>
+<div class="prose">
+<p>Four layers sit in the browser, and one package of types holds them together.</p>
+</div>
+
+<figure class="diagram">
+<div class="scroll">
+<svg viewBox="0 0 760 470" role="img" aria-labelledby="fig1-t fig1-d">
+  <title id="fig1-t">How the portal, host, game and toolkit fit together</title>
+  <desc id="fig1-d">The portal's player component asks the host to run a game. The host gives the game the HostAPI and calls mount, pause, resume and unmount. The game is built with the toolkit. The host stores data in localStorage. The SDK defines the contract both the host and the game follow.</desc>
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" class="d-head"/>
+    </marker>
+  </defs>
+
+  <!-- Portal -->
+  <rect x="20" y="16" width="520" height="92" rx="16" class="d-box d-pink"/>
+  <text x="40" y="46" class="d-title">Portal (apps/web)</text>
+  <text x="40" y="70" class="d-text">Next.js pages: home, categories, one page per game</text>
+  <text x="40" y="92" class="d-small">GameHost: the player with Play, pause overlay, crash card</text>
+
+  <!-- Host -->
+  <rect x="20" y="160" width="520" height="92" rx="16" class="d-box d-orange"/>
+  <text x="40" y="190" class="d-title">Host (@pocketcade/host)</text>
+  <text x="40" y="214" class="d-text">GameRunner: loads, mounts, pauses and unmounts one game</text>
+  <text x="40" y="236" class="d-small">Services: storage, scores, audio, fullscreen, error tracking</text>
+
+  <!-- Game -->
+  <rect x="20" y="320" width="250" height="120" rx="16" class="d-box d-sky"/>
+  <text x="40" y="350" class="d-title">A game</text>
+  <text x="40" y="372" class="d-small">packages/games/&lt;id&gt;</text>
+  <text x="40" y="398" class="d-text">meta, rules, scenes,</text>
+  <text x="40" y="418" class="d-text">art, sounds, game.md</text>
+
+  <!-- Toolkit -->
+  <rect x="290" y="320" width="250" height="120" rx="16" class="d-box d-lime"/>
+  <text x="310" y="350" class="d-title">Toolkit</text>
+  <text x="310" y="372" class="d-small">@pocketcade/toolkit</text>
+  <text x="310" y="398" class="d-text">Phaser and DOM adapters,</text>
+  <text x="310" y="418" class="d-text">input, sound, saves, menus</text>
+
+  <!-- SDK band -->
+  <rect x="590" y="16" width="150" height="424" rx="16" class="d-box2 d-violet"/>
+  <text x="665" y="48" text-anchor="middle" class="d-title">SDK</text>
+  <text x="665" y="70" text-anchor="middle" class="d-small">@pocketcade/sdk</text>
+  <text x="665" y="112" text-anchor="middle" class="d-text">The contract:</text>
+  <text x="665" y="134" text-anchor="middle" class="d-text">GameMeta</text>
+  <text x="665" y="156" text-anchor="middle" class="d-text">Game</text>
+  <text x="665" y="178" text-anchor="middle" class="d-text">HostAPI</text>
+  <text x="665" y="214" text-anchor="middle" class="d-small">plus storage and</text>
+  <text x="665" y="234" text-anchor="middle" class="d-small">score rules and</text>
+  <text x="665" y="254" text-anchor="middle" class="d-small">the contract tests</text>
+
+  <!-- arrows -->
+  <line x1="200" y1="108" x2="200" y2="156" class="d-line" marker-end="url(#a1)"/>
+  <text x="212" y="138" class="d-label">createGameRunner()</text>
+
+  <line x1="100" y1="252" x2="100" y2="316" class="d-line" marker-end="url(#a1)"/>
+  <text x="110" y="278" class="d-label">mount, pause,</text>
+  <text x="110" y="296" class="d-label">resume, unmount</text>
+  <line x1="230" y1="316" x2="230" y2="256" class="d-line" marker-end="url(#a1)"/>
+  <text x="240" y="290" class="d-label">HostAPI calls</text>
+
+  <line x1="270" y1="380" x2="286" y2="380" class="d-line" marker-end="url(#a1)"/>
+
+  <line x1="540" y1="206" x2="586" y2="206" class="d-dash" marker-end="url(#a1)"/>
+  <line x1="540" y1="380" x2="586" y2="380" class="d-dash" marker-end="url(#a1)"/>
+
+  <!-- storage -->
+  <ellipse cx="455" cy="290" rx="62" ry="10" class="d-box2"/>
+  <text x="455" y="312" text-anchor="middle" class="d-small">localStorage</text>
+  <line x1="455" y1="252" x2="455" y2="276" class="d-line" marker-end="url(#a1)"/>
+</svg>
+</div>
+<figcaption>The portal asks the host to run a game. The host hands the game a <code>HostAPI</code> and is the only
+one who calls its lifecycle methods. Games are written with the toolkit. Dashed arrows: the host and every game
+compile against the same contract in the SDK.</figcaption>
+</figure>
+
+<div class="prose">
+<ul>
+  <li><strong>Portal</strong>: the website. It lists the games, shows each game's page and draws the player around the
+  game, but never draws inside the game's frame.</li>
+  <li><strong>Host</strong>: the runtime between the portal and a game. It loads the game's code, mounts it, pauses it
+  when the tab is hidden, keeps the one shared audio context, saves data and catches crashes.</li>
+  <li><strong>Game</strong>: one package per game, with its own rules, art and sound.</li>
+  <li><strong>Toolkit</strong>: shared game code, so each game is small. Its adapters do the hard parts of the contract
+  (clean pause and teardown) for every game.</li>
+  <li><strong>SDK</strong>: the contract itself. It has no code that runs on its own, only types, validation, the
+  storage and score rules, and the tests every game must pass.</li>
+</ul>
+</div>
+</section>
+
+<section id="tools" aria-labelledby="tools-h">
+<h2 id="tools-h"><span class="num">2</span>What it is built with</h2>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Tool</th><th>Version</th><th>Used for</th></tr></thead>
+  <tbody>
+    <tr><td>Next.js and React</td><td>16.4.5, 19.3.1</td><td>The portal, exported as plain static files</td></tr>
+    <tr><td>Phaser</td><td>4.2.1</td><td>The 2D engine behind 14 of the 15 games, loaded only when a game starts</td></tr>
+    <tr><td>TypeScript</td><td>7.0.2</td><td>Every package; Node.js runs the build scripts' TypeScript directly</td></tr>
+    <tr><td>Node.js</td><td>26</td><td>Development, build scripts and CI</td></tr>
+    <tr><td>pnpm</td><td>12.18.0</td><td>The workspace and its exact, pinned dependency versions</td></tr>
+    <tr><td>Turborepo</td><td>2.11.10</td><td>Runs lint, typecheck, test and build across packages in the right order</td></tr>
+    <tr><td>Vite</td><td>8.3.6</td><td>The playground, a test bench that runs one game at a time</td></tr>
+    <tr><td>Vitest</td><td>5.1.0</td><td>Unit tests, and the contract tests in a real Chromium</td></tr>
+    <tr><td>Playwright</td><td>1.65.0</td><td>End-to-end tests of the built site, the leak test, share images, screenshots</td></tr>
+    <tr><td>ESLint and Prettier</td><td>10.14.0, 3.9.10</td><td>Package boundaries, the game sandbox rules, formatting</td></tr>
+    <tr><td>Fredoka and Nunito</td><td>5.3.0 (Fontsource)</td><td>The brand fonts, self-hosted from npm</td></tr>
+    <tr><td>Vercel</td><td>(service)</td><td>Hosting for the static files, with headers from <code>apps/web/vercel.json</code></td></tr>
+  </tbody>
+</table>
+</div>
+</section>
+
+<section id="tour" aria-labelledby="tour-h">
+<h2 id="tour-h"><span class="num">3</span>Repository tour</h2>
+<div class="prose">
+<p>One repository holds everything. Each folder below is a package in the pnpm workspace.</p>
+</div>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Folder</th><th>What lives there</th></tr></thead>
+  <tbody>
+    <tr><td><code>apps/web</code></td><td>The portal: pages, the player component, the catalog, <code>vercel.json</code>, share images and end-to-end tests</td></tr>
+    <tr><td><code>apps/playground</code></td><td>A small page that runs any game on the real host at any frame size; the screenshot script and the leak test</td></tr>
+    <tr><td><code>packages/sdk</code></td><td>The contract: types, validation, storage and score rules, a mock host and the contract test suite</td></tr>
+    <tr><td><code>packages/host</code></td><td>The runtime that mounts a game into a page</td></tr>
+    <tr><td><code>packages/toolkit</code></td><td>Shared game code and the Phaser and DOM adapters</td></tr>
+    <tr><td><code>packages/games/&lt;id&gt;</code></td><td>One folder per game: <code>game.md</code>, <code>media/cover.svg</code>, source and tests</td></tr>
+    <tr><td><code>packages/config</code></td><td>Shared TypeScript, ESLint and Prettier settings</td></tr>
+    <tr><td><code>tools/</code></td><td>Scripts: the catalog generator, the word-list builder, the post-build step, a local static server, the size-budget check</td></tr>
+    <tr><td><code>docs/</code></td><td>The references, and this page</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="prose">
+<p>The packages may only depend on each other in one direction. The SDK depends on nothing; the host depends only on
+the SDK; games depend on the SDK and the toolkit, never on the host or another game; and the portal reaches game
+code only through files generated from the game folders. ESLint enforces these rules, so a wrong import fails the
+lint step.</p>
+</div>
+</section>
+
+<section id="play" aria-labelledby="play-h">
+<h2 id="play-h"><span class="num">4</span>When someone presses Play</h2>
+<div class="prose">
+<p>A game page first shows a poster with a Play button; nothing of the game has run yet, though its code may already
+be downloading in the background once the page is idle. Here is what happens after the click.</p>
+</div>
+
+<figure class="diagram">
+<div class="scroll">
+<svg viewBox="0 0 760 610" role="img" aria-labelledby="fig2-t fig2-d">
+  <title id="fig2-t">The sequence from the Play click to a running game and back</title>
+  <desc id="fig2-d">The player clicks Play. GameHost unlocks audio and asks the GameRunner to mount. The runner waits for the one-game slot, imports the game's code, validates its meta and creates it, then calls mount with the HostAPI. The game, through the toolkit, loads Phaser, prepares sounds and fonts and starts its scenes, then resolves. The runner reports running. Hiding the tab pauses the game; a click on the overlay resumes it. Leaving the page unmounts it.</desc>
+  <defs>
+    <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" class="d-head"/>
+    </marker>
+  </defs>
+
+  <!-- participants -->
+  <rect x="20" y="12" width="120" height="48" rx="12" class="d-box d-gold"/>
+  <text x="80" y="42" text-anchor="middle" class="d-title">Player</text>
+  <rect x="170" y="12" width="140" height="48" rx="12" class="d-box d-pink"/>
+  <text x="240" y="34" text-anchor="middle" class="d-title">GameHost</text>
+  <text x="240" y="52" text-anchor="middle" class="d-small">portal</text>
+  <rect x="340" y="12" width="140" height="48" rx="12" class="d-box d-orange"/>
+  <text x="410" y="34" text-anchor="middle" class="d-title">GameRunner</text>
+  <text x="410" y="52" text-anchor="middle" class="d-small">host</text>
+  <rect x="510" y="12" width="230" height="48" rx="12" class="d-box d-sky"/>
+  <text x="625" y="34" text-anchor="middle" class="d-title">Game + toolkit</text>
+  <text x="625" y="52" text-anchor="middle" class="d-small">lazy chunk, Phaser</text>
+
+  <!-- lifelines -->
+  <line x1="80" y1="60" x2="80" y2="596" class="d-life"/>
+  <line x1="240" y1="60" x2="240" y2="596" class="d-life"/>
+  <line x1="410" y1="60" x2="410" y2="596" class="d-life"/>
+  <line x1="625" y1="60" x2="625" y2="596" class="d-life"/>
+
+  <!-- 1 -->
+  <line x1="80" y1="92" x2="236" y2="92" class="d-line" marker-end="url(#a2)"/>
+  <text x="90" y="84" class="d-label">1. clicks Play</text>
+  <!-- 2 -->
+  <line x1="240" y1="134" x2="406" y2="134" class="d-line" marker-end="url(#a2)"/>
+  <text x="250" y="114" class="d-label">2. unlock audio,</text>
+  <text x="250" y="128" class="d-label">fullscreen on phones, mount</text>
+  <!-- 3 -->
+  <rect x="420" y="146" width="186" height="44" rx="8" class="d-box2"/>
+  <text x="430" y="164" class="d-small">3. waits for the one-game</text>
+  <text x="430" y="181" class="d-small">slot; state: loading</text>
+  <!-- 4 -->
+  <line x1="410" y1="214" x2="621" y2="214" class="d-line" marker-end="url(#a2)"/>
+  <text x="420" y="206" class="d-label">4. import() the game's code</text>
+  <!-- 5 -->
+  <rect x="420" y="226" width="186" height="44" rx="8" class="d-box2"/>
+  <text x="430" y="244" class="d-small">5. validate meta, create();</text>
+  <text x="430" y="261" class="d-small">state: mounting</text>
+  <!-- 6 -->
+  <line x1="410" y1="296" x2="621" y2="296" class="d-line" marker-end="url(#a2)"/>
+  <text x="420" y="288" class="d-label">6. mount(container, HostAPI)</text>
+  <!-- 7 -->
+  <rect x="635" y="306" width="110" height="96" rx="8" class="d-box2"/>
+  <text x="643" y="326" class="d-small">7. load Phaser,</text>
+  <text x="643" y="344" class="d-small">render sounds,</text>
+  <text x="643" y="362" class="d-small">wait for fonts,</text>
+  <text x="643" y="380" class="d-small">start scenes</text>
+  <!-- 8 -->
+  <line x1="625" y1="424" x2="414" y2="424" class="d-dash" marker-end="url(#a2)"/>
+  <text x="430" y="416" class="d-label">8. mount resolves (within 15 s)</text>
+  <!-- 9 -->
+  <line x1="410" y1="456" x2="244" y2="456" class="d-dash" marker-end="url(#a2)"/>
+  <text x="252" y="448" class="d-label">9. state: running</text>
+  <!-- 10 -->
+  <line x1="410" y1="510" x2="621" y2="510" class="d-line" marker-end="url(#a2)"/>
+  <text x="420" y="484" class="d-label">10. tab hidden: pause()</text>
+  <text x="420" y="498" class="d-label">overlay clicked: resume()</text>
+  <!-- 11 -->
+  <line x1="410" y1="570" x2="621" y2="570" class="d-line" marker-end="url(#a2)"/>
+  <text x="420" y="544" class="d-label">11. page left: unmount()</text>
+  <text x="420" y="558" class="d-label">(2 s, then forced)</text>
+  <line x1="80" y1="540" x2="236" y2="540" class="d-line" marker-end="url(#a2)"/>
+  <text x="90" y="532" class="d-label">navigates away</text>
+</svg>
+</div>
+<figcaption>Steps 1 and 2 happen synchronously inside the click, because browsers only allow audio and fullscreen
+from a real user gesture. After the first Play in a tab, later game pages start straight away.</figcaption>
+</figure>
+
+<div class="prose">
+<p>If anything goes wrong on the way, the runner switches to a <strong>crashed</strong> state and the portal shows a
+crash card with Retry, Copy details and, when the repository is known, a prefilled bug report. If the game's code
+fails to load because a newer version of the site was just deployed, the player is offered a reload instead. A crash
+stays inside the player; the rest of the page keeps working.</p>
+<p>While a game runs, the host pauses it when the tab is hidden, the window loses focus, the player scrolls it mostly
+out of view, a dialog opens over it, or the screen is the wrong shape or too small. Audio is suspended while it is
+paused.</p>
+</div>
+</section>
+
+<section id="contract" aria-labelledby="contract-h">
+<h2 id="contract-h"><span class="num">5</span>The contract in brief</h2>
+<div class="prose">
+<p>A game package exports one object: a description of the game and a function that creates a fresh copy of it.</p>
+</div>
+<div class="cols">
+  <div class="card">
+    <h3>GameMeta: what the game is</h3>
+    <ul>
+      <li><code>id</code>, the folder name</li>
+      <li>inputs: keyboard, pointer, touch</li>
+      <li>orientation and frame shape</li>
+      <li>smallest playable size</li>
+      <li>save version and local leaderboards</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Game: what the host can ask</h3>
+    <ul>
+      <li><code>mount()</code> into a container, ready to play</li>
+      <li><code>pause()</code> and <code>resume()</code>, safe to repeat</li>
+      <li><code>unmount()</code>, leaving nothing behind: no listeners, timers, audio or WebGL contexts</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>HostAPI: what a game may use</h3>
+    <ul>
+      <li>storage, scores, fullscreen, audio</li>
+      <li>signals that a run started or ended</li>
+      <li>events: resize, mute, fullscreen change, input change, a new day</li>
+      <li>non-fatal error reports</li>
+    </ul>
+  </div>
+</div>
+<div class="prose">
+<p>A game may not touch the page outside its container, use the browser's storage directly or make network
+requests. Linting enforces this, and a contract test suite checks every game in a real browser: it mounts, pauses,
+resumes, aborts a mount half-way, mounts twice, plays the self-playing attract demo and unmounts, and fails if the
+game leaves anything behind or writes where it should not.</p>
+</div>
+</section>
+
+<section id="frames" aria-labelledby="frames-h">
+<h2 id="frames-h"><span class="num">6</span>Flexible frames</h2>
+<div class="prose">
+<p>Screens come in every shape, so most games accept a <strong>range</strong> of frame shapes, for example anything
+from a tall 9:16 to a wide 16:9. The portal sizes the player to the shape inside that range that fills the most of
+the screen, wide on a desktop and tall on a phone. A game can also declare one fixed ratio, or ask for the whole frame
+(Letterhop, the one game built with plain DOM, does this).</p>
+<p>A Phaser game keeps a fixed <strong>design area</strong> where everything playable lives. When the frame is wider or
+taller than that area, the camera shows a larger <strong>view</strong> around it, and the game fills the extra space,
+the <strong>bleed</strong>, with scenery.</p>
+</div>
+
+<figure class="diagram">
+<div class="scroll">
+<svg viewBox="0 0 760 380" role="img" aria-labelledby="fig3-t fig3-d">
+  <title id="fig3-t">The design area inside a wide frame and a tall frame</title>
+  <desc id="fig3-d">On the left, a wide 16 by 9 frame: the design area sits in the middle and scenery bleeds out to the left and right. On the right, a tall 9 by 16 frame: the same design area sits in the middle and scenery bleeds above and below. The dashed outline in each is the view.</desc>
+
+  <text x="200" y="30" text-anchor="middle" class="d-title">Wide frame (16:9, a desktop)</text>
+  <!-- wide frame 384 x 216 -->
+  <rect x="8" y="60" width="384" height="216" class="d-bleed"/>
+  <rect x="119" y="60" width="162" height="216" class="d-design"/>
+  <rect x="8" y="60" width="384" height="216" class="d-frame"/>
+  <rect x="12" y="64" width="376" height="208" class="d-view"/>
+  <text x="200" y="160" text-anchor="middle" class="d-text">design area</text>
+  <text x="200" y="180" text-anchor="middle" class="d-small">gameplay, HUD</text>
+  <text x="63" y="164" text-anchor="middle" class="d-small">bleed</text>
+  <text x="337" y="164" text-anchor="middle" class="d-small">bleed</text>
+  <text x="200" y="306" text-anchor="middle" class="d-small">view.x is negative: the view starts left of the design area</text>
+
+  <text x="600" y="30" text-anchor="middle" class="d-title">Tall frame (9:16, a phone)</text>
+  <!-- tall frame 162 x 288 ; design 162 x 216 centred -->
+  <rect x="519" y="50" width="162" height="288" class="d-bleed"/>
+  <rect x="519" y="86" width="162" height="216" class="d-design"/>
+  <rect x="519" y="50" width="162" height="288" class="d-frame"/>
+  <rect x="523" y="54" width="154" height="280" class="d-view"/>
+  <text x="600" y="190" text-anchor="middle" class="d-text">design area</text>
+  <text x="600" y="210" text-anchor="middle" class="d-small">gameplay, HUD</text>
+  <text x="600" y="73" text-anchor="middle" class="d-small">bleed</text>
+  <text x="600" y="325" text-anchor="middle" class="d-small">bleed</text>
+  <text x="600" y="364" text-anchor="middle" class="d-small">view.y is negative: the view starts above it</text>
+</svg>
+</div>
+<figcaption>Pink: the design area, the same in both frames. Blue tint: the bleed, filled with scenery. Dashed
+outline: the view the camera shows (<code>tk.layout.view</code>). The largest possible overhang on each side is
+<code>tk.layout.bleed</code>.</figcaption>
+</figure>
+
+<div class="prose">
+<p>The toolkit picks the canvas resolution for the largest size the game can reach, fullscreen included, and draws
+its textures once at that scale, so art stays sharp when the player goes fullscreen. In fullscreen the frame is
+letterboxed by the same rule. The full guidance is in <a href="making-games.md#frames-that-fit-any-screen">making-games.md</a>.</p>
+</div>
+</section>
+
+<section id="data" aria-labelledby="data-h">
+<h2 id="data-h"><span class="num">7</span>Where data is saved</h2>
+<div class="prose">
+<p>There are no accounts and no server. Everything is kept in the browser's <code>localStorage</code> on the player's
+device, under keys that start with <code>pocketcade:v1:</code>. Games never touch it directly; they go through the
+host, which enforces the size limits and keeps each game's data separate.</p>
+</div>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Key</th><th>Holds</th></tr></thead>
+  <tbody>
+    <tr><td><code>pocketcade:v1:g:&lt;game&gt;:&lt;key&gt;</code></td><td>A game's saves and options, at most 64 KiB per key and 256 KiB per game</td></tr>
+    <tr><td><code>pocketcade:v1:lb:&lt;game&gt;:&lt;board&gt;</code></td><td>A local top-10 leaderboard, with initials and dates</td></tr>
+    <tr><td><code>pocketcade:v1:p:settings</code></td><td>Whether sound is muted, and the last initials entered</td></tr>
+    <tr><td><code>pocketcade:v1:p:history</code></td><td>How often and when each game was played, for "Continue playing"</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="prose">
+<p>When storage is blocked, for example in some private windows, the host keeps data in memory for the visit and the
+player is told progress will not be saved. Clearing the site's data in the browser removes everything.</p>
+</div>
+</section>
+
+<section id="games" aria-labelledby="games-h">
+<h2 id="games-h"><span class="num">8</span>The 15 games</h2>
+<div class="prose">
+<p>In the portal's editorial order. "Frame" is the range of shapes each game accepts, as width to height.</p>
+</div>
+<ul class="games">
+  <li class="game" style="--accent:#F2475E">
+    <img src="../packages/games/pebble-post/media/cover.svg" alt="" width="300" height="300" loading="lazy">
+    <div class="body"><h3>Pebble Post</h3><p class="meta">Arcade &middot; lane runner &middot; 9:16 to 16:9</p>
+    <p>A penguin courier belly-slides down an ice canyon, hopping drifts and collecting letters.</p></div>
+  </li>
+  <li class="game" style="--accent:#2DD4BF">
+    <img src="../packages/games/pop-reef/media/cover.svg" alt="" width="300" height="300" loading="lazy">
+    <div class="body"><h3>Pop Reef</h3><p class="meta">Puzzle &middot; bubble shooter &middot; 9:16 to 16:9</p>
+    <p>A pufferfish puffs bubbles at the ceiling; match three to pop them before it sinks.</p></div>
+  </li>
+  <li class="game" style="--accent:#E96BD6">
+    <img src="../packages/games/snugfit/media/cover.svg" alt="" width="300" height="300" loading="lazy">
+    <div class="body"><h3>Snugfit</h3><p class="meta">Puzzle &middot; block placement &middot; 9:16 to 16:9</p>
+    <p>Fit fabric patches onto a quilt and stitch full rows and columns to clear them.</p></div>
+  </li>
+  <li class="game" style="--accent:#C77DFF">
+    <img src="../packages/games/sumslide/media/cover.svg" alt="" width="300" height="300" loading="lazy">
+    <div class="body"><h3>Sumslide</h3><p class="meta">Puzzle &middot; number merging &middot; 9:16 to 16:9</p>
+    <p>Slide candy number tiles on a 4&times;4 tray; equal numbers merge into their sum.</p></div>
+  </li>
+  <li class="game" style="--accent:#FF7A59">
+    <img src="../packages/games/sunset-sprint/media/cover.svg" alt="" width="300" height="300" loading="lazy">
+    <div class="body"><h3>Sunset Sprint</h3><p class="meta">Arcade &middot; racing &middot; 3:4 to 16:9</p>
+    <p>A red panda races a coast road at sunset, weaving through traffic to beat the clock.</p></div>
+  </li>
+  <li class="game" style="--accent:#FF9F1C">
+    <img src="../packages/games/bao-bolt/media/cover.svg" alt="" width="300" height="300" loading="lazy">
+    <div class="body"><h3>Bao Bolt</h3><p class="meta">Arcade &middot; runner &middot; 3:4 to 2:1</p>
+    <p>A steamed bun dashes over night-market rooftops while a greedy gull gives chase.</p></div>
+  </li>
+  <li class="game" style="--accent:#FFC83D">
+    <img src="../packages/games/sourdough/media/cover.svg" alt="" width="300" height="300" loading="lazy">
+    <div class="body"><h3>Sourdough Solitaire</h3><p class="meta">Cards &amp; Board &middot; solitaire &middot; 9:16 to 16:9</p>
+    <p>Klondike patience at a gold-rush camp, with Draw 1 or Draw 3 and unlimited undo.</p></div>
+  </li>
+  <li class="game" style="--accent:#7B5CFF">
+    <img src="../packages/games/pentafall/media/cover.svg" alt="" width="300" height="300" loading="lazy">
+    <div class="body"><h3>Pentafall</h3><p class="meta">Puzzle &middot; falling blocks &middot; 9:16 to 16:9</p>
+    <p>Five-block jelly pieces drop into a neon well; fill rows and land a Full Five.</p></div>
+  </li>
+  <li class="game" style="--accent:#6CF5C2">
+    <img src="../packages/games/glowworm/media/cover.svg" alt="" width="300" height="300" loading="lazy">
+    <div class="body"><h3>Glowworm</h3><p class="meta">Arcade &middot; growing worm &middot; 3:4 to 16:9</p>
+    <p>Gobble glowberries in a crystal cave, grow longer, and never bite your own tail.</p></div>
+  </li>
+  <li class="game" style="--accent:#38D6FF">
+    <img src="../packages/games/comet-bounce/media/cover.svg" alt="" width="300" height="300" loading="lazy">
+    <div class="body"><h3>Comet Bounce</h3><p class="meta">Arcade &middot; paddle and ball &middot; 9:16 to 16:9</p>
+    <p>Bounce a blazing comet off a hover-ship through 20 crystal walls in a neon nebula.</p></div>
+  </li>
+  <li class="game" style="--accent:#B8F34A">
+    <img src="../packages/games/letterhop/media/cover.svg" alt="" width="300" height="300" loading="lazy">
+    <div class="body"><h3>Letterhop</h3><p class="meta">Word &middot; daily word ladder &middot; fills the frame</p>
+    <p>Change one letter at a time to climb from the start word to the goal. The one DOM game.</p></div>
+  </li>
+  <li class="game" style="--accent:#2BD47D">
+    <img src="../packages/games/molehills/media/cover.svg" alt="" width="300" height="300" loading="lazy">
+    <div class="body"><h3>Molehills</h3><p class="meta">Puzzle &middot; deduction &middot; 9:16 to 16:9</p>
+    <p>Read the numbers in the soil and find every sleeping mole without waking one.</p></div>
+  </li>
+  <li class="game" style="--accent:#5B8CFF">
+    <img src="../packages/games/rowbot/media/cover.svg" alt="" width="300" height="300" loading="lazy">
+    <div class="body"><h3>Rowbot</h3><p class="meta">Cards &amp; Board &middot; four in a row &middot; 9:16 to 16:9</p>
+    <p>Line up four against a cheeky arcade robot that gets sharper every round you win.</p></div>
+  </li>
+  <li class="game" style="--accent:#FF4FA3">
+    <img src="../packages/games/starlap/media/cover.svg" alt="" width="300" height="300" loading="lazy">
+    <div class="body"><h3>Starlap</h3><p class="meta">Arcade &middot; one-button timing &middot; 9:16 to 16:9</p>
+    <p>Tap the moment a neon spark crosses each star; one miss ends the run.</p></div>
+  </li>
+  <li class="game" style="--accent:#FFE14D">
+    <img src="../packages/games/firefly-flip/media/cover.svg" alt="" width="300" height="300" loading="lazy">
+    <div class="body"><h3>Firefly Flip</h3><p class="meta">Brain &middot; memory &middot; 9:16 to 16:9</p>
+    <p>Match glowing firefly jars, then sing back a lantern song that grows each round.</p></div>
+  </li>
+</ul>
+</section>
+
+<section id="add" aria-labelledby="add-h">
+<h2 id="add-h"><span class="num">9</span>Adding a game</h2>
+<div class="prose">
+<p>A new game is a new folder. The quickest start is to copy a game of a similar kind.</p>
+</div>
+<ol class="steps">
+  <li>Create <code>packages/games/&lt;id&gt;/</code> with <code>src/meta.ts</code> (its <code>id</code> is the folder
+  name), <code>src/index.ts</code>, <code>game.md</code>, a square <code>media/cover.svg</code> of at most 40 KB, unit
+  tests and <code>test/contract.test.ts</code>.</li>
+  <li>Add <code>"@pocketcade/game-&lt;id&gt;": "workspace:*"</code> to the dependencies of <code>apps/web</code> and
+  <code>apps/playground</code>, then run <code>pnpm install</code>.</li>
+  <li>Add the id to <code>gameOrder</code> in <code>apps/web/src/games/catalog.ts</code>.</li>
+  <li>Run <code>pnpm og</code> and commit the new share image in <code>apps/web/public/og/</code>.</li>
+</ol>
+<div class="prose">
+<p>Everything else is automatic. The game's <code>game.md</code> is the single source of its listing, and a generator
+turns the game folders into the files the portal reads:</p>
+</div>
+
+<figure class="diagram">
+<div class="scroll">
+<svg viewBox="0 0 760 250" role="img" aria-labelledby="fig4-t fig4-d">
+  <title id="fig4-t">From game folders to portal pages</title>
+  <desc id="fig4-d">game.md, meta.ts and cover.svg in each game folder feed tools/gen-registry.ts. It writes the registry of lazy loaders, the metas, the listings and the details, and copies the covers. catalog.ts adds categories and the editorial order, and the pages are built from the result.</desc>
+  <defs>
+    <marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" class="d-head"/>
+    </marker>
+  </defs>
+  <rect x="10" y="20" width="170" height="210" rx="14" class="d-box d-sky"/>
+  <text x="95" y="48" text-anchor="middle" class="d-title">Game folder</text>
+  <text x="95" y="90" text-anchor="middle" class="d-text">game.md</text>
+  <text x="95" y="112" text-anchor="middle" class="d-small">listing, controls, FAQ</text>
+  <text x="95" y="152" text-anchor="middle" class="d-text">src/meta.ts</text>
+  <text x="95" y="192" text-anchor="middle" class="d-text">media/cover.svg</text>
+
+  <rect x="225" y="85" width="150" height="80" rx="14" class="d-box2 d-orange"/>
+  <text x="300" y="118" text-anchor="middle" class="d-title">gen-registry</text>
+  <text x="300" y="140" text-anchor="middle" class="d-small">tools/</text>
+
+  <rect x="420" y="20" width="160" height="210" rx="14" class="d-box d-violet"/>
+  <text x="500" y="48" text-anchor="middle" class="d-title">Generated</text>
+  <text x="500" y="84" text-anchor="middle" class="d-small">registry (loaders)</text>
+  <text x="500" y="110" text-anchor="middle" class="d-small">metas</text>
+  <text x="500" y="136" text-anchor="middle" class="d-small">listings</text>
+  <text x="500" y="162" text-anchor="middle" class="d-small">details</text>
+  <text x="500" y="188" text-anchor="middle" class="d-small">public/covers/</text>
+
+  <rect x="620" y="20" width="130" height="90" rx="14" class="d-box2 d-gold"/>
+  <text x="685" y="52" text-anchor="middle" class="d-title">catalog.ts</text>
+  <text x="685" y="74" text-anchor="middle" class="d-small">categories,</text>
+  <text x="685" y="92" text-anchor="middle" class="d-small">order, rows</text>
+
+  <rect x="620" y="140" width="130" height="90" rx="14" class="d-box d-pink"/>
+  <text x="685" y="180" text-anchor="middle" class="d-title">Pages</text>
+  <text x="685" y="202" text-anchor="middle" class="d-small">and the player</text>
+
+  <line x1="180" y1="125" x2="221" y2="125" class="d-line" marker-end="url(#a4)"/>
+  <line x1="375" y1="125" x2="416" y2="125" class="d-line" marker-end="url(#a4)"/>
+  <line x1="580" y1="65" x2="616" y2="65" class="d-line" marker-end="url(#a4)"/>
+  <line x1="580" y1="185" x2="616" y2="185" class="d-line" marker-end="url(#a4)"/>
+  <line x1="685" y1="110" x2="685" y2="136" class="d-line" marker-end="url(#a4)"/>
+</svg>
+</div>
+<figcaption>The generated files are not committed; they are rebuilt before every dev run, test and build. A game
+that is missing a field in <code>game.md</code>, its cover or its share image fails the lint step.</figcaption>
+</figure>
+
+<div class="prose">
+<p>To see a game while working on it, the playground runs it on the real host at any frame size
+(<code>pnpm --filter @pocketcade/playground dev</code>), and <code>node apps/playground/scripts/shot.ts &lt;id&gt;</code>
+saves screenshots of it. The rules for art, sound, frames and feel are in <a href="making-games.md">making-games.md</a>.</p>
+</div>
+</section>
+
+<section id="quality" aria-labelledby="quality-h">
+<h2 id="quality-h"><span class="num">10</span>Quality checks</h2>
+<div class="prose">
+<p>Continuous integration runs on every pull request. Locally, <code>pnpm verify</code> runs the first five rows
+below, <code>pnpm budgets</code> the size check and <code>pnpm e2e</code> the browser tests.</p>
+</div>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Check</th><th>What it proves</th></tr></thead>
+  <tbody>
+    <tr><td>Formatting and generated data</td><td>Prettier is clean; every game folder registers; Letterhop's word data matches its sources</td></tr>
+    <tr><td>ESLint</td><td>Packages import only what they may; game code stays inside its sandbox</td></tr>
+    <tr><td>Typecheck</td><td>Everything compiles with TypeScript 7</td></tr>
+    <tr><td>Unit tests</td><td>Each game's rules, the contract rules, the host, the toolkit, the catalog, SEO and the tools</td></tr>
+    <tr><td>Contract tests</td><td>Every game mounts, pauses, resumes and unmounts cleanly in Chromium, and attract mode writes nothing</td></tr>
+    <tr><td>Size budgets</td><td>Home page JavaScript at most 200 KiB gzipped and free of Phaser; one Phaser chunk of at most 365 KiB; each game at most 150 KiB</td></tr>
+    <tr><td>End-to-end tests</td><td>On the built site, on desktop Chrome and a phone profile: security headers, routing, SEO files, no request to another site, every game starts from its page, and the player's pause, fullscreen, mute, leaderboard and crash flows</td></tr>
+    <tr><td>Leak test</td><td>Every game is mounted and unmounted three times and leaves no listeners, timers, animation frames, WebGL contexts, playing audio or DOM behind</td></tr>
+  </tbody>
+</table>
+</div>
+</section>
+
+<section id="privacy" aria-labelledby="privacy-h">
+<h2 id="privacy-h"><span class="num">11</span>Privacy and security</h2>
+<div class="prose">
+<p>Pocketcade is built to collect nothing.</p>
+<ul>
+  <li><strong>No accounts, analytics, ads, trackers or cookies.</strong> Game data stays on the device, as described
+  above.</li>
+  <li><strong>Nothing from other sites.</strong> Fonts are self-hosted and there are no CDNs. The Content Security
+  Policy in <code>apps/web/vercel.json</code> allows scripts, styles, images, fonts and connections only from the site
+  itself, and an end-to-end test fails if browsing and playing request anything from another origin.</li>
+  <li><strong>Locked-down headers.</strong> A Permissions-Policy turns off the camera, microphone, geolocation,
+  payment, USB and similar APIs; the site cannot be framed by others (<code>frame-ancestors 'none'</code>,
+  <code>X-Frame-Options: DENY</code>); it also sends <code>Cross-Origin-Opener-Policy: same-origin</code>,
+  <code>Referrer-Policy: same-origin</code> and <code>X-Content-Type-Options: nosniff</code>.</li>
+  <li><strong>Sandboxed games.</strong> Game code may not make network requests, read browser storage directly or
+  reach outside its container; linting enforces it.</li>
+  <li><strong>No secrets.</strong> The site is static and has no server code. Every environment variable is optional,
+  public and read only at build time.</li>
+  <li><strong>Hosting.</strong> The site is served by Vercel, which may process request data such as IP addresses and
+  browser details in its server logs, as the site's privacy page explains.</li>
+  <li><strong>Bug reports are opt-in.</strong> After a crash, "Report a bug" opens a prefilled GitHub issue with the
+  game, its version, the build, the error and browser details; nothing is sent unless the player submits it.</li>
+</ul>
+</div>
+</section>
+
+<section id="licence" aria-labelledby="licence-h">
+<h2 id="licence-h"><span class="num">12</span>Licensing</h2>
+<div class="cols">
+  <div class="card">
+    <h3>Code</h3>
+    <p>MIT License (<a href="../LICENSE">LICENSE</a>).</p>
+  </div>
+  <div class="card">
+    <h3>Art, audio and text</h3>
+    <p>Original work, licensed CC BY 4.0 (<a href="../LICENSE-ASSETS">LICENSE-ASSETS</a>), credit "Pocketcade
+    contributors". Every sprite and cover is drawn in code or hand-written SVG, and every sound is synthesized.</p>
+  </div>
+  <div class="card">
+    <h3>Third-party material</h3>
+    <p>The fonts and Letterhop's word lists keep their own licences and are listed in <a href="../ASSETS.md">ASSETS.md</a>.
+    The site's Licenses page is built from that file.</p>
+  </div>
+</div>
+<footer class="page-end">
+  <p>Next steps: <a href="../README.md">README</a> for setup and commands, <a href="../CONTRIBUTING.md">CONTRIBUTING</a>
+  before a pull request, and <a href="architecture.md">architecture.md</a> for the full reference.</p>
+</footer>
+</section>
+
+</main>
+</div>
+</body>
+</html>

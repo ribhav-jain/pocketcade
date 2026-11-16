@@ -1,5 +1,5 @@
-// Unit tests run in Node; the contract suite runs in Vitest browser mode on Playwright Chromium so Phaser gets
-// a real canvas and WebGL (SDK-902, OQ-SDK-010).
+// Unit tests run in Node. The contract suite runs in Vitest browser mode on Playwright Chromium, so the game gets
+// a real canvas, WebGL and audio.
 import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vitest/config';
 

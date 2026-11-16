@@ -82,9 +82,7 @@ export function createTumbler(
   function refill(): void {
     loads++;
     const rest = rng.shuffle(
-      PIECE_IDS.filter(
-        (id) => id !== 'I' && tierOf(id) <= tier && (id !== 'X' || loads % 2 === 0),
-      ),
+      PIECE_IDS.filter((id) => id !== 'I' && tierOf(id) <= tier && (id !== 'X' || loads % 2 === 0)),
     );
     if (loads === 1)
       for (let i = 0, j = GENTLE_START; i < GENTLE_START; i++) {
@@ -458,7 +456,10 @@ export function createSim(o: SimOptions) {
       ev.push({ type: 'start' });
     }
     if (phase === 'falling') act(action);
-    else if (phase === 'entry' && (action === 'turnRight' || action === 'turnLeft' || action === 'stash'))
+    else if (
+      phase === 'entry' &&
+      (action === 'turnRight' || action === 'turnLeft' || action === 'stash')
+    )
       queued = action;
   }
 

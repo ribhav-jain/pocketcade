@@ -47,7 +47,8 @@ export function plan(board: Board, entered: Piece): Action[] {
     let p: Piece | null = entered;
     let up = UP_NUDGES_MAX;
     for (const t of turns) {
-      const res: ReturnType<typeof tryTurn> = p && tryTurn(board, p, t === 'turnRight' ? 1 : -1, up);
+      const res: ReturnType<typeof tryTurn> =
+        p && tryTurn(board, p, t === 'turnRight' ? 1 : -1, up);
       p = res?.piece ?? null;
       if (res?.up) up--;
     }

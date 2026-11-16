@@ -40,9 +40,9 @@ export interface GameMeta {
   apiVersion: typeof SDK_API_VERSION;
   /** semver of the game package */
   version: string;
-  /** ≥ 1; must equal manifest `inputs` */
+  /** at least one */
   inputs: readonly InputKind[];
-  /** must equal manifest `orientation` */
+  /** which way up the game is meant to be played */
   orientation: Orientation;
   /**
    * Frame shape (width / height) the game wants: one ratio, a range the game adapts to (the portal picks the shape

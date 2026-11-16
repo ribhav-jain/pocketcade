@@ -15,7 +15,7 @@ const gamesDir = join(web, '..', '..', 'packages', 'games');
 const outDir = join(web, 'public', 'og');
 const MAX_BYTES = 300 * 1024;
 /** The covers on the site-wide image (Pentafall is left out until its name and look have had a legal review). */
-const SITE_COVERS = ['bao-bolt', 'pop-reef', 'sunset-sprint', 'sumslide', 'pebble-post', 'rowdy'];
+const SITE_COVERS = ['bao-bolt', 'pop-reef', 'sunset-sprint', 'sumslide', 'pebble-post', 'rowbot'];
 
 const dataUrl = (file: string, type: string) =>
   `data:${type};base64,${readFileSync(file).toString('base64')}`;

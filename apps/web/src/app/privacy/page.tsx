@@ -3,7 +3,7 @@
 import { repoUrl } from '../../lib/build-info';
 import { pageMeta, SITE_NAME } from '../../lib/seo';
 
-const UPDATED = '14 November 2026';
+const UPDATED = '11 November 2026';
 
 export const metadata = pageMeta({
   path: '/privacy/',

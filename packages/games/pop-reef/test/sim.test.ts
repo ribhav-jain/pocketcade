@@ -151,9 +151,9 @@ describe('hex grid', () => {
     const ring = around(at(4, 4), 0, 2);
     expect(ring).toHaveLength(18);
     for (const n of ring)
-      expect(
-        Math.hypot(cellX(n, 0) - cellX(at(4, 4), 0), cellY(n) - cellY(at(4, 4))),
-      ).toBeLessThan(2 * D + 1);
+      expect(Math.hypot(cellX(n, 0) - cellX(at(4, 4), 0), cellY(n) - cellY(at(4, 4)))).toBeLessThan(
+        2 * D + 1,
+      );
   });
 
   it('fits the walls and keeps the danger line above the launcher', () => {
@@ -260,10 +260,7 @@ describe('matching and drops', () => {
 
   it('multiplies points by the streak and hands out a rainbow every fourth pop in a row', () => {
     const cells = board(['11...00']);
-    const run = createRun(
-      rng(),
-      level(cells, { current: 0, next: 1, streak: RAINBOW_EVERY - 1 }),
-    );
+    const run = createRun(rng(), level(cells, { current: 0, next: 1, streak: RAINBOW_EVERY - 1 }));
     const events = shoot(run, aimFor(run, at(1, 5)));
     expect(of(events, 'pop')[0]!.points).toBe(3 * POP_POINTS * RAINBOW_EVERY);
     expect(of(events, 'rainbow')).toHaveLength(1);
@@ -472,7 +469,12 @@ describe('determinism and the attract AI', () => {
     const pick = createRng(`${seed}:ai`);
     const log: SimEvent[] = [];
     for (let i = 0; i < max && run.phase === 'aim'; i++)
-      log.push(...shoot(run, chooseAim(run, () => pick.next())));
+      log.push(
+        ...shoot(
+          run,
+          chooseAim(run, () => pick.next()),
+        ),
+      );
     return { run, log };
   }
 

@@ -36,7 +36,7 @@ export const LOW = 1;
 export const HIGH = 2;
 export const FULL = 3;
 export type Slot = 0 | 1 | 2 | 3;
-/** Each kind has two looks: low = snow drift | ice block, high = icicle arch | frozen-mail banner,
+/** Each kind has two looks: low = snow drift | fallen log, high = icicle arch | frozen-mail banner,
  * full = ice pillar | mail sled. Half-lengths along the track (m) per [slot][look]. */
 export const HALF_LEN: readonly (readonly [number, number])[] = [
   [0, 0],

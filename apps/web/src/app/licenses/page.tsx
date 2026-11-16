@@ -1,5 +1,5 @@
 // /licenses/: code and asset licences, every ASSETS.md entry (anchor = its id), per-game credits
-// and the open-source libraries the site ships. The npm dependency report (P1) is not built yet.
+// and the open-source libraries the site ships.
 import Link from 'next/link';
 import { games } from '../../games/catalog';
 import { readAssets } from '../../lib/assets';

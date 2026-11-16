@@ -63,10 +63,7 @@ function stackCell(w: number, h: number): number {
 
 function sideCell(w: number, h: number): number {
   return clampCell(
-    Math.min(
-      (h - 40 - BIND * 2) / SIZE,
-      (w - PANEL_MIN * 2 - GAP * 4 - PAD * 2 - BIND * 2) / SIZE,
-    ),
+    Math.min((h - 40 - BIND * 2) / SIZE, (w - PANEL_MIN * 2 - GAP * 4 - PAD * 2 - BIND * 2) / SIZE),
   );
 }
 

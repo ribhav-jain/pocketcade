@@ -364,7 +364,12 @@ function junk(ctx: Ctx, x: number, y: number, s: number): void {
     ctx.fillRect(x + mx * s - 1, y - (mh + 10) * s, 2, mh * s);
     ctx.beginPath();
     ctx.moveTo(x + (mx - mw * 0.5) * s, y - 14 * s);
-    ctx.quadraticCurveTo(x + (mx - mw * 0.7) * s, y - mh * 0.6 * s, x + (mx - mw * 0.3) * s, y - (mh + 8) * s);
+    ctx.quadraticCurveTo(
+      x + (mx - mw * 0.7) * s,
+      y - mh * 0.6 * s,
+      x + (mx - mw * 0.3) * s,
+      y - (mh + 8) * s,
+    );
     ctx.lineTo(x + (mx + mw * 0.5) * s, y - (mh + 2) * s);
     ctx.lineTo(x + (mx + mw * 0.6) * s, y - 16 * s);
     ctx.closePath();

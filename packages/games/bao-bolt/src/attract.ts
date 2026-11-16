@@ -17,7 +17,7 @@ const fumbling = (step: number) =>
 const press = (action: string): VirtualInput => ({ action, phase: 'press' });
 
 export const attract: AttractScript<AttractView> = {
-  seed: 'bunaway:attract',
+  seed: 'bao-bolt:attract',
   drive(step, view) {
     if (!view) return;
     // short hops release at once; tins jumps keep the full hold

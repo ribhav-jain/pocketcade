@@ -1,6 +1,6 @@
 ---
 title: Sunset Sprint
-tagline: Weave through traffic and beat the clock to every checkpoint.
+tagline: Weave through traffic and beat the clock to every checkpoint arch.
 category: arcade
 tags: [endless, quick]
 accent: '#FF7A59'
@@ -20,12 +20,14 @@ controls:
     touch: Pause button
 faq:
   - q: How do I get more time?
-    a: Drive under the checkpoint arch at the end of each stretch. The first ones add 30 seconds; each new stage adds a little less. The race ends when the clock runs out and the car rolls to a stop, but rolling under an arch before it stops still counts.
+    a: Drive under the checkpoint arch at the end of each stretch. You start with 45 seconds. The first arch adds 30, the second 27, then 24, 21 and so on down to 15. If time runs out the car rolls to a stop, and an arch you reach before it stops still counts.
   - q: What slows me down?
-    a: Hitting a car cuts your speed to about a third and makes Miso wobble; after that she is safe from crashes for a moment. Driving off the road (sand, rock or kerb) caps your speed low. Curves push the car wide, more so at speed, so steer into them.
+    a: Hitting a car cuts your speed to about a third and makes Miso wobble, then she is safe from crashes for a moment. Sand, rock and kerbs off the road cap your speed low. Curves push the car wide, more so at speed, so steer into them.
+  - q: Do I need to accelerate?
+    a: No. Miso speeds up on her own up to about 230 km/h. You steer, and brake when you need to. Passing a car without touching it counts as an overtake, and a very close pass flashes "Close one!".
   - q: Is the road the same every time?
     a: Yes. The road is the same for everyone, so best distances are fair to compare. The traffic changes from run to run.
-coverAlt: Miso, a cheerful red panda in a lime-green convertible, looks back with a grin as she races down a coast road toward a huge setting sun, between palm trees by the sea.
+coverAlt: Miso, a cheerful red panda in a lime-green convertible, looks back with a grin as she races down a bending coast road toward a huge setting sun, between palm trees and the sea.
 ---
 
-Miso, a cheerful red panda in a little lime-green convertible, races along a winding coast road as the sun sets. Weave through traffic, lean into the bends and reach each checkpoint arch before the clock runs out, from the beach to the red canyon to the neon city.
+Miso, a cheerful red panda in a little lime-green convertible, races along a winding coast road as the sun sets. Weave through traffic, lean into the bends and reach each checkpoint arch before the clock runs out, from the Coast Road through the Red Canyon to the Night City.

@@ -7,7 +7,8 @@ contract itself (`Game`, `HostAPI`, `GameMeta`) is described in [architecture.md
 
 ```
 packages/games/<id>/
-  game.md            portal listing: title, tagline, category, tags, accent, controls, FAQ, blurb
+  game.md            portal listing: title, tagline, category, tags, accent, minutes, cover alt text,
+                     controls and FAQ in the front matter; the blurb below it
   media/cover.svg    square key art (viewBox 0 0 600 600, no text, no external references, ≤ 40 KB)
   src/meta.ts        GameMeta: id, inputs, aspect ratio, minimum size, leaderboards
   src/index.ts       definePhaserGame({ meta, scenes, config }) or defineDomGame(...)
@@ -36,13 +37,17 @@ Two rules shape everything else:
 | A Phaser game | `definePhaserGame` from `@pocketcade/toolkit/phaser`; scenes extend `kit.Scene` and get `this.tk` |
 | A DOM game | `defineDomGame` from `@pocketcade/toolkit/dom` (styles are scoped in a shadow root) |
 | Input | `tk.input`: keyboard actions by key code, pointer taps, swipes and drags, already in design units |
-| Sound | The `sfx` list in the game config, played with `tk.sfx.play(name)`; every effect is synthesized |
-| Saves | `tk.createSave({ key, parse, ... })`: validated on load, flushed on pause and unmount |
+| Sound | The `sfx` list in the game config (preset names or `{ name, params }`), played with `tk.sfx.play(name)`; every effect is synthesized |
+| Saves | `tk.createSave({ key, defaults, validate, migrate })`: validated and migrated on load, written with a short debounce, flushed on pause, at the end of a run and on unmount |
+| Randomness | `tk.rng.main`, a seeded generator; attract mode uses a fixed seed so the demo repeats |
+| Start and end of a run | `tk.run.begin()` and `tk.run.end(reason)` report gameplay to the portal; `end` also flushes saves |
 | Scores | `tk.host.scores.submit({ board, value })`; the portal asks for initials |
 | Dialogs | `tk.ui`: how-to card, pause menu, game-over dialog, toasts, pause button |
+| Text | `kit.text(scene, x, y, value, style)` in the brand faces, at the render scale |
 | Textures | `kit.textures.canvas(scene, key, w, h, draw)` draws once with Canvas 2D at the render scale |
-| Feedback | `burst`, `popText`, `shake`, `flash`, `bump`, `hudPill`, `backdrop` from the Phaser adapter |
+| Feedback | `burst`, `popText`, `shake`, `flash`, `bump`, `hudPill`, `backdrop` from `@pocketcade/toolkit/phaser` |
 | Motion preferences | `tk.motion.reduced`; the feedback helpers already honour it |
+| Frame rate | `loop: 'turn-based'` in the config caps the game at 30 fps; `kit.fps.burst(ms)` runs 60 fps during an animation |
 
 ## Frames that fit any screen
 
@@ -53,7 +58,8 @@ aspectRatio: { min: 9 / 16, max: 16 / 9 },
 ```
 
 With a range, the portal gives the game the frame shape inside it that best fills the screen: wide on a desktop,
-tall on a phone.
+tall on a phone. A DOM game can instead declare `'fill'` and lay itself out in whatever frame it gets, as Letterhop
+does.
 
 ```mermaid
 flowchart LR
@@ -82,7 +88,8 @@ flowchart LR
 The canvas is rendered at up to twice the design size, chosen for the largest size the game can reach (including
 fullscreen). Art stays sharp if it is drawn that way:
 
-- Draw sprites with `kit.textures.canvas` at the default scale. Keep `scale: 1` for large, soft backgrounds.
+- Draw sprites with `kit.textures.canvas` at the default scale. For large, soft backgrounds use `backdrop()` or
+  `canvasTexture(..., { scale: 1 })`, which save memory.
 - Never show a texture larger than it was drawn.
 - Create text with `kit.text`; for text baked into a texture use `font()` at 14 design px or more.
 - Prefer solid fills, a darker rim, one highlight and one soft shadow. Stacked glows and hairlines read as blur.
@@ -116,17 +123,23 @@ Capture frames of a running game at any frame size (the playground must be runni
 node apps/playground/scripts/shot.ts <id> --size 1031x580 --at 2000,6000
 ```
 
-`--launch attract` (the default) records the self-playing demo; `--launch play` starts a real game and accepts
-`--click "x,y;x,y"` and `--keys "Enter,ArrowLeft"`. Check a desktop frame, a phone frame and the two ends of the
-game's aspect range.
+`--size` takes `WxH` or a named size (`desktop`, `desktop-small`, `wide`, `square`, `tablet`, `phone-portrait`,
+`phone-landscape`, `phone-small`). `--launch attract` (the default) records the self-playing demo; `--launch play`
+starts a real game and accepts `--click "x,y;x,y"` and `--keys "Enter,ArrowLeft"`. Frames are written to
+`reports/shots/` unless `--out` says otherwise. Check a desktop frame, a phone frame and the two ends of the game's
+aspect range.
 
-Each game package has three checks:
+Each game package has three checks. `pnpm test` runs the last two together; the contract tests need Playwright's
+Chromium (`pnpm --filter @pocketcade/web exec playwright install chromium`).
 
 | Check | Command (in the package folder) | What it proves |
 | --- | --- | --- |
 | Types and lint | `pnpm typecheck`, `pnpm lint` | The code compiles and stays inside the game sandbox rules |
 | Rules | `pnpm exec vitest run --project unit` | The simulation behaves as specified |
-| Contract | `pnpm exec vitest run --project contract` | In a real browser: mounts, pauses, resumes, plays attract and unmounts cleanly on the real host |
+| Contract | `pnpm exec vitest run --project contract` | In Chromium: mounts, pauses, resumes, plays attract and unmounts cleanly, using only host storage and its own boards. It runs on the mock host from `@pocketcade/sdk/testing`, whose storage and score rules are the real host's |
+
+Beyond the package, `pnpm e2e` starts every game from its portal page and runs the leak test, which mounts and
+unmounts every game in attract mode and fails if anything is left behind.
 
 ## Adding a game
 
@@ -137,4 +150,8 @@ Each game package has three checks:
 3. Add the id to `gameOrder` in `apps/web/src/games/catalog.ts`, at the position it deserves.
 4. Run `pnpm og` and commit the new share image in `apps/web/public/og/`.
 
-`tools/gen-registry` picks up the loader, the meta, the listing from `game.md` and the cover on the next build.
+`tools/gen-registry` picks up the loader, the meta, the listing from `game.md` and the cover on the next `pnpm dev` or
+build. `pnpm lint` fails until the game has a complete `game.md`, a cover and a share image, and is a dependency of
+`apps/web`; the catalog test fails until it is in `gameOrder`. The size budget (150 KiB of gzipped game code,
+toolkit included) applies to the new game automatically: `tools/check-budgets.ts` finds each game's chunks in the
+build, so there is nothing to register.

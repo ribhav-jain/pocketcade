@@ -1,5 +1,5 @@
 // Per-mount TkContext and the plumbing both adapters share: host events, mute, the local sound
-// preference, overlays, saves and the dev fault hook. Never stored in module scope.
+// preference, overlays and saves. Never stored in module scope.
 import type {
   FullscreenMode,
   GameMeta,

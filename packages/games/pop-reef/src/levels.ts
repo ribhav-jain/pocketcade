@@ -197,14 +197,7 @@ const DEFS: readonly Def[] = [
   {
     rows: 6,
     kinds: 4,
-    art: [
-      'aabbccddaa',
-      '.b..c..d.',
-      '.bb.cc.dd.',
-      '.a..d..b.',
-      '.aa.dd.bb.',
-      '.c..a..c.',
-    ],
+    art: ['aabbccddaa', '.b..c..d.', '.bb.cc.dd.', '.a..d..b.', '.aa.dd.bb.', '.c..a..c.'],
     paint: bands(1),
     par: 8,
   },
@@ -489,7 +482,10 @@ const DEFS: readonly Def[] = [
     kinds: 6,
     paint: chevron(1),
     noise: 0.25,
-    stone: both(rowsFrom(3, 5), (s) => Math.abs(s.x) + s.r * 2 === 11 || Math.abs(s.x) + s.r * 2 === 12),
+    stone: both(
+      rowsFrom(3, 5),
+      (s) => Math.abs(s.x) + s.r * 2 === 11 || Math.abs(s.x) + s.r * 2 === 12,
+    ),
     par: 36,
     pushEvery: 5,
   },
@@ -622,7 +618,10 @@ export function buildLevel(level: number): Level {
       if (ch === '*' || def.urchin?.(s)) cells[s.i] = URCHIN;
       else if (ch === '#' || def.stone?.(s)) cells[s.i] = STONE;
       else cells[s.i] = letter >= 0 && letter < COLOURS ? letter : colour(s);
-      if (isColour(cells[s.i]!) && (ch === '$' || (letter >= 0 && ch !== ch.toLowerCase()) || def.fish?.(s)))
+      if (
+        isColour(cells[s.i]!) &&
+        (ch === '$' || (letter >= 0 && ch !== ch.toLowerCase()) || def.fish?.(s))
+      )
         fish[s.i] = 1;
     }
   for (const i of floating(cells, 0)) {

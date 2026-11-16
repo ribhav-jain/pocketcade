@@ -42,8 +42,7 @@ export const strings = defineStrings({
   over: 'The bubbles reached Puff!',
 });
 
-const pop =
-  'Match 3 or more of a colour to pop them. Bubbles left hanging drop for double points.';
+const pop = 'Match 3 or more of a colour to pop them. Bubbles left hanging drop for double points.';
 const goal = "Reach each level's goal in few shots to earn up to 3 stars.";
 const sink =
   'Shots that pop nothing make the ceiling sink. Keep the bubbles above the dashed line!';

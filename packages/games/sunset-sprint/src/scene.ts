@@ -34,7 +34,8 @@ import {
   type Track,
 } from './track.ts';
 
-const DBGZ: number = 40 + 1900 + 6000 - 200; const DBGHIT: boolean = false; /*DBG*/
+const DBGZ: number = 40 + 1900 + 6000 - 200;
+const DBGHIT: boolean = false; /*DBG*/
 const MAX_STEPS = 6;
 /** the run-over moment before the dialog */
 const OVER_MS = 900;
@@ -610,7 +611,13 @@ export const createScenes: SceneFactory = (_P, kit) => {
       // the attract reel starts on the move (no countdown)
       while (tk.attract && this.sim.phase === 'countdown') this.sim.step(0, false);
       tk.attract?.setView(this.sim);
-      /*DBG*/ if (DBGZ) { this.sim.z = DBGZ; this.sim.nextCp = Math.max(0, Math.ceil((DBGZ - 1940) / 1500)); this.sim.stage = Math.floor(this.sim.nextCp / 2); this.sim.timeLeftMs = 99000; this.sim.speed = 60; }
+      /*DBG*/ if (DBGZ) {
+        this.sim.z = DBGZ;
+        this.sim.nextCp = Math.max(0, Math.ceil((DBGZ - 1940) / 1500));
+        this.sim.stage = Math.floor(this.sim.nextCp / 2);
+        this.sim.timeLeftMs = 99000;
+        this.sim.speed = 60;
+      }
       this.runs++;
       this.endAt = -1;
       this.ending = false;
@@ -692,7 +699,14 @@ export const createScenes: SceneFactory = (_P, kit) => {
         this.handle(this.sim.step(this.steer, this.brake));
       const wait = this.tk.motion.reduced ? OVER_MS_CALM : OVER_MS;
       if (this.endAt >= 0 && !this.ending && this.clock >= this.endAt + wait) void this.gameOver();
-      /*DBG*/ if (DBGHIT && Math.floor(this.clock / 2600) !== Math.floor((this.clock - dt) / 2600)) { this.sim.wobbleMs = WOBBLE_MS; this.sim.ghostMs = 1500; this.onCrash(this.sim.x); }
+      /*DBG*/ if (
+        DBGHIT &&
+        Math.floor(this.clock / 2600) !== Math.floor((this.clock - dt) / 2600)
+      ) {
+        this.sim.wobbleMs = WOBBLE_MS;
+        this.sim.ghostMs = 1500;
+        this.onCrash(this.sim.x);
+      }
       this.draw(dt);
     }
 
@@ -1036,10 +1050,7 @@ export const createScenes: SceneFactory = (_P, kit) => {
         }
         const a = (calm ? 0 : t / 130) + (k * Math.PI * 2) / 3;
         star
-          .setPosition(
-            cx + hx + Math.cos(a) * 42,
-            CAR_Y + art.HEAD.y - 98 - up + Math.sin(a) * 10,
-          )
+          .setPosition(cx + hx + Math.cos(a) * 42, CAR_Y + art.HEAD.y - 98 - up + Math.sin(a) * 10)
           .setVisible(true);
       }
 

@@ -262,7 +262,7 @@ export function createRoadView(scene: Phaser.Scene, bleed: { x: number; y: numbe
       g.clear();
       let maxy = bottom;
       let nearest = true;
-      for (let n = 0; n < DRAW; ) {
+      for (let n = 0; n < DRAW;) {
         // far runs start on a stripe pair, so the pattern doesn't swim as the camera moves
         const far = n >= FAR_FROM && (baseIdx + n) % FAR_RUN === 0;
         const m = far ? Math.min(DRAW, n + FAR_RUN) : n + 1;

@@ -271,7 +271,10 @@ export const createScenes: SceneFactory = (_P, kit) => {
           replay: { codes: ['KeyR'] },
         },
       });
-      tk.input.on('fire', (e) => e.phase === 'press' && (this.cardOpen ? this.next() : this.fire()));
+      tk.input.on(
+        'fire',
+        (e) => e.phase === 'press' && (this.cardOpen ? this.next() : this.fire()),
+      );
       tk.input.on('swap', (e) => e.phase === 'press' && this.swap());
       tk.input.on('replay', (e) => e.phase === 'press' && this.cardOpen && this.replay());
       // touch (and mouse) drag aims, release fires; a tap or click aims at the point and fires
@@ -375,7 +378,9 @@ export const createScenes: SceneFactory = (_P, kit) => {
         art.drawButton(ctx, art.BUTTON.w, art.BUTTON.h, '#8E86C8'),
       );
       crisp('pr-leaf', art.LEAF.w, art.LEAF.h, (ctx) => art.drawLeaf(ctx, art.LEAF.w, art.LEAF.h));
-      crisp('pr-wall', FIELD_L, art.H + by * 2, (ctx) => art.drawWall(ctx, FIELD_L, art.H + by * 2));
+      crisp('pr-wall', FIELD_L, art.H + by * 2, (ctx) =>
+        art.drawWall(ctx, FIELD_L, art.H + by * 2),
+      );
       crisp('pr-lip', art.W + bx * 2, 22, (ctx) => art.drawLip(ctx, art.W + bx * 2, 22));
       canvasTexture(this, 'pr-ray', art.RAY.w, art.RAY.h, (ctx, w, h) => art.drawRay(ctx, w, h), {
         scale: 1,
@@ -453,7 +458,9 @@ export const createScenes: SceneFactory = (_P, kit) => {
         .rectangle(-bx, -by, fullW, by + art.HUD_H - 15, 0)
         .setOrigin(0)
         .setDepth(400);
-      this.lip = canvasImage(this, -bx, art.HUD_H - 16, 'pr-lip').setOrigin(0).setDepth(400);
+      this.lip = canvasImage(this, -bx, art.HUD_H - 16, 'pr-lip')
+        .setOrigin(0)
+        .setDepth(400);
     }
 
     /** Switches the scenery to a zone: a new backdrop (the old one is freed) and new tints. */
@@ -573,9 +580,7 @@ export const createScenes: SceneFactory = (_P, kit) => {
       const stars = [0, 1, 2].map((i) =>
         canvasImage(this, STAR_PILL.x + 30 + i * 36, midY, 'pr-star-true'),
       );
-      const starShots = kit
-        .text(this, STAR_PILL.x + 144, midY, '', { px: 28 })
-        .setOrigin(0.5);
+      const starShots = kit.text(this, STAR_PILL.x + 144, midY, '', { px: 28 }).setOrigin(0.5);
       const goalBg = canvasImage(this, GOAL_PILL.x, PILL.y, 'pr-pill-goal').setOrigin(0);
       const goalIcon = canvasImage(this, GOAL_PILL.x + 32, midY, tex(0));
       goalIcon.setScale(goalIcon.scaleX * 0.56);
@@ -782,7 +787,9 @@ export const createScenes: SceneFactory = (_P, kit) => {
         }
       }
       const left = s.phase === 'aim' ? s.starShots : 0;
-      h.starShots.setText(left > 0 ? String(left) : '').setColor(left <= 2 ? colors.orange : colors.text);
+      h.starShots
+        .setText(left > 0 ? String(left) : '')
+        .setColor(left <= 2 ? colors.orange : colors.text);
     }
 
     private get cardOpen(): boolean {
@@ -902,7 +909,11 @@ export const createScenes: SceneFactory = (_P, kit) => {
       const turn = (input.isDown('left') ? 1 : 0) - (input.isDown('right') ? 1 : 0);
       for (let i = 0; i < Math.min(steps, MAX_STEPS); i++) this.handle(this.sim.step(turn));
       const calm = this.tk.motion.reduced;
-      if (this.endAt >= 0 && !this.ending && this.clock >= this.endAt + (calm ? OVER_MS_CALM : OVER_MS))
+      if (
+        this.endAt >= 0 &&
+        !this.ending &&
+        this.clock >= this.endAt + (calm ? OVER_MS_CALM : OVER_MS)
+      )
         void this.gameOver();
       if (this.wonAt >= 0 && this.clock >= this.wonAt + (calm ? WIN_MS_CALM : WIN_MS)) {
         this.wonAt = -1;
@@ -977,7 +988,12 @@ export const createScenes: SceneFactory = (_P, kit) => {
             size: 16,
             depth: 700,
           });
-        popText(this, c.x, c.y - 30, strings.boom, { color: colors.pink, px: 44, rise: 50, ms: 900 });
+        popText(this, c.x, c.y - 30, strings.boom, {
+          color: colors.pink,
+          px: 44,
+          rise: 50,
+          ms: 900,
+        });
       }
       if (e.fish) {
         tk.sfx.play('coin', { volume: 0.8, detuneCents: 500 });
@@ -1127,7 +1143,10 @@ export const createScenes: SceneFactory = (_P, kit) => {
       const ring = this.take(this.fxRings);
       if (ring) {
         Object.assign(ring, { on: true, mode: 'ring', t0: this.clock + delay, life: RING_MS });
-        ring.img.setPosition(b.x, b.y).setTint(colorNum(shade(color, 0.3))).setVisible(false);
+        ring.img
+          .setPosition(b.x, b.y)
+          .setTint(colorNum(shade(color, 0.3)))
+          .setVisible(false);
       }
       if (!this.tk.motion.reduced) this.splash(b.x, b.y, color, DROPS_PER_POP, delay);
       if (b.fish) this.spawnFish(b, delay);
@@ -1174,7 +1193,11 @@ export const createScenes: SceneFactory = (_P, kit) => {
         t0: this.clock + delay,
         life: 1600,
       });
-      f.img.setPosition(b.x, b.y).setFlipX(dir < 0).setAlpha(1).setVisible(false);
+      f.img
+        .setPosition(b.x, b.y)
+        .setFlipX(dir < 0)
+        .setAlpha(1)
+        .setVisible(false);
     }
 
     /** Droplets bursting out of (x, y). */
@@ -1331,7 +1354,8 @@ export const createScenes: SceneFactory = (_P, kit) => {
       const h = this.hud;
       if (!h.title.visible) return;
       const k = (t - this.introAt - INTRO_MS + 300) / 300;
-      if (k >= 1 || this.cardOpen) for (const x of [h.title, h.zone, h.goalLine]) x.setVisible(false);
+      if (k >= 1 || this.cardOpen)
+        for (const x of [h.title, h.zone, h.goalLine]) x.setVisible(false);
       else if (k > 0) for (const x of [h.title, h.zone, h.goalLine]) x.setAlpha(1 - k);
     }
 

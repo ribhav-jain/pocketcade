@@ -407,8 +407,7 @@ export const createScenes: SceneFactory = (_P, kit) => {
         label: string,
         icon: 'star' | 'trophy' | 'heart' | 'bolt',
         accent: string,
-      ) =>
-        hudPill(this, x, y, { icon, accent, label, value: '', width: w, height: h, depth: 500 });
+      ) => hudPill(this, x, y, { icon, accent, label, value: '', width: w, height: h, depth: 500 });
       // the cave pill wears a little glowworm badge and shows the berries eaten as pips instead of a value
       const cave = pill(370, 300, '', 'heart', art.ACCENT);
       (cave.container.list[1] as Img)
@@ -690,11 +689,17 @@ export const createScenes: SceneFactory = (_P, kit) => {
               depth: 60,
             });
             // a heads-up next to it (kept inside the cave)
-            popText(this, Math.min(820, Math.max(180, x)), y < 240 ? y + 54 : y - 50, strings.golden, {
-              color: colors.gold,
-              px: 32,
-              ms: 1100,
-            });
+            popText(
+              this,
+              Math.min(820, Math.max(180, x)),
+              y < 240 ? y + 54 : y - 50,
+              strings.golden,
+              {
+                color: colors.gold,
+                px: 32,
+                ms: 1100,
+              },
+            );
             break;
           }
           case 'golden-gone':
@@ -1041,7 +1046,9 @@ export const createScenes: SceneFactory = (_P, kit) => {
         const j = (i + 1) * stride;
         img.setVisible(j < m);
         if (j < m)
-          img.setPosition(this.fill[j]!.x, this.fill[j]!.y).setAlpha(0.2 * this.fill[j]!.alpha * glowFade);
+          img
+            .setPosition(this.fill[j]!.x, this.fill[j]!.y)
+            .setAlpha(0.2 * this.fill[j]!.alpha * glowFade);
       });
 
       // crystals glint as Wick passes

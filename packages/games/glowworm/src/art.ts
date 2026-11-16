@@ -206,7 +206,17 @@ const colorPrism = (
   tilt: number,
   color: string,
 ) =>
-  prism(ctx, x, base, hw, height, tilt, shade(color, 0.25), shade(color, -0.25), shade(color, -0.65));
+  prism(
+    ctx,
+    x,
+    base,
+    hw,
+    height,
+    tilt,
+    shade(color, 0.25),
+    shade(color, -0.25),
+    shade(color, -0.65),
+  );
 
 // ─── scenery ───
 
@@ -232,7 +242,9 @@ export function drawBackdrop(ctx: Ctx, w: number, h: number, bx: number, by: num
     }
     ctx.closePath();
     ctx.fillStyle =
-      rnd() < 0.35 ? `rgba(255,255,255,${0.05 + rnd() * 0.07})` : `rgba(0,0,0,${0.08 + rnd() * 0.14})`;
+      rnd() < 0.35
+        ? `rgba(255,255,255,${0.05 + rnd() * 0.07})`
+        : `rgba(0,0,0,${0.08 + rnd() * 0.14})`;
     ctx.fill();
   }
   ctx.globalAlpha = 0.5;

@@ -8,15 +8,15 @@ packages:
 catalog:
   '@fontsource-variable/fredoka': 5.3.0
   '@fontsource-variable/nunito': 5.3.0
-  '@playwright/test': 1.65.0
+  '@playwright/test': 1.65.1
   '@types/node': 26.6.6
   '@vitest/browser-playwright': 5.1.0
-  eslint: 10.14.0
+  eslint: 10.15.0
   phaser: 4.2.1
-  playwright: 1.65.0
-  prettier: 3.9.10
+  playwright: 1.65.1
+  prettier: 3.10.1
   typescript: 7.0.2
-  vite: 8.3.6
+  vite: 8.3.8
   vitest: 5.1.0
 
 # `pnpm add` saves exact versions, so an upgrade is always a deliberate change.

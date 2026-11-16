@@ -809,14 +809,7 @@ export function drawZone(
       ctx.lineWidth = 10 + rnd() * 8;
       ctx.beginPath();
       ctx.moveTo(x, h - 300);
-      ctx.bezierCurveTo(
-        x - 40,
-        h - 520,
-        x + 50,
-        h - 700,
-        x + (rnd() - 0.5) * 60,
-        60 + rnd() * 240,
-      );
+      ctx.bezierCurveTo(x - 40, h - 520, x + 50, h - 700, x + (rnd() - 0.5) * 60, 60 + rnd() * 240);
       ctx.stroke();
     } else if (zone === 3) {
       // rock spires

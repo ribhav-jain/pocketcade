@@ -99,17 +99,18 @@ export interface Listing {
 export const gameOrder: readonly GameId[] = [
   'pebble-post',
   'pop-reef',
+  'snugfit',
   'sumslide',
   'sunset-sprint',
   'bao-bolt',
   'sourdough',
   'pentafall',
   'glowworm',
-  'comet-crush',
+  'comet-bounce',
   'letterhop',
   'molehills',
-  'rowdy',
-  'on-the-dot',
+  'rowbot',
+  'starlap',
   'firefly-flip',
 ];
 

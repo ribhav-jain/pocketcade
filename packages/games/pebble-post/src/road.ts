@@ -350,7 +350,10 @@ export function createRoadView(scene: Phaser.Scene) {
         wall(n, baseIdx + n, -1);
         wall(n, baseIdx + n, 1);
       }
-      haze.setPosition(left, haze.y).setDisplaySize(right - left, art.HAZE.h).setTint(fog);
+      haze
+        .setPosition(left, haze.y)
+        .setDisplaySize(right - left, art.HAZE.h)
+        .setTint(fog);
 
       // 4. sprites, far to near: props per segment, then the course's rows, power-ups and letters in it
       const { rows, letters, pickups } = run.course;

@@ -1,4 +1,4 @@
-// The shared contract suite against the real game in Chromium.
+// The contract suite against the real game, in Chromium.
 import { runContractSuite } from '@pocketcade/sdk/testing';
 import pentafall from '../src/index.ts';
 
