@@ -13,7 +13,7 @@ controls:
   - action: Launch the comet
     keyboard: Space, Enter, Up arrow or W
     pointer: Click
-    touch: Tap
+    touch: Tap, or drag to aim and lift your finger
   - action: Pause
     keyboard: Esc or P
     pointer: Pause button

@@ -1,12 +1,13 @@
 # Games
 
-Pocketcade ships fifteen games. Each one is a package under `packages/games/<id>`. Its `game.md` holds the portal listing, `src/meta.ts` the platform metadata (inputs, frame shape, leaderboards), and the rules live in a pure module that unit tests drive directly. This page describes every game as it plays and how its code is laid out. See [Shared conventions](#shared-conventions) for what all games have in common.
+Pocketcade ships sixteen games. Each one is a package under `packages/games/<id>`. Its `game.md` holds the portal listing, `src/meta.ts` the platform metadata (inputs, frame shape, leaderboards), and the rules live in a pure module that unit tests drive directly. This page describes every game as it plays and how its code is laid out. See [Shared conventions](#shared-conventions) for what all games have in common.
 
 | Game | Id | Category | Genre | Engine | Frame | Inputs | Leaderboards |
 |---|---|---|---|---|---|---|---|
 | [Pebble Post](#pebble-post) | `pebble-post` | Arcade | Endless ice-canyon runner | Phaser | 9:16 to 16:9 | Keyboard, pointer, touch | Best score |
 | [Pop Reef](#pop-reef) | `pop-reef` | Puzzle | Bubble-shooter levels | Phaser | 9:16 to 16:9 | Pointer, touch, keyboard | Best score |
 | [Snugfit](#snugfit) | `snugfit` | Puzzle | Quilt block-fitting puzzle | Phaser | 9:16 to 16:9 | Pointer, touch, keyboard | Best score |
+| [Hue Brew](#hue-brew) | `hue-brew` | Puzzle | Colour-sort pouring puzzle | Phaser | 9:16 to 16:9 | Pointer, touch, keyboard | Levels solved |
 | [Sumslide](#sumslide) | `sumslide` | Puzzle | Sliding number-merge puzzle | Phaser | 9:16 to 16:9 | Keyboard, pointer, touch | Best score, Best tile |
 | [Sunset Sprint](#sunset-sprint) | `sunset-sprint` | Arcade | Checkpoint traffic racer | Phaser | 3:4 to 16:9 | Keyboard, pointer, touch | Best distance |
 | [Bao Bolt](#bao-bolt) | `bao-bolt` | Arcade | Endless rooftop runner | Phaser | 3:4 to 2:1 | Keyboard, pointer, touch | Best score |
@@ -137,6 +138,43 @@ A sewing table seen from above with the quilt, a tray of patches, yarn, buttons 
 **Saves and boards**
 
 The run in progress is saved after every placement (board, hand, score, streak and the random state), so a quilt can be picked up later. A profile stores the best score. Leaderboard: Best score.
+
+## Hue Brew
+
+The drinks at Pekoe's tea house have been stacked in the wrong bottles. The player pours them from bottle to bottle on the shelves of a night-market tea house until every bottle holds a single flavour, while Pekoe the otter barista looks on.
+
+**Rules**
+
+- Each bottle holds 4 layers. Lifting a bottle and choosing another pours the top run of one flavour onto the same flavour or into an empty bottle, as many layers as fit.
+- A bottle full of one flavour is corked and can no longer be poured from. A level is solved when every bottle is empty or corked.
+- Levels are endless and generated from the level number, so everyone gets the same ones. A deal is kept only if the solver proves it solvable and its solution takes at least twice the number of flavours plus one pours. There are always 2 spare bottles.
+- Flavours rise from 3 on levels 1 to 3 to 12 at level 60, then vary between 9 and 12. Par, the solver's pour count, runs from about 7 on the first levels to about 45.
+- From level 15 some levels hide the lowest layers of a few bottles behind a question mark until the layer above is poured away.
+- Helpers are free: unlimited undo, restart, a hint (the solver's next pour, shown by nudging both bottles) and one extra empty bottle per level.
+- Stars: 3 at par or better, 2 up to par plus the larger of 3 pours or 30 %, otherwise 1. The result notes when a hint or the extra bottle was used, then the next level starts.
+
+**Controls**
+
+| Input | Lift and pour | Undo | Hint | Extra bottle | Restart |
+| --- | --- | --- | --- | --- | --- |
+| Keyboard | Arrows or W A S D to move, Enter or Space | U or Ctrl+Z | H | B | R, then Restart in the menu |
+| Pointer | Click a bottle, then the target | Undo button | Hint button | Bottle button | Restart button (asks once) |
+| Touch | Tap a bottle, then the target | Undo button | Hint button | Bottle button | Restart button (asks once) |
+
+**Look and feel**
+
+Rounded glass café bottles with corks stand on wooden shelves. Each of the 12 drinks has its own colour and its own symbol, so colour is never the only signal. The pour tilts the lifted bottle over the target and drops a stream while one level falls and the other rises; any new input finishes it at once. A completed bottle gets a cork, a sparkle and a chime. The wall behind the shelves changes every ten levels: lantern evening, rainy window, dawn, festival lights. Bottles sit in one, two or three rows, whichever makes them largest in the frame.
+
+**Code map**
+
+- `src/logic.ts`: bottles, the pour rule, the win test, the level generator, the solver, hints, par and stars.
+- `src/layout.ts`: where bottles, HUD and buttons go for a given view, keeping the pause-button corner clear.
+- `src/scene.ts`, `src/art.ts`: drawing, input, the pour animation, Pekoe and the four walls.
+- `test/logic.test.ts` covers pours, corked bottles, the win test, generator determinism, solvability of the first levels, hints and stars; `test/layout.test.ts` checks the layout on phone, tablet and desktop frames; `test/save.test.ts` checks the save validators.
+
+**Saves and boards**
+
+The furthest level, the star total and the level in progress (bottles, hidden layers, pours, undo history) are saved, so a player can leave and resume. Leaderboard: Levels solved, with an entry at every tenth level.
 
 ## Sumslide
 
@@ -379,7 +417,7 @@ The Skiff, a white hover-ship with a small pilot, bounces a blazing comet into w
 |---|---|---|---|
 | Keyboard | Left and right arrows, A and D (hold Shift to fine-tune) | Space, Enter, Up arrow, W | Escape, P |
 | Pointer | Move the mouse | Click | Pause button |
-| Touch | Drag anywhere | Tap | Pause button |
+| Touch | Drag anywhere | Tap, or drag to aim and lift | Pause button |
 
 **Look and feel**
 

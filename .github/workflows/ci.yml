@@ -27,7 +27,9 @@ jobs:
       - run: pnpm install --frozen-lockfile
       # Each game's contract tests run in Chromium (Vitest browser mode).
       - run: pnpm --filter @pocketcade/web exec playwright install --with-deps chromium
-      - run: pnpm verify
+      # One task per core: fifteen browser test suites at once starve a small runner and trip the tests'
+      # real-time limits.
+      - run: pnpm verify --concurrency=100%
       - run: pnpm budgets
 
   e2e:

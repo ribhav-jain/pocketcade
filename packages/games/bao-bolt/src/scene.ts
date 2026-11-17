@@ -49,6 +49,12 @@ const TILE_W = DESIGN.width;
 const ROOF_W = 240;
 /** Scenery is drawn this far past the widest view, so a camera shake never shows the bare canvas. */
 const PAD = 24;
+/** Touch: a finger down this long without dragging starts a jump. */
+const TAP_JUMP_MS = 100;
+/** Touch: dragging down this many CSS px, within this long of touching, is a slide. */
+const SWIPE_DOWN_PX = 10;
+const SWIPE_WINDOW_MS = 300;
+
 /** Bao's rig pivots at his middle (26 px above the feet) so the jump spin turns him in place. */
 const PIVOT = 26;
 /** Bao is drawn 10 % larger than his hitbox (scaled about his feet): forgiving, and he's the star. */
@@ -137,7 +143,8 @@ export const createScenes: SceneFactory = (_P, kit) => {
     private statsSave!: Save<RunStatsV1>;
     private acc = 0;
     private intents: Intents = {};
-    private touch: { t: number; y: number } | null = null;
+    /** a finger that is down: where and when it landed, and whether its jump has already started */
+    private touch: { t: number; y: number; jumped: boolean } | null = null;
     private jumpKind: AttractView['jumpKind'] = null;
     private ending = false;
     private anim: Anim = freshAnim();
@@ -560,21 +567,27 @@ export const createScenes: SceneFactory = (_P, kit) => {
       this.input.on('pointerdown', (p: Phaser.Input.Pointer) => {
         if (!live()) return;
         if (p.rightButtonDown()) return void (this.intents.slide = true);
-        if (p.wasTouch) this.touch = { t: this.time.now, y: (p.event as PointerEvent).clientY };
+        // Phaser's own pointer position works for touch and mouse alike (a TouchEvent has no clientY).
+        // Times are the events' own timestamps (the clock the frame loop uses), so a slow frame cannot eat the
+        // swipe window.
+        if (p.wasTouch) this.touch = { t: p.downTime, y: p.y, jumped: false };
         else this.intents.jumpDown = true;
       });
       this.input.on('pointermove', (p: Phaser.Input.Pointer) => {
-        if (!this.touch || !p.isDown) return;
-        // a touch that drags down within 60 ms is a slide; otherwise it becomes a jump
-        if ((p.event as PointerEvent).clientY - this.touch.y > 8) {
+        const touch = this.touch;
+        if (!touch || !p.isDown || p.moveTime - touch.t > SWIPE_WINDOW_MS) return;
+        // A finger that drags down is a slide. If its jump has already started, the slide drops Bao at once.
+        const dragged = (p.y - touch.y) / this.scale.displayScale.y;
+        if (dragged > SWIPE_DOWN_PX) {
           this.touch = null;
           this.intents.slide = true;
+          if (touch.jumped) this.intents.jumpUp = true;
         }
       });
       this.input.on('pointerup', (p: Phaser.Input.Pointer) => {
         if (p.wasTouch && this.touch) {
+          if (!this.touch.jumped) this.intents.jumpDown = true;
           this.touch = null;
-          this.intents.jumpDown = true;
           this.intents.jumpUp = true;
         } else if (!p.rightButtonReleased()) this.intents.jumpUp = true;
       });
@@ -632,8 +645,10 @@ export const createScenes: SceneFactory = (_P, kit) => {
 
     override update(_time: number, delta: number): void {
       if (!this.sim) return;
-      if (this.touch && this.time.now - this.touch.t >= 60) {
-        this.touch = null;
+      // A finger that has not started dragging down after a short beat is a jump. It stays tracked, so a swipe
+      // that begins a little late still turns into a slide.
+      if (this.touch && !this.touch.jumped && this.game.loop.now - this.touch.t >= TAP_JUMP_MS) {
+        this.touch.jumped = true;
         this.intents.jumpDown = true;
       }
       this.acc = Math.min(this.acc + delta, MAX_STEPS_PER_FRAME * STEP_MS);

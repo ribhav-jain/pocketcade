@@ -21,18 +21,21 @@ sign-ups, ads or tracking.
     <td align="center"><a href="packages/games/pebble-post"><img src="packages/games/pebble-post/media/cover.svg" width="112" alt="" /><br />Pebble Post</a></td>
     <td align="center"><a href="packages/games/pop-reef"><img src="packages/games/pop-reef/media/cover.svg" width="112" alt="" /><br />Pop Reef</a></td>
     <td align="center"><a href="packages/games/snugfit"><img src="packages/games/snugfit/media/cover.svg" width="112" alt="" /><br />Snugfit</a></td>
-    <td align="center"><a href="packages/games/sumslide"><img src="packages/games/sumslide/media/cover.svg" width="112" alt="" /><br />Sumslide</a></td>
-    <td align="center"><a href="packages/games/sunset-sprint"><img src="packages/games/sunset-sprint/media/cover.svg" width="112" alt="" /><br />Sunset Sprint</a></td>
+    <td align="center"><a href="packages/games/hue-brew"><img src="packages/games/hue-brew/media/cover.svg" width="112" alt="" /><br />Hue Brew</a></td>
   </tr>
   <tr>
+    <td align="center"><a href="packages/games/sumslide"><img src="packages/games/sumslide/media/cover.svg" width="112" alt="" /><br />Sumslide</a></td>
+    <td align="center"><a href="packages/games/sunset-sprint"><img src="packages/games/sunset-sprint/media/cover.svg" width="112" alt="" /><br />Sunset Sprint</a></td>
     <td align="center"><a href="packages/games/bao-bolt"><img src="packages/games/bao-bolt/media/cover.svg" width="112" alt="" /><br />Bao Bolt</a></td>
     <td align="center"><a href="packages/games/sourdough"><img src="packages/games/sourdough/media/cover.svg" width="112" alt="" /><br />Sourdough Solitaire</a></td>
+  </tr>
+  <tr>
     <td align="center"><a href="packages/games/pentafall"><img src="packages/games/pentafall/media/cover.svg" width="112" alt="" /><br />Pentafall</a></td>
     <td align="center"><a href="packages/games/glowworm"><img src="packages/games/glowworm/media/cover.svg" width="112" alt="" /><br />Glowworm</a></td>
     <td align="center"><a href="packages/games/comet-bounce"><img src="packages/games/comet-bounce/media/cover.svg" width="112" alt="" /><br />Comet Bounce</a></td>
+    <td align="center"><a href="packages/games/letterhop"><img src="packages/games/letterhop/media/cover.svg" width="112" alt="" /><br />Letterhop</a></td>
   </tr>
   <tr>
-    <td align="center"><a href="packages/games/letterhop"><img src="packages/games/letterhop/media/cover.svg" width="112" alt="" /><br />Letterhop</a></td>
     <td align="center"><a href="packages/games/molehills"><img src="packages/games/molehills/media/cover.svg" width="112" alt="" /><br />Molehills</a></td>
     <td align="center"><a href="packages/games/rowbot"><img src="packages/games/rowbot/media/cover.svg" width="112" alt="" /><br />Rowbot</a></td>
     <td align="center"><a href="packages/games/starlap"><img src="packages/games/starlap/media/cover.svg" width="112" alt="" /><br />Starlap</a></td>
@@ -40,8 +43,8 @@ sign-ups, ads or tracking.
   </tr>
 </table>
 
-Fifteen original games: arcade runners, a racer, a growing-worm chase, a comet-and-paddle game, a one-button timing
-game, a bubble shooter, block and number puzzles, a falling-block puzzle, a deduction puzzle, a daily word ladder,
+Sixteen original games: arcade runners, a racer, a growing-worm chase, a comet-and-paddle game, a one-button timing
+game, a bubble shooter, block and number puzzles, a colour-sort puzzle, a falling-block puzzle, a deduction puzzle, a daily word ladder,
 solitaire, four in a row and a two-mode memory game. Each has its own art, synthesized sound, keyboard and touch controls (all but one also
 take a mouse) and local high scores. Rules and art notes for every game are in [docs/games.md](docs/games.md).
 
@@ -108,7 +111,7 @@ apps/playground    Vite app that mounts any game on the real host; screenshot sc
 packages/sdk       The Game / HostAPI contract, storage and score rules, mock host and contract suite
 packages/host      GameRunner and host services: storage, scores, audio, fullscreen, error attribution
 packages/toolkit   Shared game code: input, synthesized sound, saves, overlays; Phaser and DOM adapters
-packages/games/*   The 15 games, each with game.md, cover art, unit tests and the contract suite
+packages/games/*   The 16 games, each with game.md, cover art, unit tests and the contract suite
 packages/config    Shared tsconfig, ESLint and Prettier config
 tools/             Registry generator, word-list builder, post-build step, static server, size budgets
 docs/              Architecture, game-making guide, design system, games reference, project overview

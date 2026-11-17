@@ -44,7 +44,8 @@ const ALLOWED = [
   'import { defineGame } from "@pocketcade/sdk"; export { defineGame };',
 ];
 
-describe('game sandbox lint rules', () => {
+// The first case loads ESLint and the TypeScript parser, which can take several seconds on a busy CI runner.
+describe('game sandbox lint rules', { timeout: 30_000 }, () => {
   it.each(BANNED)('rejects: %s', async (code) => {
     expect((await errors(code)).length).toBeGreaterThan(0);
   });

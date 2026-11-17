@@ -9,9 +9,9 @@ is [making-games.md](making-games.md), and each game's rules are in [games.md](g
 
 | Area    | Choice                                                                                                     |
 | ------- | ---------------------------------------------------------------------------------------------------------- |
-| Product | 15 free browser games; no accounts, ads, analytics, cookies or third-party requests                        |
+| Product | 16 free browser games; no accounts, ads, analytics, cookies or third-party requests                        |
 | Portal  | Next.js 16.4.5 App Router and React 19.3.1, built as a static export (`output: 'export'`, trailing slashes) |
-| Games   | Workspace packages behind one contract (`Game` / `HostAPI`); 14 on Phaser 4.2.1, 1 on plain DOM            |
+| Games   | Workspace packages behind one contract (`Game` / `HostAPI`); 15 on Phaser 4.2.1, 1 on plain DOM            |
 | Data    | Saves, local top-10 boards, settings and play history in `localStorage`, on the device only                |
 | Hosting | One Vercel project serving `apps/web/out`; every header in `apps/web/vercel.json`; no server functions     |
 | Tooling | pnpm 12.18.0 workspace, Turborepo 2.11.10, Node.js 26, TypeScript 7.0.2, Vitest 5.1.0, Playwright 1.65.0   |
@@ -436,7 +436,7 @@ pinned by commit SHA. It has two jobs:
 
 | Job      | Steps                                                                                        |
 | -------- | -------------------------------------------------------------------------------------------- |
-| `verify` | Install with a frozen lockfile, install Chromium, `pnpm verify` (lint, typecheck, unit and contract tests, build), `pnpm budgets` |
+| `verify` | Install with a frozen lockfile, install Chromium, `pnpm verify --concurrency=100%` (lint, typecheck, unit and contract tests, build; one task per core so the browser suites do not starve the runner), `pnpm budgets` |
 | `e2e`    | Install, `pnpm build`, install Chromium, `pnpm e2e` (portal and playground)                  |
 
 ## Not built yet

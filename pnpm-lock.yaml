@@ -250,6 +250,9 @@ importers:
       '@pocketcade/game-glowworm':
         specifier: workspace:*
         version: link:../../packages/games/glowworm
+      '@pocketcade/game-hue-brew':
+        specifier: workspace:*
+        version: link:../../packages/games/hue-brew
       '@pocketcade/game-letterhop':
         specifier: workspace:*
         version: link:../../packages/games/letterhop
@@ -332,6 +335,9 @@ importers:
       '@pocketcade/game-glowworm':
         specifier: workspace:*
         version: link:../../packages/games/glowworm
+      '@pocketcade/game-hue-brew':
+        specifier: workspace:*
+        version: link:../../packages/games/hue-brew
       '@pocketcade/game-letterhop':
         specifier: workspace:*
         version: link:../../packages/games/letterhop
@@ -521,6 +527,40 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/browser-playwright@5.1.0)(@vitest/ui@5.1.0)(happy-dom@21.0.4)(vite@8.3.8(@types/node@26.6.6)(yaml@2.9.1))
 
   packages/games/glowworm:
+    dependencies:
+      '@pocketcade/sdk':
+        specifier: workspace:*
+        version: link:../../sdk
+      '@pocketcade/toolkit':
+        specifier: workspace:*
+        version: link:../../toolkit
+      phaser:
+        specifier: 'catalog:'
+        version: 4.2.1
+    devDependencies:
+      '@pocketcade/config':
+        specifier: workspace:*
+        version: link:../../config
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.6
+      '@vitest/browser-playwright':
+        specifier: 'catalog:'
+        version: 5.1.0(playwright@1.65.1)(vite@8.3.8(@types/node@26.6.6)(yaml@2.9.1))(vitest@5.1.0)
+      eslint:
+        specifier: 'catalog:'
+        version: 10.15.0
+      playwright:
+        specifier: 'catalog:'
+        version: 1.65.1
+      typescript:
+        specifier: 'catalog:'
+        version: 7.0.2
+      vitest:
+        specifier: 'catalog:'
+        version: 5.1.0(@types/node@26.6.6)(@vitest/browser-playwright@5.1.0)(@vitest/ui@5.1.0)(happy-dom@21.0.4)(vite@8.3.8(@types/node@26.6.6)(yaml@2.9.1))
+
+  packages/games/hue-brew:
     dependencies:
       '@pocketcade/sdk':
         specifier: workspace:*

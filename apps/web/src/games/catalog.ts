@@ -100,6 +100,7 @@ export const gameOrder: readonly GameId[] = [
   'pebble-post',
   'pop-reef',
   'snugfit',
+  'hue-brew',
   'sumslide',
   'sunset-sprint',
   'bao-bolt',

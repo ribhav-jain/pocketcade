@@ -1,0 +1,200 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#33207A"/>
+      <stop offset="0.55" stop-color="#1F1350"/>
+      <stop offset="1" stop-color="#120A30"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFC66B" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFC66B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E2AB70"/>
+      <stop offset="0.4" stop-color="#E2AB70"/>
+      <stop offset="0.4" stop-color="#96603A"/>
+      <stop offset="1" stop-color="#96603A"/>
+    </linearGradient>
+    <!-- the bottle outline, in a 150 x 420 box -->
+    <path id="glass" d="M44 20V78C44 114 0 108 0 148V386Q0 420 34 420H116Q150 420 150 386V148C150 108 106 114 106 78V20Z"/>
+    <clipPath id="inside">
+      <path d="M9 148C9 120 35 118 44 100H106C115 118 141 120 141 148V386Q141 411 116 411H34Q9 411 9 386Z"/>
+    </clipPath>
+    <!-- glass drawn over the drink: outline, lip, highlights -->
+    <g id="front">
+      <use href="#glass" fill="none" stroke="#E6F3FF" stroke-width="6" stroke-linejoin="round"/>
+      <rect x="35" y="2" width="80" height="23" rx="9" fill="#E6F3FF"/>
+      <rect x="41" y="16" width="68" height="5" rx="2.5" fill="#3C5A96" opacity="0.35"/>
+      <rect x="17" y="156" width="12" height="196" rx="6" fill="#FFFFFF" opacity="0.42"/>
+      <rect x="53" y="34" width="7" height="38" rx="3.5" fill="#FFFFFF" opacity="0.42"/>
+      <rect x="124" y="190" width="7" height="90" rx="3.5" fill="#FFFFFF" opacity="0.2"/>
+    </g>
+    <g id="back">
+      <use href="#glass" fill="#96BEFF" opacity="0.18"/>
+    </g>
+    <g id="cork">
+      <path d="M42 -26Q42 -36 52 -36H98Q108 -36 108 -26L101 30H49Z" fill="#8A5A30"/>
+      <path d="M46 -25Q46 -32 54 -32H96Q104 -32 104 -25L97.500 27H52.500Z" fill="#E9B578"/>
+      <rect x="53" y="-29" width="44" height="7" rx="3.500" fill="#FFD9A3"/>
+      <circle cx="63" cy="-12" r="2.600" fill="#C48A4E"/>
+      <circle cx="84" cy="-16" r="2.600" fill="#C48A4E"/>
+      <circle cx="72" cy="0" r="2.600" fill="#C48A4E"/>
+      <circle cx="89" cy="2" r="2.600" fill="#C48A4E"/>
+    </g>
+    <path id="leaf" d="M-17 12Q-15 -15 17 -13Q14 16 -17 12Z"/>
+    <path id="star" d="M0 -18L5.300 -6.500 17.600 -5.300 8.300 2.900 11 15 0 8.700 -11 15 -8.300 2.900 -17.600 -5.300 -5.300 -6.500Z"/>
+    <path id="heart" d="M0 16C-25 0 -12 -19 0 -7C12 -19 25 0 0 16Z"/>
+    <path id="moon" d="M9 -15A17 17 0 1 0 9 15Q-4 0 9 -15Z"/>
+    <g id="wave" fill="none" stroke-width="6" stroke-linecap="round">
+      <path d="M-19 -7C-10 -17 -5 3 0 -7C5 -17 10 3 19 -7"/>
+      <path d="M-19 7C-10 -3 -5 17 0 7C5 -3 10 17 19 7"/>
+    </g>
+    <g id="lantern">
+      <circle r="62" fill="url(#glow)"/>
+      <rect x="-11" y="-36" width="22" height="7" fill="#22123F"/>
+      <rect x="-11" y="29" width="22" height="7" fill="#22123F"/>
+      <ellipse rx="25" ry="31" fill="#FF8F2E"/>
+      <ellipse rx="11" ry="24" fill="#FFE2A0" opacity="0.75"/>
+    </g>
+  </defs>
+
+  <!-- the tea-house wall and its lanterns -->
+  <rect width="600" height="600" fill="url(#wall)"/>
+  <g fill="#FFFFFF" opacity="0.03">
+    <rect x="40" width="80" height="600"/>
+    <rect x="200" width="80" height="600"/>
+    <rect x="360" width="80" height="600"/>
+    <rect x="520" width="80" height="600"/>
+  </g>
+  <path d="M-20 34Q90 84 200 34Q310 84 420 34Q530 84 640 34" fill="none" stroke="#FFDCAA" stroke-width="3" opacity="0.35"/>
+  <use href="#lantern" x="90" y="92"/>
+  <use href="#lantern" x="310" y="92"/>
+  <use href="#lantern" x="530" y="92"/>
+  <g fill="#FFC66B">
+    <circle cx="420" cy="170" r="4" opacity="0.5"/>
+    <circle cx="560" cy="250" r="3" opacity="0.4"/>
+    <circle cx="30" cy="210" r="3.500" opacity="0.45"/>
+    <circle cx="170" cy="150" r="2.500" opacity="0.4"/>
+  </g>
+
+  <!-- the shelf and its back panel -->
+  <rect x="14" y="150" width="572" height="296" fill="#0A0620" opacity="0.42"/>
+  <rect x="20" y="462" width="560" height="9" fill="#060314" opacity="0.4"/>
+  <rect x="8" y="446" width="584" height="18" fill="url(#wood)"/>
+
+  <!-- a finished bottle: matcha, corked -->
+  <g transform="translate(46 194) scale(0.6)">
+    <ellipse cx="75" cy="421" rx="76" ry="8" fill="#060314" opacity="0.4"/>
+    <use href="#back"/>
+    <g clip-path="url(#inside)">
+      <rect x="9" y="147" width="132" height="264" fill="#1FB56F"/>
+      <rect x="110" y="147" width="31" height="264" fill="#17995C"/>
+      <g fill="#FFFFFF" opacity="0.3">
+        <rect x="9" y="147" width="132" height="3"/>
+        <rect x="9" y="213" width="132" height="3"/>
+        <rect x="9" y="279" width="132" height="3"/>
+        <rect x="9" y="345" width="132" height="3"/>
+      </g>
+      <g fill="#FFFFFF" opacity="0.92">
+        <use href="#leaf" x="75" y="182"/>
+        <use href="#leaf" x="75" y="248"/>
+        <use href="#leaf" x="75" y="314"/>
+        <use href="#leaf" x="75" y="380"/>
+      </g>
+    </g>
+    <use href="#cork"/>
+    <use href="#front"/>
+  </g>
+  <g fill="#FFE98A">
+    <use href="#star" transform="translate(30 196) scale(0.75)"/>
+    <use href="#star" transform="translate(160 178) scale(0.5)"/>
+    <use href="#star" transform="translate(140 228) scale(0.35)"/>
+  </g>
+
+  <!-- the bottle being filled: sea blue below, peach arriving -->
+  <rect x="246" y="166" width="11" height="190" rx="5" fill="#FF8A3D"/>
+  <g transform="translate(195 194) scale(0.6)">
+    <ellipse cx="75" cy="421" rx="76" ry="8" fill="#060314" opacity="0.4"/>
+    <use href="#back"/>
+    <g clip-path="url(#inside)">
+      <rect x="9" y="279" width="132" height="132" fill="#3D8BFF"/>
+      <rect x="110" y="279" width="31" height="132" fill="#3077DE"/>
+      <rect x="9" y="213" width="132" height="66" fill="#FF8A3D"/>
+      <rect x="110" y="213" width="31" height="66" fill="#E37428"/>
+      <rect x="9" y="188" width="132" height="25" fill="#FF8A3D"/>
+      <rect x="110" y="188" width="31" height="25" fill="#E37428"/>
+      <g fill="#FFFFFF" opacity="0.3">
+        <rect x="9" y="188" width="132" height="3"/>
+        <rect x="9" y="279" width="132" height="3"/>
+        <rect x="9" y="345" width="132" height="3"/>
+      </g>
+      <g stroke="#FFFFFF" opacity="0.92">
+        <use href="#wave" x="75" y="314"/>
+        <use href="#wave" x="75" y="380"/>
+      </g>
+      <use href="#heart" x="75" y="248" fill="#FFFFFF" opacity="0.92"/>
+    </g>
+    <use href="#front"/>
+  </g>
+
+  <!-- the lifted bottle, tilted over it -->
+  <g transform="translate(466 298) rotate(-58) scale(0.6) translate(-75 -420)">
+    <use href="#back"/>
+    <g clip-path="url(#inside)">
+      <rect x="9" y="345" width="132" height="66" fill="#FFD23F"/>
+      <rect x="110" y="345" width="31" height="66" fill="#E3B72A"/>
+      <rect x="9" y="279" width="132" height="66" fill="#9B5DE5"/>
+      <rect x="110" y="279" width="31" height="66" fill="#844BCB"/>
+      <rect x="9" y="236" width="132" height="43" fill="#FF8A3D"/>
+      <rect x="110" y="236" width="31" height="43" fill="#E37428"/>
+      <g fill="#FFFFFF" opacity="0.3">
+        <rect x="9" y="236" width="132" height="3"/>
+        <rect x="9" y="279" width="132" height="3"/>
+        <rect x="9" y="345" width="132" height="3"/>
+      </g>
+      <use href="#star" x="75" y="380" fill="#2A1A52" opacity="0.62"/>
+      <use href="#moon" x="75" y="314" fill="#FFFFFF" opacity="0.92"/>
+    </g>
+    <use href="#front"/>
+  </g>
+  <g fill="#FF8A3D">
+    <circle cx="238" cy="176" r="4"/>
+    <circle cx="266" cy="188" r="3"/>
+  </g>
+
+  <!-- Pekoe the otter, cheering from behind the counter -->
+  <g transform="translate(366 398) scale(1.02)">
+    <path d="M66 140Q12 118 16 30M154 140Q208 118 204 30" fill="none" stroke="#6F4526" stroke-width="27" stroke-linecap="round"/>
+    <circle cx="16" cy="26" r="17" fill="#9A6238"/>
+    <circle cx="204" cy="26" r="17" fill="#9A6238"/>
+    <path d="M52 200Q46 112 80 104H140Q174 112 168 200Z" fill="#9A6238"/>
+    <ellipse cx="110" cy="132" rx="34" ry="22" fill="#F7E2BF"/>
+    <rect x="74" y="142" width="72" height="78" rx="14" fill="#7ED957"/>
+    <rect x="80" y="126" width="7" height="20" fill="#589840"/>
+    <rect x="133" y="126" width="7" height="20" fill="#589840"/>
+    <use href="#leaf" transform="translate(110 172) scale(0.7)" fill="#FFFFFF"/>
+    <circle cx="44" cy="52" r="12" fill="#6F4526"/>
+    <circle cx="176" cy="52" r="12" fill="#6F4526"/>
+    <circle cx="44" cy="53" r="6" fill="#E8A07E"/>
+    <circle cx="176" cy="53" r="6" fill="#E8A07E"/>
+    <ellipse cx="110" cy="72" rx="72" ry="50" fill="#9A6238"/>
+    <ellipse cx="110" cy="96" rx="52" ry="30" fill="#F7E2BF"/>
+    <ellipse cx="90" cy="88" rx="27" ry="20" fill="#F7E2BF"/>
+    <ellipse cx="130" cy="88" rx="27" ry="20" fill="#F7E2BF"/>
+    <circle cx="58" cy="92" r="8" fill="#FF788C" opacity="0.5"/>
+    <circle cx="162" cy="92" r="8" fill="#FF788C" opacity="0.5"/>
+    <g fill="none" stroke="#6F4526" stroke-width="3" stroke-linecap="round">
+      <path d="M144 93.500L172 90M144 98L172 104.400M76 93.500L48 90M76 98L48 104.400"/>
+    </g>
+    <g fill="none" stroke="#3B2418" stroke-width="5.500" stroke-linecap="round">
+      <path d="M67.500 63A9 9 0 0 1 84.500 63"/>
+      <path d="M135.500 63A9 9 0 0 1 152.500 63"/>
+    </g>
+    <path d="M93 76Q110 68 127 76Q122 92 110 93Q98 92 93 76Z" fill="#3B2418"/>
+    <path d="M96 101Q110 124 124 101Z" fill="#7A2E3A"/>
+  </g>
+
+  <!-- the counter -->
+  <rect y="578" width="600" height="22" fill="#5C3620"/>
+  <rect y="572" width="600" height="8" fill="#96603A"/>
+</svg>

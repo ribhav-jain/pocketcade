@@ -463,8 +463,11 @@ export function hudPill(
       if (value.text !== v) value.setText(v);
     },
     setLabel(t) {
-      if (label.text !== t) label.setText(t);
+      if (label.text === t) return;
+      label.setText(t);
       label.visible = !!t;
+      // The value sits lower and smaller under a caption, centred and larger without one.
+      value.setY(t ? h * 0.62 : h / 2).setFontSize(Math.round(h * (t ? 0.42 : 0.5)));
     },
     bump() {
       bump(scene, value, 1.2);

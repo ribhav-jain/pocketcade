@@ -24,6 +24,7 @@
     "@pocketcade/game-comet-bounce": "workspace:*",
     "@pocketcade/game-firefly-flip": "workspace:*",
     "@pocketcade/game-glowworm": "workspace:*",
+    "@pocketcade/game-hue-brew": "workspace:*",
     "@pocketcade/game-letterhop": "workspace:*",
     "@pocketcade/game-molehills": "workspace:*",
     "@pocketcade/game-pebble-post": "workspace:*",

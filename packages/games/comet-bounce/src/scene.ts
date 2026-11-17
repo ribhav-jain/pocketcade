@@ -33,6 +33,11 @@ import {
 } from './sim.ts';
 import { strings } from './strings.ts';
 
+/** Tall frames: the tallest extra HUD band above the arena, in design units. */
+const HUD_TOP_MAX = 120;
+/** Tall frames: the height the HUD pills aim for, and the corner the pause button covers, in CSS px. */
+const HUD_PILL_CSS = 30;
+const PAUSE_CORNER_CSS = 64;
 const MAX_STEPS_PER_FRAME = 6;
 const STEP_MS = 1000 / 60;
 const TRAIL = 12;
@@ -132,14 +137,20 @@ export const createScenes: SceneFactory = (_P, kit) => {
       h: STAGE.height,
     };
     private hud!: {
+      /** score, multiplier, wall and ships: moved and scaled as one */
+      root: Phaser.GameObjects.Container;
       score: HudPill;
       mult: Text;
       wall: HudPill;
+      /** the narrow wall pill ("3/20") shown on tall frames, where the named one does not fit */
+      wallCompact: HudPill;
       ships: HudPill;
       shipIcons: Img[];
       chips: Record<'w' | 'z', HudPill>;
     };
     private shown = { score: -1, lives: -1, mult: 1, level: -1 };
+    /** how the HUD sits in the current frame (see hudLayout) */
+    private hudAt = { top: 0, scale: 1, compact: false };
     private prompt!: Text;
     private intro!: { root: Phaser.GameObjects.Container; label: Text; name: Text };
     private banner!: { root: Phaser.GameObjects.Container; title: Text; lines: Text };
@@ -252,13 +263,15 @@ export const createScenes: SceneFactory = (_P, kit) => {
     private drawStage(): void {
       const { width: W, height: H } = STAGE;
       const { x: bx, y: by } = this.tk.layout.bleed;
-      // The camera keeps world y 0 at the top of the view, so a tall frame shows extra space below (see update).
+      // The camera keeps the HUD band at the top of the view, so a tall frame shows extra space below the
+      // design area (see placeFloor). The sky starts HUD_TOP_MAX above it, for the taller band on phones.
       const fullH = H + by * 2;
-      this.sky = { x: -bx, y: 0, w: W + bx * 2, h: fullH };
-      canvasTexture(this, 'cc-space', W + bx * 2, fullH, (c) => art.drawSpace(c, W, fullH, bx), {
+      const skyH = fullH + HUD_TOP_MAX;
+      this.sky = { x: -bx, y: -HUD_TOP_MAX, w: W + bx * 2, h: skyH };
+      canvasTexture(this, 'cc-space', W + bx * 2, skyH, (c) => art.drawSpace(c, W, skyH, bx), {
         scale: 1,
       });
-      this.add.image(-bx, 0, 'cc-space').setOrigin(0).setDepth(-1000);
+      this.add.image(-bx, -HUD_TOP_MAX, 'cc-space').setOrigin(0).setDepth(-1000);
       this.voidGlow = this.add.image(-bx, 0, 'cc-void').setOrigin(0).setDepth(-890);
       for (const [x, y, r, a] of art.CLOUDS) {
         const img = this.add
@@ -277,10 +290,10 @@ export const createScenes: SceneFactory = (_P, kit) => {
       if (bx > 0)
         for (const left of [true, false])
           this.add
-            .image(left ? -bx : W, 0, 'cc-shade-h')
+            .image(left ? -bx : W, -HUD_TOP_MAX, 'cc-shade-h')
             .setOrigin(0)
             .setFlipX(left)
-            .setDisplaySize(bx, fullH)
+            .setDisplaySize(bx, skyH)
             .setDepth(-890);
       // two parallax layers of drifting stars (small sprites, so almost no overdraw); some near ones twinkle
       const tints = [0xffffff, 0xffffff, 0xbff6ff, 0xffb3da];
@@ -382,9 +395,26 @@ export const createScenes: SceneFactory = (_P, kit) => {
         width: 262,
         height: h,
       });
+      const wallCompact = hudPill(this, 202, 6, {
+        icon: 'flag',
+        accent: colors.sky,
+        label: strings.wallShort,
+        value: '',
+        width: 118,
+        height: h,
+      });
       const ships = hudPill(this, 472, 6, { label: strings.ships, width: 128, height: h });
       const shipIcons = [0, 1, 2].map((i) => canvasImage(this, 34 + i * 32, 29, 'cc-ship-on'));
       ships.container.add(shipIcons);
+      const root = this.add
+        .container(0, 0, [
+          score.container,
+          mult,
+          wall.container,
+          wallCompact.container,
+          ships.container,
+        ])
+        .setDepth(500);
       const chip = (k: 'w' | 'z', label: string) => {
         const c = hudPill(this, 608, 6, {
           icon: 'clock',
@@ -398,9 +428,11 @@ export const createScenes: SceneFactory = (_P, kit) => {
         return c;
       };
       this.hud = {
+        root,
         score,
         mult,
         wall,
+        wallCompact,
         ships,
         shipIcons,
         chips: { w: chip('w', strings.wingspan), z: chip('z', strings.stasis) },
@@ -459,16 +491,16 @@ export const createScenes: SceneFactory = (_P, kit) => {
       };
     }
 
-    // ─── input: keyboard via tk.input; mouse steers absolutely, touch drags relatively; a short tap launches ───
+    // ─── input: keyboard via tk.input; mouse steers absolutely, touch drags relatively; a click or a lifted finger launches ───
     private bindPointer(): void {
       const live = () => !this.tk.attract && !this.tk.ui.open;
       const world = (p: Phaser.Input.Pointer) => this.cameras.main.getWorldPoint(p.x, p.y).x;
       this.input.on('pointerdown', (p: Phaser.Input.Pointer) => {
         if (!live()) return;
-        const e = p.event as PointerEvent;
+        // Phaser's own pointer position works for touch and mouse alike (a TouchEvent has no clientX).
         this.press = {
-          x: e.clientX,
-          y: e.clientY,
+          x: p.x,
+          y: p.y,
           t: this.time.now,
           lastX: world(p),
           touch: p.wasTouch,
@@ -487,9 +519,13 @@ export const createScenes: SceneFactory = (_P, kit) => {
         const pr = this.press;
         this.press = null;
         if (!pr || !live()) return;
-        const e = p.event as PointerEvent;
-        if (Math.hypot(e.clientX - pr.x, e.clientY - pr.y) <= 8 && this.time.now - pr.t < 450)
-          this.launch = true;
+        // Touch: lifting the finger launches, whether it was a tap or a drag to aim. A finger never lands and
+        // lifts on exactly the same spot, so a strict tap test fails on real phones. The simulation ignores a
+        // launch while the comet is already flying.
+        if (pr.touch) return void (this.launch = true);
+        // Mouse: a click, meaning it moved no more than 8 CSS px and was released quickly.
+        const moved = Math.hypot(p.x - pr.x, p.y - pr.y) / this.scale.displayScale.x;
+        if (moved <= 8 && this.time.now - pr.t < 450) this.launch = true;
       });
     }
 
@@ -517,29 +553,43 @@ export const createScenes: SceneFactory = (_P, kit) => {
       this.acc = 0;
       this.launch = false;
       this.shown = { score: -1, lives: state.lives, mult: 1, level: -1 };
-      const { score, mult, wall, ships, chips } = this.hud;
-      for (const o of [
-        score.container,
-        mult,
-        wall.container,
-        ships.container,
-        chips.w.container,
-        chips.z.container,
-      ])
-        o.setVisible(!this.tk.attract);
+      const { root, chips } = this.hud;
+      for (const o of [root, chips.w.container, chips.z.container]) o.setVisible(!this.tk.attract);
       this.handle(this.sim.begin());
       this.render(0);
+    }
+
+    /**
+     * Where the HUD goes. A wide frame keeps the design layout. On a tall (phone) frame a design unit is well
+     * under half a CSS pixel, so the HUD is scaled up and its band grows above the arena by `top` design units,
+     * enough for readable pills and for the pause button, which would otherwise sit over the arena's corner.
+     */
+    private hudLayout(): { top: number; scale: number; compact: boolean } {
+      const { view, cssWidth } = this.tk.layout;
+      if (view.height <= STAGE.height) return { top: 0, scale: 1, compact: false };
+      const css = cssWidth / view.width; // CSS px per design unit
+      const scale = Math.min(1.75, Math.max(1, HUD_PILL_CSS / (44 * css)));
+      const band = Math.max(56 * scale, PAUSE_CORNER_CSS / css);
+      return { top: Math.min(HUD_TOP_MAX, band - 56), scale, compact: scale > 1.2 };
     }
 
     /** The arena floor for the current frame: the design floor, or near the bottom of a taller view. */
     private floorForView(): number {
       const h = this.tk.layout.view.height;
-      return h > STAGE.height ? h - 40 : STAGE.height;
+      return h > STAGE.height ? h - 40 - this.hudAt.top : STAGE.height;
     }
 
-    /** Pin the camera's top to world y 0 and move the floor-relative pieces after a resize. */
+    /** Lay out the HUD band, pin the camera to its top and move the floor-relative pieces after a resize. */
     private placeFloor(): void {
-      this.cameras.main.scrollY = 0;
+      const at = (this.hudAt = this.hudLayout());
+      this.cameras.main.scrollY = -at.top;
+      const { root, wall, wallCompact, ships } = this.hud;
+      // the row of pills (44 tall at design y 6) is centred in the band and keeps its 16-unit left margin
+      const rowTop = -at.top + (at.top + 56 - 44 * at.scale) / 2;
+      root.setScale(at.scale).setPosition(16 - 16 * at.scale, rowTop - 6 * at.scale);
+      wall.container.setVisible(!at.compact);
+      wallCompact.container.setVisible(at.compact);
+      ships.container.setX(at.compact ? 328 : 472);
       if (!this.sim) return;
       this.sim.setFloor(this.floorForView());
       const a = this.sim.arena;
@@ -548,7 +598,7 @@ export const createScenes: SceneFactory = (_P, kit) => {
     }
 
     override update(time: number, delta: number): void {
-      this.cameras.main.scrollY = 0;
+      this.cameras.main.scrollY = -this.hudAt.top;
       if (!this.sim) return;
       this.acc = Math.min(this.acc + delta, MAX_STEPS_PER_FRAME * STEP_MS);
       while (this.acc >= STEP_MS) {
@@ -844,15 +894,20 @@ export const createScenes: SceneFactory = (_P, kit) => {
       const lives = this.sim.state.lives;
       const ships = this.hud.ships.container;
       if (lives < 3 && !this.tk.attract)
-        burst(this, ships.x + 34 + lives * 32, ships.y + 29, {
-          count: 8,
-          colors: [colors.vermillion, colors.pink, '#FFFFFF'],
-          shape: 'spark',
-          distance: 40,
-          size: 12,
-          lifeMs: 420,
-          depth: 700,
-        });
+        burst(
+          this,
+          this.hud.root.x + (ships.x + 34 + lives * 32) * this.hudAt.scale,
+          this.hud.root.y + (ships.y + 29) * this.hudAt.scale,
+          {
+            count: 8,
+            colors: [colors.vermillion, colors.pink, '#FFFFFF'],
+            shape: 'spark',
+            distance: 40,
+            size: 12,
+            lifeMs: 420,
+            depth: 700,
+          },
+        );
     }
 
     private fizzle(x: number): void {
@@ -1332,7 +1387,7 @@ export const createScenes: SceneFactory = (_P, kit) => {
     private renderHud(): void {
       const s = this.sim;
       const st = s.state;
-      const { score, mult, wall, shipIcons, chips } = this.hud;
+      const { score, mult, wall, wallCompact, shipIcons, chips } = this.hud;
       if (st.score !== this.shown.score) {
         if (this.shown.score >= 0 && st.score > this.shown.score) score.bump();
         this.shown.score = st.score;
@@ -1347,12 +1402,15 @@ export const createScenes: SceneFactory = (_P, kit) => {
         this.shown.level = st.level;
         wall.setLabel(strings.t('wall', { n: st.level }));
         wall.set(LEVELS[st.level - 1]!.name);
+        wallCompact.set(strings.t('wallOf', { n: st.level, total: LEVELS.length }));
       }
       if (st.lives !== this.shown.lives) {
         this.shown.lives = st.lives;
         shipIcons.forEach((img, i) => img.setTexture(i < st.lives ? 'cc-ship-on' : 'cc-ship-off'));
       }
-      let x = 608;
+      // pod timers: in the HUD row on a wide frame; on a tall one, in the gap between the ceiling and the bricks
+      const compact = this.hudAt.compact;
+      let x = compact ? WALL_L + 8 : 608;
       for (const [kind, ms] of [
         ['w', s.wingMs],
         ['z', s.stasisMs],
@@ -1361,7 +1419,9 @@ export const createScenes: SceneFactory = (_P, kit) => {
         chip.container.setVisible(ms > 0);
         if (ms <= 0) continue;
         chip.set(strings.t('seconds', { s: Math.ceil(ms / 1000) }));
-        chip.container.setX(x).setAlpha(ms < 2000 && Math.floor(ms / 250) % 2 === 0 ? 0.55 : 1);
+        chip.container
+          .setPosition(x, compact ? CEIL + 2 : 6)
+          .setAlpha(ms < 2000 && Math.floor(ms / 250) % 2 === 0 ? 0.55 : 1);
         x += 104;
       }
     }

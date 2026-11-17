@@ -122,6 +122,7 @@ In the portal's editorial order. The accent is read from each game's `game.md`.
 | **Pebble Post** | Pebble, a penguin mail courier in a red beanie, belly-slides down a three-lane ice canyon collecting letters | red `#F2475E` | Arcade |
 | **Pop Reef** | Puff, a pufferfish on a coral reef, puffs bubbles at the ceiling; match three to pop, drop whole clusters | teal `#2DD4BF` | Puzzle |
 | **Snugfit** | Drag fabric patches onto a quilt and stitch full rows and columns while Purl the cat naps | orchid `#E96BD6` | Puzzle |
+| **Hue Brew** | Pour layered drinks between café bottles until each holds one flavour, with Pekoe the otter barista | leaf green `#7ED957` | Puzzle |
 | **Sumslide** | Slide glossy candy number tiles on a 4×4 tray; equal numbers merge into their sum | purple `#C77DFF` | Puzzle |
 | **Sunset Sprint** | Miso, a red panda in a lime-green convertible, races a winding coast road at sunset to each checkpoint arch | coral `#FF7A59` | Arcade |
 | **Bao Bolt** | Bao, a steamed bun in a red bandana, dashes across lantern-lit night-market rooftops while Gulp the gull gives chase | orange `#FF9F1C` | Arcade |

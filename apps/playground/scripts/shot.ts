@@ -1,8 +1,9 @@
 // Screenshot a game running in the playground dev server (pnpm --filter @pocketcade/playground dev).
 //
 //   node apps/playground/scripts/shot.ts <game> [--size desktop|phone-portrait|WxH] [--launch attract|play]
-//        [--at 1500,4000,8000] [--out <dir>] [--keys "ArrowLeft,Space"] [--click "x,y;x,y"] [--wait 1500] [--dpr 1]
+//        [--at 1500,4000,8000] [--out <dir>] [--keys "ArrowLeft,Space"] [--click "x,y;x,y"] [--wait 1500] [--dpr 1] [--play]
 //
+// --play  with --launch play: press the how-to card's Play button before anything else
 // --at    milliseconds after the game is running (and --wait has passed) at which to capture frames
 // --wait  milliseconds to wait after mount before sending clicks and keys (default 1500)
 // --keys  key presses sent (150 ms apart) before the first capture; only useful with --launch play
@@ -50,6 +51,10 @@ const frame = page.locator('#frame');
 await frame.locator('canvas, [data-tk-root]').first().waitFor({ timeout: 30_000 });
 // Let the how-to card (or the first frame) settle before any input is sent.
 await page.waitForTimeout(Number(opt('wait', '1500')));
+if (args.includes('--play')) {
+  await page.getByRole('button', { name: 'Play', exact: true }).click();
+  await page.waitForTimeout(500);
+}
 const start = Date.now();
 const box = (await frame.boundingBox())!;
 for (const [x, y] of clicks) {
