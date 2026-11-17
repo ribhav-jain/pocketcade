@@ -59,8 +59,9 @@ Start with [docs/architecture.md](docs/architecture.md) for how the pieces fit, 
   row in [ASSETS.md](ASSETS.md) with its source and licence.
 - **Exact dependency versions.** `pnpm add` saves exact versions; keep it that way. A version used by several
   packages goes in the `catalog:` section of `pnpm-workspace.yaml`.
-- **No tracking and no third-party requests.** The site loads only its own files. Do not add analytics, ads,
-  external fonts or CDNs.
+- **No ads, no cookies, no third-party requests.** The site loads only its own files. Its only statistics are
+  Vercel's anonymous Web Analytics and Speed Insights, described on the Privacy page. Do not add other analytics,
+  ads, external fonts or CDNs.
 - **No secrets.** Every environment variable is optional and non-secret ([.env.example](.env.example)).
 
 ## Licence of contributions

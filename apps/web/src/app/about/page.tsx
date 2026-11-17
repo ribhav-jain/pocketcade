@@ -1,4 +1,4 @@
-// /about/: what it is, principles, how games are built, contributing, and the working name.
+// /about/: what it is, principles, how games are built, contributing, and the names.
 import Link from 'next/link';
 import { games } from '../../games/catalog';
 import { repoUrl } from '../../lib/build-info';
@@ -8,7 +8,7 @@ export const metadata = pageMeta({
   path: '/about/',
   title: `About · ${SITE_NAME}`,
   description:
-    'Pocketcade is a free, open-source arcade of browser games: no downloads, no sign-ups, no ads and no tracking.',
+    'Pocketcade is a free, open-source arcade of browser games: no downloads, no sign-ups and no ads.',
 });
 
 export default function About() {
@@ -40,8 +40,8 @@ export default function About() {
             <strong>Instant.</strong> No downloads and no sign-up.
           </li>
           <li>
-            <strong>No ads, no tracking.</strong> No analytics, no third-party scripts, no cookies.
-            See the <Link href="/privacy/">privacy page</Link>.
+            <strong>No ads, no accounts.</strong> No cookies and no advertising trackers; only
+            anonymous visit counts. See the <Link href="/privacy/">privacy page</Link>.
           </li>
           <li>
             <strong>Your data stays with you.</strong> Saves and scores never leave your device.
@@ -81,8 +81,8 @@ export default function About() {
       <section className="info-card">
         <h2>The name</h2>
         <p>
-          {SITE_NAME} and the game titles are working names. They may change before the site
-          launches.
+          {SITE_NAME} and the game titles were made up for this project. If one turns out to clash
+          with someone else&apos;s name, it will change.
         </p>
       </section>
     </article>

@@ -82,7 +82,7 @@ export function SiteFooter({ buildId }: { buildId: string }) {
               <Icon name="shield" size={16} /> No ads
             </li>
             <li>
-              <Icon name="heart" size={16} /> No tracking
+              <Icon name="heart" size={16} /> No cookies
             </li>
             <li>
               <Icon name="bolt" size={16} /> No sign-up
@@ -127,7 +127,7 @@ export function SiteFooter({ buildId }: { buildId: string }) {
           </Link>
         </nav>
         <p>
-          Code: MIT · Art, audio and text: CC BY 4.0 · No ads. No tracking. · Build{' '}
+          Code: MIT · Art, audio and text: CC BY 4.0 · No ads. No accounts. · Build{' '}
           {buildId.slice(0, 7)}
         </p>
       </div>

@@ -9,7 +9,7 @@ is [making-games.md](making-games.md), and each game's rules are in [games.md](g
 
 | Area    | Choice                                                                                                     |
 | ------- | ---------------------------------------------------------------------------------------------------------- |
-| Product | 16 free browser games; no accounts, ads, analytics, cookies or third-party requests                        |
+| Product | 16 free browser games; no accounts, ads, cookies or third-party requests; anonymous visit statistics only                        |
 | Portal  | Next.js 16.4.5 App Router and React 19.3.1, built as a static export (`output: 'export'`, trailing slashes) |
 | Games   | Workspace packages behind one contract (`Game` / `HostAPI`); 15 on Phaser 4.2.1, 1 on plain DOM            |
 | Data    | Saves, local top-10 boards, settings and play history in `localStorage`, on the device only                |
@@ -365,8 +365,9 @@ Game pages add `VideoGame` and `BreadcrumbList` JSON-LD. Canonical links, the si
 `NEXT_PUBLIC_SITE_URL`, else the Vercel production domain, else the local static server; a preview's share tags use
 the preview's own URL. Share images are committed JPEGs in `apps/web/public/og/` (1200 × 630), rendered from the
 covers by `pnpm og`. `robots.txt` on a preview disallows everything; on production it allows crawling and names the
-sitemap. `vercel.json` sends `X-Robots-Tag: noindex` on every path; remove that header to let search engines index the
-site.
+sitemap. The production build on Vercel also includes Vercel Web Analytics and Speed Insights (`collectsStats` in
+`src/lib/build-info.ts`): anonymous, cookie-free page-view and loading-speed statistics served from the site's own
+origin. Local, CI and preview builds leave them out.
 
 ### Performance
 
@@ -411,7 +412,7 @@ settings are in the [README](../README.md#deploying-to-vercel)). `apps/web/verce
 Content Security Policy (`default-src 'self'`, `connect-src 'self'`, `frame-ancestors 'none'`), a Permissions-Policy
 that turns off camera, microphone, geolocation, payment and other APIs, `X-Frame-Options: DENY`,
 `Cross-Origin-Opener-Policy: same-origin`, `Referrer-Policy: same-origin`, `X-Content-Type-Options: nosniff`, immutable
-caching for hashed assets, `no-cache` for `/version.json`, and `X-Robots-Tag: noindex`. Every environment variable is
+caching for hashed assets, and `no-cache` for `/version.json`. Every environment variable is
 optional and non-secret ([.env.example](../.env.example)): `NEXT_PUBLIC_REPO_URL`, `NEXT_PUBLIC_SITE_URL` and
 `NEXT_PUBLIC_DEPLOY_ENV`, read at build time only.
 
@@ -451,16 +452,14 @@ pinned by commit SHA. It has two jobs:
 - **Iframe mounting**: `HostEnv.mode` reserves `'iframe'`, but the host mounts every game directly.
 - **Translations**: every string is English and `env.locale` is always `en-US`.
 
-## Before a public launch
+## Still needs a person
 
-These need a person, not code:
+The site is live. These remain, and none of them is a code change:
 
-- **Names**: a trademark search for the site name and every game title. The About page says the names are working
-  names until that is done.
+- **Names**: a trademark search for the site name and every game title. The About page says a name will
+  change if it clashes with someone else's.
 - **Pentafall**: a legal review of its look and feel, since falling-block games are an actively protected genre.
-- **Letterhop**: set `DAILY_EPOCH` in `packages/games/letterhop/src/daily.ts` to the Monday the dailies start, and
-  read `data/blocklist.txt`.
+- **Letterhop**: have a person read `packages/games/letterhop/data/blocklist.txt`.
 - **Devices**: play every game on real phones; frame rate and touch feel are only checked in desktop browsers.
-- **Site**: set `NEXT_PUBLIC_SITE_URL` to the real domain and remove the `X-Robots-Tag: noindex` header from
-  `apps/web/vercel.json`.
+- **Site**: set `NEXT_PUBLIC_SITE_URL` once the site has its own domain.
 - **Privacy page**: have its wording checked against how the site is finally hosted.

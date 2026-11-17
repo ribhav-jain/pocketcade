@@ -22,6 +22,8 @@ const LIBRARIES = [
   ['Next.js', 'MIT', 'https://github.com/vercel/next.js'],
   ['React', 'MIT', 'https://github.com/react/react'],
   ['Phaser', 'MIT', 'https://github.com/phaserjs/phaser'],
+  ['Vercel Web Analytics', 'MIT', 'https://github.com/vercel/analytics'],
+  ['Vercel Speed Insights', 'Apache-2.0', 'https://github.com/vercel/speed-insights'],
 ] as const;
 
 export default function Licenses() {

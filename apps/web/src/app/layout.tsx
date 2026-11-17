@@ -1,10 +1,12 @@
 import '@fontsource-variable/fredoka/index.css';
 import '@fontsource-variable/nunito/index.css';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { RouteFocus } from '../components/RouteFocus';
 import { SiteFooter, SiteHeader } from '../components/SiteChrome';
-import { buildId } from '../lib/build-info';
+import { buildId, collectsStats } from '../lib/build-info';
 import { deployUrl, SITE_NAME } from '../lib/seo';
 import './globals.css';
 
@@ -37,6 +39,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main id="main">{children}</main>
         <SiteFooter buildId={id} />
         <RouteFocus />
+        {/* Anonymous, cookie-free page-view and loading-speed statistics; described on the Privacy page. */}
+        {collectsStats() && (
+          <>
+            <Analytics />
+            <SpeedInsights />
+          </>
+        )}
       </body>
     </html>
   );

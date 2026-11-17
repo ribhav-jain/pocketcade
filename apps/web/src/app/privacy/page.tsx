@@ -9,7 +9,7 @@ export const metadata = pageMeta({
   path: '/privacy/',
   title: `Privacy · ${SITE_NAME}`,
   description:
-    'Pocketcade keeps your game data on your device. No accounts, no analytics, no ads, no trackers and no cookies.',
+    'Pocketcade keeps your game data on your device. No accounts, no ads and no cookies.',
 });
 
 export default function Privacy() {
@@ -18,7 +18,8 @@ export default function Privacy() {
     <article className="doc-page">
       <h1>Privacy</h1>
       <p className="doc-lede">
-        {SITE_NAME} keeps your game data on this device. Nothing you do here is sent to us.
+        {SITE_NAME} keeps your game data on this device. Your saves, scores and settings are never
+        sent anywhere.
       </p>
 
       <section className="info-card">
@@ -53,8 +54,18 @@ export default function Privacy() {
       <section className="info-card">
         <h2>What is not collected</h2>
         <p>
-          There are no accounts, no analytics, no ads and no trackers. The pages load no third-party
-          scripts or fonts and set no cookies.
+          There are no accounts and no ads. The site sets no cookies, loads no scripts or fonts from
+          other companies&apos; sites, and does not follow you across other sites.
+        </p>
+      </section>
+
+      <section className="info-card">
+        <h2>Visit statistics</h2>
+        <p>
+          To see which games get played and how fast the pages load, the site uses{' '}
+          <a href="https://vercel.com/docs/analytics/privacy-policy">Vercel Web Analytics</a> and{' '}
+          <a href="https://vercel.com/docs/speed-insights/privacy-policy">Vercel Speed Insights</a>,
+          run by Vercel, the company that hosts it.
         </p>
       </section>
 
@@ -96,7 +107,7 @@ export default function Privacy() {
 
       <section className="info-card">
         <h2>Children</h2>
-        <p>{SITE_NAME} is for all ages and collects no personal data from anyone.</p>
+        <p>{SITE_NAME} is for all ages. It has no accounts and asks no one for personal details.</p>
       </section>
 
       <section className="info-card">

@@ -1,6 +1,6 @@
 # Pocketcade design system
 
-Pocketcade is "a whole arcade in your pocket": free, instant browser games with no ads and no tracking. The look is
+Pocketcade is "a whole arcade in your pocket": free, instant browser games with no ads and no accounts. The look is
 a **night arcade with candy-bright lights**: deep indigo backdrops, glossy rounded shapes, warm sunset gradients and
 cheerful cartoon characters. It should feel playful and energetic, never noisy, and every screen should look like it
 came from the same studio.

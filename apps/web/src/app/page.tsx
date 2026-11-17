@@ -22,7 +22,7 @@ import { pageMeta } from '../lib/seo';
 export const metadata = pageMeta({
   path: '/',
   title: 'Pocketcade — Free browser games, no downloads',
-  description: 'Play free games instantly in your browser. No downloads, no ads, no tracking.',
+  description: 'Play free games instantly in your browser. No downloads, no ads, no sign-ups.',
 });
 
 const dailyBadge = (g: CatalogGame) => (g.tags.includes('daily') ? 'Daily' : undefined);
@@ -50,7 +50,7 @@ export default function Home() {
             </span>
           </h1>
           <p className="hero-sub">
-            Tap a game and you&apos;re playing. No downloads, no accounts, no tracking: just quick,
+            Tap a game and you&apos;re playing. No downloads, no accounts, no ads: just quick,
             colourful fun on any screen.
           </p>
           <div className="hero-ctas">
@@ -206,7 +206,7 @@ export default function Home() {
             <span className="promise-icon p2">
               <Icon name="shield" size={26} />
             </span>
-            <strong>No ads, no tracking</strong>
+            <strong>No ads, no accounts</strong>
             <span>Your scores and progress stay on your device.</span>
           </li>
           <li>

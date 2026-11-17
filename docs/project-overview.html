@@ -355,7 +355,7 @@ footer.page-end { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid v
   </div>
   <h1><span class="grad">Pocketcade</span>: a whole arcade in your pocket</h1>
   <p class="lede">An open-source website of sixteen original browser games. They start in a second on a phone or a
-  desktop, with no downloads, no sign-ups, no ads and no tracking.</p>
+  desktop, with no downloads, no sign-ups and no ads.</p>
   <ul class="pills" aria-label="Key facts">
     <li>16 games</li>
     <li>Static site, no server code</li>
@@ -935,8 +935,9 @@ below, <code>pnpm budgets</code> the size check and <code>pnpm e2e</code> the br
 <div class="prose">
 <p>Pocketcade is built to collect nothing.</p>
 <ul>
-  <li><strong>No accounts, analytics, ads, trackers or cookies.</strong> Game data stays on the device, as described
-  above.</li>
+  <li><strong>No accounts, ads or cookies.</strong> Game data stays on the device, as described above. The only data
+  that leaves the browser is anonymous page-view and loading-speed statistics, collected by the host on the
+  production site.</li>
   <li><strong>Nothing from other sites.</strong> Fonts are self-hosted and there are no CDNs. The Content Security
   Policy in <code>apps/web/vercel.json</code> allows scripts, styles, images, fonts and connections only from the site
   itself, and an end-to-end test fails if browsing and playing request anything from another origin.</li>

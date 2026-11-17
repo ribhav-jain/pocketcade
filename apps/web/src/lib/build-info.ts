@@ -26,6 +26,14 @@ export function deployEnv(): 'production' | 'preview' {
   return process.env.VERCEL_ENV === 'preview' ? 'preview' : 'production';
 }
 
+/**
+ * True for the production build on Vercel. Only that build includes Vercel Web Analytics and Speed Insights:
+ * their scripts are served by Vercel itself, so local, CI and preview builds leave them out.
+ */
+export function collectsStats(): boolean {
+  return process.env.VERCEL === '1' && deployEnv() === 'production';
+}
+
 let warnedRepo = false;
 
 /** Public GitHub repository URL for "Report a bug"; null hides the links. */

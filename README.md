@@ -5,7 +5,7 @@
 # Pocketcade
 
 **A whole arcade in your pocket.** Free browser games that start in a second on any device, with no downloads,
-sign-ups, ads or tracking.
+sign-ups or ads.
 
 ![Code: MIT](https://img.shields.io/badge/code-MIT-ff4fa3)
 ![Art and audio: CC BY 4.0](https://img.shields.io/badge/art%20%26%20audio-CC%20BY%204.0-ff9f1c)
@@ -50,8 +50,9 @@ take a mouse) and local high scores. Rules and art notes for every game are in [
 
 ## Highlights
 
-- **Instant and private.** A static site with no server code. Saves, scores and settings stay in the browser; the
-  pages load nothing from other sites and set no cookies.
+- **Instant and private.** A static site with no server code. Saves, scores and settings stay in the browser. The
+  pages set no cookies and load nothing from other sites; the only data that leaves is anonymous page-view and
+  loading-speed statistics on the production site.
 - **One contract for every game.** Each game is a package that implements `Game` and talks to the page only through
   `HostAPI`, so the portal can pause, resume, fullscreen, mute and unmount any of them the same way, and a crash never
   takes the page down.
@@ -134,24 +135,23 @@ applies to the new game without any extra step. The full guide is [docs/making-g
 
 The repository deploys as one Vercel project, set up once in the dashboard:
 
-| Setting                            | Value                                                                                                   |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Root Directory                     | `apps/web`, with "Include files outside the Root Directory" on                                          |
-| Framework preset                   | Next.js                                                                                                 |
-| Build Command                      | `turbo build`. Set it explicitly: the app's own `build` script does not run `gen-registry`, so it fails |
-| Install Command, Output Directory  | Defaults (`pnpm install` at the repository root; the static export in `apps/web/out`)                   |
-| Node.js                            | 26.x (matches `engines.node`)                                                                           |
-| Environment variables (all)        | `ENABLE_EXPERIMENTAL_COREPACK=1`, `NEXT_TELEMETRY_DISABLED=1`, `TURBO_TELEMETRY_DISABLED=1`             |
-| Deployment Protection              | Vercel Authentication off, so previews are public                                                       |
-| Analytics, Speed Insights, Toolbar | Off: the site has no analytics or tracking and loads nothing but its own files                          |
+| Setting                           | Value                                                                                                   |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Root Directory                    | `apps/web`, with "Include files outside the Root Directory" on                                          |
+| Framework preset                  | Next.js                                                                                                 |
+| Build Command                     | `turbo build`. Set it explicitly: the app's own `build` script does not run `gen-registry`, so it fails |
+| Install Command, Output Directory | Defaults (`pnpm install` at the repository root; the static export in `apps/web/out`)                   |
+| Node.js                           | 26.x (matches `engines.node`)                                                                           |
+| Environment variables (all)       | `ENABLE_EXPERIMENTAL_COREPACK=1`, `NEXT_TELEMETRY_DISABLED=1`, `TURBO_TELEMETRY_DISABLED=1`             |
+| Deployment Protection             | Vercel Authentication off, so previews are public                                                       |
+| Web Analytics, Speed Insights     | On: anonymous, cookie-free statistics, included only in the production build (see the Privacy page)     |
 
 Every environment variable the site reads is optional and non-secret; see [.env.example](.env.example). Check the first
 deployment:
 
 - The build log uses pnpm 12.18.0.
 - The deployment lists no Functions, and `/version.json` shows the commit.
-- `apps/web/vercel.json` holds every header, including `X-Robots-Tag: noindex` on every path. Remove that header when
-  the site should appear in search results.
+- `apps/web/vercel.json` holds every header.
 - `/robots.txt` on a preview says `Disallow: /`. On production, `/sitemap.xml` and each page's canonical link use
   `https://<project>.vercel.app`. Once the site has its own domain, set `NEXT_PUBLIC_SITE_URL` in the project.
 

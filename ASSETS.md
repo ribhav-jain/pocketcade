@@ -29,11 +29,13 @@ Notes:
 
 ## Libraries shipped in the built site
 
-| Library                                      | License |
-| -------------------------------------------- | ------- |
-| [Phaser](https://github.com/phaserjs/phaser) | MIT     |
-| [Next.js](https://github.com/vercel/next.js) | MIT     |
-| [React](https://github.com/facebook/react)   | MIT     |
+| Library                                                           | License    |
+| ----------------------------------------------------------------- | ---------- |
+| [Phaser](https://github.com/phaserjs/phaser)                      | MIT        |
+| [Next.js](https://github.com/vercel/next.js)                      | MIT        |
+| [React](https://github.com/facebook/react)                        | MIT        |
+| [Vercel Web Analytics](https://github.com/vercel/analytics)       | MIT        |
+| [Vercel Speed Insights](https://github.com/vercel/speed-insights) | Apache-2.0 |
 
 Build and test tooling (TypeScript, Vite, Vitest, Playwright, ESLint, Prettier, Turborepo and their dependencies) is
 used during development only and is not part of the site. `pnpm licenses list` prints the licence of every installed

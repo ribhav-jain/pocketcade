@@ -66,8 +66,8 @@ describe('dates, daily slot and streak', () => {
   it('epoch is a Monday and slots follow the weekday curve', () => {
     expect(new Date(`${DAILY_EPOCH}T00:00:00Z`).getUTCDay()).toBe(1);
     expect(dailySlot(DAILY_EPOCH, DAILY_EPOCH, 728)).toEqual({ day: 1, index: 0 });
-    expect(dailySlot('2026-11-15', DAILY_EPOCH, 728)).toEqual({ day: 7, index: 6 });
-    expect(dailySlot('2026-11-08', DAILY_EPOCH, 728)).toEqual({ day: 0, index: 727 });
+    expect(dailySlot(addDays(DAILY_EPOCH, 6), DAILY_EPOCH, 728)).toEqual({ day: 7, index: 6 });
+    expect(dailySlot(addDays(DAILY_EPOCH, -1), DAILY_EPOCH, 728)).toEqual({ day: 0, index: 727 });
     expect(dailySlot(addDays(DAILY_EPOCH, 728), DAILY_EPOCH, 728).index).toBe(0);
   });
   it('day arithmetic ignores DST', () => {
